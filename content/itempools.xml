@@ -1,0 +1,14 @@
+<ItemPools>
+    <Pool Name="treasure">
+        <Item Name="Life Orb" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+    </Pool>
+    <Pool Name="devil">
+        <Item Name="Life Orb" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+    </Pool>
+    <Pool Name="curse">
+        <Item Name="Life Orb" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+    </Pool>
+    <Pool Name="craneGame">
+        <Item Name="Life Orb" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+    </Pool>
+</ItemPools>

@@ -1,0 +1,3 @@
+<items gfxroot="gfx/items/" version="1">
+    <passive id="1" name="Life Orb" gfx="life_orb_item.png" description="Put your life on the line" quality="2" cache="damage"/>
+</items>
