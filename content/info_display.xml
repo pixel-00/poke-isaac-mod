@@ -3,4 +3,8 @@
         <info text="x1.3 damage multiplier"/>
         <info text="Isaac takes damage at the start of each new floor"/>
     </collectible>
+    <collectible id="2">
+        <info text="Grants 1-5 coins when defeating a boss"/>
+        <info text="At least 1 lucky penny is guaranteed to appear"/>
+    </collectible>
 </collectibles>

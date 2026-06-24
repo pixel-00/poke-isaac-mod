@@ -2,7 +2,6 @@ local lifeOrb = Isaac.GetItemIdByName("Life Orb")
 local lifeOrbMultiplier = 1.3
 local mustTakeLifeOrbDamage = false
 
-
 function mod:EvaluateCache(player, cacheFlags)
     if (cacheFlags & CacheFlag.CACHE_DAMAGE) == CacheFlag.CACHE_DAMAGE then
         local itemCount = player:GetCollectibleNum(lifeOrb)
