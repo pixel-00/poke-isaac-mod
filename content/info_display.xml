@@ -1,6 +1,6 @@
 <collectibles>
     <collectible id="1">
-        <info text="1.3x damage multiplier"/>
+        <info text="x1.3 damage multiplier"/>
         <info text="Isaac takes damage at the start of each new floor"/>
     </collectible>
 </collectibles>
