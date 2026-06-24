@@ -5,6 +5,12 @@
     <Pool Name="boss">
         <Item Name="Amulet Coin" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
     </Pool>
+    <Pool Name="secret">
+        <Item Name="Hidden Machine" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+    </Pool>
+    <Pool Name="goldenChest">
+        <Item Name="Amulet Coin" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+    </Pool>
     <Pool Name="demonBeggar">
         <Item Name="Life Orb" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
     </Pool>
