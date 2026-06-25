@@ -8,7 +8,7 @@
         <info text="At least 1 lucky penny is guaranteed to appear"/>
     </collectible>
     <collectible id="3">
-        <info text="Activation allows Isaac to break rocks by walking over them"/>
+        <info text="Break rocks by walking over them"/>
         <info text="Grants flight while held"/>
     </collectible>
 </collectibles>
