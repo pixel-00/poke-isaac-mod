@@ -1,5 +1,6 @@
 <items gfxroot="gfx/items/" version="1">
-    <passive id="1" name="Life Orb" gfx="life_orb_item.png" description="Put your life on the line" quality="2" craftquality="2" cache="damage" tags="offensive, summonable"/>
-    <passive id="2" name="Amulet Coin" gfx="amulet_coin_item.png" description="Prize money!" quality="1" craftquality="1" tags="offensive, summonable"/>
+    <passive id="1" name="Life Orb" gfx="life_orb_item.png" description="Put your life on the line" quality="2" craftquality="2" cache="damage" tags="offensive summonable"/>
+    <passive id="2" name="Amulet Coin" gfx="amulet_coin_item.png" description="Prize money!" quality="1" craftquality="1" tags="offensive summonable"/>
     <active id="3" name="Hidden Machine" gfx="hidden_machine_item.png" description="Rock smashing + flight" quality="2" craftquality="2" maxcharges="3" chargetype="normal" cache="flying" passivecache="true" tags="offensive"/>
+    <passive id="4" name="Bubble Beam" gfx="bubble_beam_item.png" description="Bubble tears!" quality="3" craftquality="3" cache="firedelay damage shotspeed" tags="offensive summonable"/>
 </items>

@@ -11,4 +11,7 @@
         <info text="Break rocks by walking over them"/>
         <info text="Grants flight while held"/>
     </collectible>
+    <collectible id="4">
+        <info text="Tears are replaced with bubbles"/>
+    </collectible>
 </collectibles>
