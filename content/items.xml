@@ -3,4 +3,5 @@
     <passive id="2" name="Amulet Coin" gfx="amulet_coin_item.png" description="Prize money!" quality="1" craftquality="1" tags="offensive summonable"/>
     <active id="3" name="Hidden Machine" gfx="hidden_machine_item.png" description="Rock smashing + flight" quality="2" craftquality="2" maxcharges="3" chargetype="normal" cache="flying" passivecache="true" tags="offensive"/>
     <passive id="4" name="Bubble Beam" gfx="bubble_beam_item.png" description="Bubble tears!" quality="3" craftquality="3" cache="firedelay damage shotspeed" tags="offensive summonable"/>
+    <passive id="5" name="Leftovers" gfx="leftovers_item.png" description="there was a healing" quality="3" craftquality="3" maxhearts="2" hearts="2" soulhearts="1" tags="summonable"/>
 </items>

@@ -12,6 +12,10 @@
         <info text="Grants flight while held"/>
     </collectible>
     <collectible id="4">
-        <info text="Tears are replaced with bubbles"/>
+        <info text="Tears are replaced with bubbles which fire in unpredictable directions"/>
+    </collectible>
+    <collectible id="5">
+        <info text="Heals half a red heart on room clear"/>
+        <info text="Small chance to grant half a soul heart"/>
     </collectible>
 </collectibles>
