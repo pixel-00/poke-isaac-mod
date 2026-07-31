@@ -5,6 +5,9 @@
     <Pool Name="shop">
         <Item Name="Amulet Coin" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
     </Pool>
+    <Pool Name="boss">
+        <Item Name="Coconut Water" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+    </Pool>
     <Pool Name="secret">
         <Item Name="Hidden Machine" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Leftovers" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>

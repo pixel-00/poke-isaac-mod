@@ -24,4 +24,6 @@
     <collectible id="7">
         <info text="Grants immunity to hard projectiles"/>
     </collectible>
+    <collectible id="8">
+    </collectible>
 </collectibles>

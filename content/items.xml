@@ -6,4 +6,5 @@
     <passive id="5" name="Leftovers" gfx="leftovers_item.png" description="there was a healing" quality="3" craftquality="3" maxhearts="2" hearts="2" tags="summonable"/>
     <passive id="6" name="Red Map" gfx="red_map_item.png" description="Red secrets" quality="1" craftquality="1" tags="offensive summonable"/>
     <passive id="7" name="Traffic Cone" gfx="traffic_cone_item.png" description="Protection!" quality="3" craftquality="3" cache="luck" soulhearts="2" tags="offensive summonable"/>
+    <passive id="8" name="Coconut Water" gfx="coconut_water_item.png" description="Tears + speed up!" quality="3" craftquality="3" cache="firedelay speed" soulhearts="2" tags="offensive summonable"/>
 </items>
