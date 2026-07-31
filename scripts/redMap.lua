@@ -7,7 +7,7 @@ function mod:redMap()
         local level = Game():GetLevel()
         local rooms = level:GetRooms()
         local ultraSecretIndex = -1
-        for i = 1, rooms.Size - 1 do
+        for i = 0, rooms.Size - 1 do
             if rooms:Get(i).Data.Type == RoomType.ROOM_ULTRASECRET then
                 ultraSecretIndex = rooms:Get(i).GridIndex
             end

@@ -26,4 +26,7 @@
     </collectible>
     <collectible id="8">
     </collectible>
+    <collectible id="9">
+        <info text="Randomly reveals rooms on the map"/>
+    </collectible>
 </collectibles>
