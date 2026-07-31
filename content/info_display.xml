@@ -16,6 +16,9 @@
     </collectible>
     <collectible id="5">
         <info text="Heals half a red heart on room clear"/>
-        <info text="Small chance to grant half a soul heart"/>
+        <info text="Small chance to grant half a soul heart instead"/>
+    </collectible>
+    <collectible id="6">
+        <info text="Reveals the Ultra Secret Room"/>
     </collectible>
 </collectibles>

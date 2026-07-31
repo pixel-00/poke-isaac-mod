@@ -1,4 +1,4 @@
-local leftovers = Isaac.GetItemIdByName("Life Orb")
+local leftovers = Isaac.GetItemIdByName("Leftovers")
 
 function mod:ApplyLeftovers()
     local player = Isaac.GetPlayer(0)
