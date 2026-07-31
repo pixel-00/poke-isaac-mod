@@ -21,4 +21,7 @@
     <collectible id="6">
         <info text="Reveals the Ultra Secret Room"/>
     </collectible>
+    <collectible id="7">
+        <info text="Grants immunity to hard projectiles"/>
+    </collectible>
 </collectibles>
