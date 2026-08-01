@@ -29,4 +29,7 @@
     <collectible id="9">
         <info text="Randomly reveals rooms on the map"/>
     </collectible>
+    <collectible id="10">
+        <info text="Grants a luck based chance to upgrade the quality of spawned items"/>
+    </collectible>
 </collectibles>

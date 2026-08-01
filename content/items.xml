@@ -8,4 +8,5 @@
     <passive id="7" name="Traffic Cone" gfx="traffic_cone_item.png" description="Protection!" quality="3" craftquality="3" cache="luck" soulhearts="2" tags="offensive summonable"/>
     <passive id="8" name="Coconut Water" gfx="coconut_water_item.png" description="Tears + speed up!" quality="3" craftquality="3" cache="firedelay speed" soulhearts="2" tags="offensive summonable"/>
     <passive id="9" name="Fool's Map" gfx="fool's_map_item.png" description="Random secrets" quality="1" craftquality="1" tags="offensive summonable"/>
+    <passive id="10" name="Lucky Star" gfx="lucky_star_item.png" description="Today is your day" quality="3" craftquality="3" tags="offensive summonable"/>
 </items>
