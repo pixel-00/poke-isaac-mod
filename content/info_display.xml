@@ -33,6 +33,12 @@
         <info text="Grants a luck based chance to upgrade the quality of spawned items"/>
     </collectible>
     <collectible id="11">
-        <info text="Duplicates any purchases made in the shop"/>
+        <info text="Duplicates all purchases"/>
+    </collectible>
+    <collectible id="12">
+        <info text="Every item spawned in the future will be taken from the current room's item pool"/>
+    </collectible>
+    <collectible id="13">
+        <info text="Prevents a lethal hit"/>
     </collectible>
 </collectibles>

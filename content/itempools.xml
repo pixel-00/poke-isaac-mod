@@ -2,10 +2,12 @@
     <Pool Name="treasure">
         <Item Name="Bubble Beam" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Traffic Cone" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Lucky Star" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
     </Pool>
     <Pool Name="shop">
         <Item Name="Amulet Coin" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Fool's Map" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Promo Offer" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
     </Pool>
     <Pool Name="boss">
         <Item Name="Coconut Water" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
