@@ -1,14 +1,7 @@
+include("scripts.utilities")
+
 local luckyStar = Isaac.GetItemIdByName("Lucky Star")
 local canRoll = true
-
-local function RandomPositive()
-    local x = Random()
-    if x == 0 then
-        return 1
-    else
-        return x
-    end
-end
 
 function mod:LuckyRoll(collectible, itemPoolType, decrease, seed)
     local player = Isaac.GetPlayer()

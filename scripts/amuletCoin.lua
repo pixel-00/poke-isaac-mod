@@ -1,11 +1,4 @@
-function mod:RandomNonzero()
-    local n = Random()
-    if n == 0 then
-        return 1
-    else
-        return n
-    end
-end
+include("scripts.utilities")
 
 function mod:PreSpawnCleanAward()
     local player = Isaac.GetPlayer(0)
@@ -15,7 +8,7 @@ function mod:PreSpawnCleanAward()
         local coinAmount = math.random(0, 4)
         Game():Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_COIN, Game():GetRoom():GetCenterPos(), RandomVector():Resized(math.random(8)), nil, CoinSubType.COIN_LUCKYPENNY, Game():GetRoom():GetSpawnSeed())
         while coinAmount > 0 do
-            Game():Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_COIN, Game():GetRoom():GetCenterPos(), RandomVector():Resized(math.random(8)), nil, 0, mod:RandomNonzero())
+            Game():Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_COIN, Game():GetRoom():GetCenterPos(), RandomVector():Resized(math.random(8)), nil, 0, mod:RandomPositive())
             coinAmount = coinAmount - 1
         end
     end

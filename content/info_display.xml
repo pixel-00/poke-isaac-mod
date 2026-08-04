@@ -32,4 +32,7 @@
     <collectible id="10">
         <info text="Grants a luck based chance to upgrade the quality of spawned items"/>
     </collectible>
+    <collectible id="11">
+        <info text="Duplicates any purchases made in the shop"/>
+    </collectible>
 </collectibles>
