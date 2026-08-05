@@ -38,7 +38,12 @@
     <collectible id="12">
         <info text="Every item spawned in the future will be taken from the current room's item pool"/>
     </collectible>
+</collectibles>
+<trinkets>
     <collectible id="13">
         <info text="Prevents a lethal hit"/>
     </collectible>
-</collectibles>
+    <collectible id="14">
+        <info text="Keys have a chance to drop Cracked Keys when collected"/>
+    </collectible>
+</trinkets>

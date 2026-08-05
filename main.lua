@@ -14,3 +14,4 @@ include("scripts.collectibles.promoOffer")
 include("scripts.collectibles.tabulaRasa")
 
 include("scripts.trinkets.focusSash")
+include("scripts.trinkets.keyCrusher")

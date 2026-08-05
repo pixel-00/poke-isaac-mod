@@ -1,4 +1,5 @@
 local redMap = Isaac.GetItemIdByName("Red Map")
+local keyCrusher = Isaac.GetTrinketIdByName("Key Crusher")
 local needToDisplayUltraSecret = true
 
 function mod:redMap()
@@ -25,5 +26,16 @@ function mod:newLevel()
     needToDisplayUltraSecret = true
 end
 
+function mod:SpawnTrinket(pickup, collider, low)
+    local player = collider:ToPlayer()
+    if player and pickup.Variant == PickupVariant.PICKUP_COLLECTIBLE then
+        if pickup.SubType == redMap and not pickup.Touched then
+            local spawnPosition = Game():GetLevel():GetCurrentRoom():FindFreePickupSpawnPosition(player.Position)
+            Game():Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_TRINKET, spawnPosition, Vector(0,0), player, keyCrusher, mod:RandomPositive())
+        end
+    end
+end
+
 mod:AddCallback(ModCallbacks.MC_POST_UPDATE, mod.redMap)
 mod:AddCallback(ModCallbacks.MC_POST_NEW_LEVEL, mod.newLevel)
+mod:AddCallback(ModCallbacks.MC_PRE_PICKUP_COLLISION, mod.SpawnTrinket)

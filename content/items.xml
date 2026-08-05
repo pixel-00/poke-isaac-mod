@@ -12,4 +12,6 @@
     <passive id="11" name="Promo Offer" gfx="promo_offer_item.png" description="Buy one, get one" quality="3" craftquality="3" tags="offensive summonable"/>
     <active id="12" name="Tabula Rasa" gfx="placeholder.png" description="placeholder" quality="3" craftquality="3" maxcharges="0" chargetype="special" tags="offensive"/>
     <trinket id="13" name="Focus Sash" gfx="placeholder.png" description="Close call!"/>
+    <trinket id="14" name="Key Crusher" gfx="placeholder.png" description="Recycle them"/>
+    <passive id="15" name="Temper Tantrum" gfx="placeholder.png" description="May your rage consume you" quality="1" craftquality="1" tags="offensive summonable"/>
 </items>
