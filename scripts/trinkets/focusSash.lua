@@ -4,7 +4,6 @@ function mod:FocusSash(entity, amount, damageFlags, source, countdownFrames)
     local player = entity:ToPlayer()
     if player then
         local health = player:GetHearts() + player:GetSoulHearts() + player:GetBoneHearts() + player:GetRottenHearts() + player:GetEternalHearts()
-        print("player hit, amount = " .. amount .. " health = " .. health)
         if player:HasTrinket(focusSash) and health <= amount then
             local trinketMultiplier = player:GetTrinketMultiplier(focusSash)
             player:TryRemoveTrinket(focusSash)

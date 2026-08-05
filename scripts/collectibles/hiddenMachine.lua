@@ -10,6 +10,7 @@ end
 
 function mod:UseItem(item, rng, player, useFlags, activeSlot, varData)
     player:GetEffects():AddCollectibleEffect(CollectibleType.COLLECTIBLE_LEO, false, 1)
+    return {ShowAnim = true}
 end
 
 mod:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, mod.EvaluateCache)

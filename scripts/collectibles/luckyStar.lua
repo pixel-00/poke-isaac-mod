@@ -6,15 +6,12 @@ local canRoll = true
 function mod:LuckyRoll(oldCollectibleID, itemPoolType, decrease, seed)
     local player = Isaac.GetPlayer()
     if player:HasCollectible(luckyStar) and canRoll then
-        print("--- Spawning a new item ---")
         local numRolls = math.floor(player.Luck / 10) + ((math.random() < (player.Luck % 10) / 10) and 1 or 0)
-        print("You have " .. numRolls .. " rolls")
         local oldCollectible = Isaac.GetItemConfig():GetCollectible(oldCollectibleID)
         local oldQuality = oldCollectible.Quality
-        print("Original item: " .. oldCollectible.Name .. ", quality: " .. oldQuality)
         while numRolls > 0 do
             canRoll = false
-            local newSeed = RandomPositive()
+            local newSeed = mod:RandomPositive()
             local newCollectibleID = Game():GetItemPool():GetCollectible(itemPoolType, false, newSeed, CollectibleType.COLLECTIBLE_NULL, ItemPoolType.POOL_TREASURE)
             local newCollectible = Isaac.GetItemConfig():GetCollectible(newCollectibleID)
             canRoll = true
@@ -28,8 +25,6 @@ function mod:LuckyRoll(oldCollectibleID, itemPoolType, decrease, seed)
             end
             numRolls = numRolls - 1
         end
-        print("Keeping old item")
-        --return oldCollectibleID
     end
 end
 

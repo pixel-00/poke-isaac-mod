@@ -12,6 +12,8 @@ include("scripts.collectibles.foolsMap")
 include("scripts.collectibles.luckyStar")
 include("scripts.collectibles.promoOffer")
 include("scripts.collectibles.tabulaRasa")
+include("scripts.collectibles.temperTantrum")
+include("scripts.collectibles.pairODice")
 
 include("scripts.trinkets.focusSash")
 include("scripts.trinkets.keyCrusher")
