@@ -16,4 +16,5 @@
     <passive id="15" name="Temper Tantrum" gfx="placeholder.png" description="May your rage consume you" quality="2" craftquality="2" tags="offensive summonable"/>
     <active id="16" name="Pair o' Dice" gfx="placeholder.png" description="Shake 'em, then roll 'em!" quality="4" craftquality="4" maxcharges="4" chargetype="normal" tags="offensive"/>
     <passive id="17" name="Lazy Bones" gfx="placeholder.png" description="placeholder" quality="2" craftquality="2" tags="nolostbr summonable"/>
+    <passive id="18" name="Junk Food" gfx="placeholder.png" description="placeholder" quality="1" craftquality="1" maxhearts="2" tags="nolostbr"/>
 </items>

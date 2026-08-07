@@ -48,7 +48,10 @@
     </collectible>
     <collectible id="17">
         <info text="Each bone heart grants bonus damage, but slows Isaac down"/>
-        <info text="Losing a bone heart removes the damage, but grants extra speed"/>
+        <info text="Losing a bone heart removes the damage, but grants a permanent speed up"/>
+    </collectible>
+    <collectible id="18">
+        <info text="Fills all heart containers with rotten hearts"/>
     </collectible>
 </collectibles>
 <trinkets>

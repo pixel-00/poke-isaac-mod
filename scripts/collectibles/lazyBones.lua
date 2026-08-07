@@ -2,10 +2,11 @@ local lazyBones = Isaac.GetItemIdByName("Lazy Bones")
 
 local boneHearts = 0
 local brokenBoneHearts = 0
+local lazyBonesSpeedUp = 0.1 * brokenBoneHearts
 
 function mod:CheckBones(player)
-    if player:HasCollectible(lazyBones) and player:GetBoneHearts() < boneHearts then
-        brokenBoneHearts = brokenBoneHearts + (boneHearts - player:GetBoneHearts())
+    if player:HasCollectible(lazyBones) and player:GetBoneHearts() ~= boneHearts then
+        brokenBoneHearts = brokenBoneHearts + math.max(boneHearts - player:GetBoneHearts(), 0)
         player:AddCacheFlags(CacheFlag.CACHE_DAMAGE | CacheFlag.CACHE_SPEED)
         player:EvaluateItems()
     end
@@ -19,9 +20,9 @@ function mod:ApplyStats(player, cacheFlags)
         player.Damage = player.Damage * lazyBonesMultiplier
     end
     if (cacheFlags & CacheFlag.CACHE_SPEED) == CacheFlag.CACHE_SPEED then
-        local lazyBonesSpeedUp = 0.1 * brokenBoneHearts
+        lazyBonesSpeedUp = 0.1 * brokenBoneHearts
         local lazyBonesSpeedDown = 0.1 * boneHearts * math.min(itemCount, 1)
-        player.MoveSpeed = player.MoveSpeed + lazyBonesSpeedUp - lazyBonesSpeedDown
+        player.MoveSpeed = player.MoveSpeed + (lazyBonesSpeedUp - lazyBonesSpeedDown)
     end
 end
 
