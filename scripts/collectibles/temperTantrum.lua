@@ -31,7 +31,7 @@ end
 function mod:ApplyDamage(player, cacheFlags)
     local itemCount = player:GetCollectibleNum(temperTantrum)
     if (cacheFlags & CacheFlag.CACHE_DAMAGE) == CacheFlag.CACHE_DAMAGE then
-        local temperTantrumMultiplier = 1 + (temperTantrumStage * itemCount / 2)
+        local temperTantrumMultiplier = 1 + (temperTantrumStage * itemCount / 3)
         player.Damage = player.Damage * temperTantrumMultiplier
     end
 end

@@ -46,6 +46,10 @@
         <info text="Shaking the dice stores the current room's item pool"/>
         <info text="Rolling the dice rerolls items using the stored item pool"/>
     </collectible>
+    <collectible id="17">
+        <info text="Each bone heart grants bonus damage, but slows Isaac down"/>
+        <info text="Losing a bone heart removes the damage, but grants extra speed"/>
+    </collectible>
 </collectibles>
 <trinkets>
     <trinket id="13">
