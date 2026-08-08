@@ -26,16 +26,19 @@ function mod:newLevel()
     needToDisplayUltraSecret = true
 end
 
-function mod:SpawnTrinket(pickup, collider, low)
-    local player = collider:ToPlayer()
-    if player and pickup.Variant == PickupVariant.PICKUP_COLLECTIBLE then
-        if pickup.SubType == redMap and not pickup.Touched then
-            local spawnPosition = Game():GetLevel():GetCurrentRoom():FindFreePickupSpawnPosition(player.Position)
-            Game():Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_TRINKET, spawnPosition, Vector(0,0), player, keyCrusher, mod:RandomPositive())
-        end
+function mod:SpawnTrinket(player)
+    local queued = player.QueuedItem
+    local data = player:GetData()
+    if queued.Item and queued.Item:IsCollectible() and queued.Item.ID == redMap and not queued.Touched then
+        data.numRedMap = player:GetCollectibleNum(redMap)
+    end
+    if data.numRedMap and data.numRedMap < player:GetCollectibleNum(redMap) then
+        local spawnPosition = Game():GetLevel():GetCurrentRoom():FindFreePickupSpawnPosition(player.Position)
+        Game():Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_TRINKET, spawnPosition, Vector(0,0), player, keyCrusher, mod:RandomPositive())
+        data.numRedMap = nil
     end
 end
 
 mod:AddCallback(ModCallbacks.MC_POST_UPDATE, mod.redMap)
 mod:AddCallback(ModCallbacks.MC_POST_NEW_LEVEL, mod.newLevel)
-mod:AddCallback(ModCallbacks.MC_PRE_PICKUP_COLLISION, mod.SpawnTrinket)
+mod:AddCallback(ModCallbacks.MC_POST_PEFFECT_UPDATE, mod.SpawnTrinket)

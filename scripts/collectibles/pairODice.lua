@@ -27,4 +27,4 @@ function mod:ResetPairODice(onContinue)
 end
 
 mod:AddCallback(ModCallbacks.MC_USE_ITEM, mod.UseItem, pairODice)
-mod:AddCallback(ModCallbacks.MC_POST_GAME_STARTED, mod.UseItem, ResetPairODice)
+mod:AddCallback(ModCallbacks.MC_POST_GAME_STARTED, mod.ResetPairODice)
