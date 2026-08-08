@@ -53,6 +53,9 @@
     <collectible id="18">
         <info text="Fills all heart containers with rotten hearts"/>
     </collectible>
+    <collectible id="19">
+        <info text="Once every floor, restarts the floor after 30 seconds"/>
+    </collectible>
 </collectibles>
 <trinkets>
     <trinket id="13">

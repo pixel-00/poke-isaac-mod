@@ -16,6 +16,7 @@ include("scripts.collectibles.temperTantrum")
 include("scripts.collectibles.pairODice")
 include("scripts.collectibles.lazyBones")
 include("scripts.collectibles.junkFood")
+include("scripts.collectibles.earlyOnset")
 
 include("scripts.trinkets.focusSash")
 include("scripts.trinkets.keyCrusher")
