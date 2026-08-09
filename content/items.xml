@@ -18,4 +18,5 @@
     <passive id="17" name="Lazy Bones" gfx="placeholder.png" description="placeholder" quality="2" craftquality="2" tags="nolostbr summonable"/>
     <passive id="18" name="Junk Food" gfx="placeholder.png" description="placeholder" quality="1" craftquality="1" maxhearts="2" hearts="2" tags="nolostbr"/>
     <passive id="19" name="Early Onset" gfx="placeholder.png" description="Who are you?!" quality="3" craftquality="3" tags="offensive summonable"/>
+    <passive id="20" name="Couch Cushion" gfx="placeholder.png" description="placeholder" quality="2" craftquality="2" tags="offensive summonable"/>
 </items>

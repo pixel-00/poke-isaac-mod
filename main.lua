@@ -17,6 +17,7 @@ include("scripts.collectibles.pairODice")
 include("scripts.collectibles.lazyBones")
 include("scripts.collectibles.junkFood")
 include("scripts.collectibles.earlyOnset")
+include("scripts.collectibles.couchCushion")
 
 include("scripts.trinkets.focusSash")
 include("scripts.trinkets.keyCrusher")

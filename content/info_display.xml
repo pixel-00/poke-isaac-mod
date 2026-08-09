@@ -56,6 +56,9 @@
     <collectible id="19">
         <info text="Once every floor, restarts the floor after 30 seconds"/>
     </collectible>
+    <collectible id="20">
+        <info text="When entering a special room for the first time, Isaac will sometimes find an extra pickup corresponding to the room's type"/>
+    </collectible>
 </collectibles>
 <trinkets>
     <trinket id="13">
