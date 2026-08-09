@@ -20,11 +20,14 @@ function mod:TearHitEnemy(tear, collider, low)
 end
 
 function mod:UpdateDamageMultiplier(tear)
-    local player = tear.SpawnerEntity:ToPlayer()
-    if player and tear:IsDead() and tear:GetData().missed then
-        temperTantrumStage = math.min(temperTantrumStage + 1, 6)
-        player:AddCacheFlags(CacheFlag.CACHE_DAMAGE)
-        player:EvaluateItems()
+    local spawner = tear.SpawnerEntity
+    if spawner then
+        local player = spawner:ToPlayer()
+        if player and tear:IsDead() and tear:GetData().missed then
+            temperTantrumStage = math.min(temperTantrumStage + 1, 6)
+            player:AddCacheFlags(CacheFlag.CACHE_DAMAGE)
+            player:EvaluateItems()
+        end
     end
 end
 

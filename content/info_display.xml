@@ -59,6 +59,9 @@
     <collectible id="20">
         <info text="When entering a special room for the first time, Isaac will sometimes find an extra pickup corresponding to the room's type"/>
     </collectible>
+    <collectible id="21">
+        <info text="Shoot piercing gusts of wind that blow enemies away"/>
+    </collectible>
 </collectibles>
 <trinkets>
     <trinket id="13">

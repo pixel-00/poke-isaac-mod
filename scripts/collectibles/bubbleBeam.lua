@@ -4,20 +4,12 @@ local bubbleBeamShotSpeed = 0.4
 local bubbleBeamTearRadius = 30
 local canSpawnExtraTears = true
 
-local function toTearsPerSecond(maxFireDelay)
-	return 30 / (maxFireDelay + 1)
-end
-
-local function toMaxFireDelay(tearsPerSecond)
-	return (30 / tearsPerSecond) - 1
-end
-
 function mod:EvaluateCache(player, cacheFlags)
 	local itemCount = player:GetCollectibleNum(bubbleBeam)
 	if (cacheFlags & CacheFlag.CACHE_FIREDELAY) == CacheFlag.CACHE_FIREDELAY then
-	    local tearsPerSecond = toTearsPerSecond(player.MaxFireDelay)
+	    local tearsPerSecond = mod:ToTearsPerSecond(player.MaxFireDelay)
 	    tearsPerSecond = tearsPerSecond + (2.27 * itemCount)
-	    player.MaxFireDelay = toMaxFireDelay(tearsPerSecond)
+	    player.MaxFireDelay = mod:ToMaxFireDelay(tearsPerSecond)
 	end
 	if (cacheFlags & CacheFlag.CACHE_DAMAGE) == CacheFlag.CACHE_DAMAGE then
 	    local multiplierToAdd = bubbleBeamMultiplier^itemCount

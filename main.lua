@@ -18,6 +18,7 @@ include("scripts.collectibles.lazyBones")
 include("scripts.collectibles.junkFood")
 include("scripts.collectibles.earlyOnset")
 include("scripts.collectibles.couchCushion")
+include("scripts.collectibles.momsLashes")
 
 include("scripts.trinkets.focusSash")
 include("scripts.trinkets.keyCrusher")
