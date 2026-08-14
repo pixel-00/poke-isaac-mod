@@ -20,4 +20,6 @@
     <passive id="19" name="Early Onset" gfx="placeholder.png" description="Who are you?!" quality="3" craftquality="3" tags="offensive summonable"/>
     <passive id="20" name="Couch Cushion" gfx="placeholder.png" description="I can't believe it was under there!" quality="2" craftquality="2" tags="offensive summonable"/>
     <passive id="21" name="Mom's Lashes" gfx="placeholder.png" description="Blow them away" quality="2" craftquality="2" cache="firedelay tearflag size shotspeed" tags="offensive summonable"/>
+    <passive id="22" name="Plantasia" gfx="placeholder.png" description="placeholder" quality="2" craftquality="2" tags="offensive summonable"/>
+    <passive id="23" name="Fly Swatter" gfx="placeholder.png" description="I hate bugs" quality="1" craftquality="1" cache="shotspeed" tags="offensive summonable"/>
 </items>

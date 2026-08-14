@@ -19,6 +19,8 @@ include("scripts.collectibles.junkFood")
 include("scripts.collectibles.earlyOnset")
 include("scripts.collectibles.couchCushion")
 include("scripts.collectibles.momsLashes")
+include("scripts.collectibles.plantasia")
+include("scripts.collectibles.flySwatter")
 
 include("scripts.trinkets.focusSash")
 include("scripts.trinkets.keyCrusher")

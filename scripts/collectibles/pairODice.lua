@@ -6,7 +6,7 @@ local itemPool = RoomType.ROOM_NULL
 function mod:UseItem(item, rng, player, useFlags, activeSlot, varData)
     if shaken then
         local items = Isaac.FindByType(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_COLLECTIBLE, -1, false, false)
-        for i, v in pairs(items) do
+        for _, v in pairs(items) do
             local newItem = Game():GetItemPool():GetCollectible(itemPool, true, mod:RandomPositive(), CollectibleType.COLLECTIBLE_NULL, ItemPoolType.POOL_TREASURE)
             v:ToPickup():Morph(EntityType.ENTITY_PICKUP, v.Variant, newItem, true, false, false)
         end

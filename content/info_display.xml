@@ -62,6 +62,12 @@
     <collectible id="21">
         <info text="Shoot piercing gusts of wind that blow enemies away"/>
     </collectible>
+    <collectible id="22">
+        <info text="Chance to shoot seeds which grow into vines and trap enemies on contact"/>
+    </collectible>
+    <collectible id="23">
+        <info text="Increased damage against all flies and spiders"/>
+    </collectible>
 </collectibles>
 <trinkets>
     <trinket id="13">
