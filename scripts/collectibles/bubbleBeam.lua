@@ -5,7 +5,7 @@ local bubbleBeamTearRadius = 30
 local canSpawnExtraTears = true
 
 function mod:EvaluateCache(player, cacheFlags)
-	local itemCount = player:GetCollectibleNum(bubbleBeam)
+	local itemCount = math.max(player:GetCollectibleNum(bubbleBeam), player:GetData().bubbleBeam and 1 or 0) --having the bubbleBeam flag set counts as having at least 1 copy of the item
 	if (cacheFlags & CacheFlag.CACHE_FIREDELAY) == CacheFlag.CACHE_FIREDELAY then
 	    local tearsPerSecond = mod:ToTearsPerSecond(player.MaxFireDelay)
 	    tearsPerSecond = tearsPerSecond + (2.27 * itemCount)
@@ -24,7 +24,7 @@ end
 function mod:bubbleTear(tear)
 	local player = Isaac.GetPlayer(0)
 	local tearVelocity = tear.Velocity
-	if player:HasCollectible(bubbleBeam) then
+	if player:GetData().bubbleBeam then
 		tear.Velocity = tear.Velocity:Rotated(math.random(-bubbleBeamTearRadius, bubbleBeamTearRadius))
 		tear.Scale = tear.Scale * 1.5
 		if canSpawnExtraTears then
@@ -39,5 +39,12 @@ function mod:bubbleTear(tear)
 	end
 end
 
+function mod:UpdateBubbleBeamFlag(player)
+    if player:HasCollectible(bubbleBeam) then
+        player:GetData().bubbleBeam = true
+    end
+end
+
 mod:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, mod.EvaluateCache)
 mod:AddCallback(ModCallbacks.MC_POST_FIRE_TEAR, mod.bubbleTear)
+mod:AddCallback(ModCallbacks.MC_POST_PEFFECT_UPDATE, mod.UpdateBubbleBeamFlag)

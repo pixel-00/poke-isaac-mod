@@ -11,15 +11,24 @@
     <passive id="10" name="Lucky Star" gfx="lucky_star_item.png" description="Today is gonna be a good day" quality="3" craftquality="3" tags="offensive summonable"/>
     <passive id="11" name="Promo Offer" gfx="promo_offer_item.png" description="Buy one, get one" quality="3" craftquality="3" tags="offensive summonable"/>
     <active id="12" name="Tabula Rasa" gfx="placeholder.png" description="placeholder" quality="3" craftquality="3" maxcharges="0" chargetype="special" tags="offensive"/>
-    <trinket id="13" name="Focus Sash" gfx="placeholder.png" description="Close call!"/>
+    <trinket id="13" name="Focus Sash" gfx="focus_sash_item.png" description="Close call!"/>
     <trinket id="14" name="Key Crusher" gfx="placeholder.png" description="Recycle them"/>
-    <passive id="15" name="Temper Tantrum" gfx="placeholder.png" description="May your rage consume you" quality="2" craftquality="2" tags="offensive summonable"/>
-    <active id="16" name="Pair o' Dice" gfx="placeholder.png" description="Shake 'em, then roll 'em!" quality="4" craftquality="4" maxcharges="4" chargetype="normal" tags="offensive"/>
-    <passive id="17" name="Lazy Bones" gfx="placeholder.png" description="placeholder" quality="2" craftquality="2" tags="nolostbr summonable"/>
-    <passive id="18" name="Junk Food" gfx="placeholder.png" description="placeholder" quality="1" craftquality="1" maxhearts="2" hearts="2" tags="nolostbr"/>
-    <passive id="19" name="Early Onset" gfx="placeholder.png" description="Who are you?!" quality="3" craftquality="3" tags="offensive summonable"/>
-    <passive id="20" name="Couch Cushion" gfx="placeholder.png" description="I can't believe it was under there!" quality="2" craftquality="2" tags="offensive summonable"/>
-    <passive id="21" name="Mom's Lashes" gfx="placeholder.png" description="Blow them away" quality="2" craftquality="2" cache="firedelay tearflag size shotspeed" tags="offensive summonable"/>
+    <passive id="15" name="Temper Tantrum" gfx="temper_tantrum_item.png" description="May your rage consume you" quality="2" craftquality="2" tags="offensive summonable"/>
+    <active id="16" name="Pair o' Dice" gfx="pair_o_dice_item.png" description="Shake 'em, then roll 'em!" quality="4" craftquality="4" maxcharges="4" chargetype="normal" tags="offensive"/>
+    <passive id="17" name="Lazy Bones" gfx="lazy_bones_item.png" description="placeholder" quality="2" craftquality="2" tags="nolostbr summonable"/>
+    <passive id="18" name="Junk Food" gfx="junk_food_item.png" description="placeholder" quality="1" craftquality="1" maxhearts="2" hearts="2" tags="nolostbr"/>
+    <passive id="19" name="Early Onset" gfx="early_onset_item.png" description="Who are you?!" quality="3" craftquality="3" tags="offensive summonable"/>
+    <passive id="20" name="Couch Cushion" gfx="couch_cushion_item.png" description="I can't believe it was under there!" quality="2" craftquality="2" tags="offensive summonable"/>
+    <passive id="21" name="Loose Feathers" gfx="loose_feathers_item.png" description="Blow them away" quality="2" craftquality="2" cache="firedelay tearflag size shotspeed" tags="offensive summonable"/>
     <passive id="22" name="Plantasia" gfx="placeholder.png" description="placeholder" quality="2" craftquality="2" tags="offensive summonable"/>
-    <passive id="23" name="Fly Swatter" gfx="placeholder.png" description="I hate bugs" quality="1" craftquality="1" cache="shotspeed" tags="offensive summonable"/>
+    <passive id="23" name="Fly Swatter" gfx="fly_swatter_item.png" description="I hate bugs" quality="1" craftquality="1" cache="shotspeed" tags="offensive summonable"/>
+    <active id="24" name="Techincal Machine" gfx="technical_machine_item.png" description="placeholder" quality="3" craftquality="3" maxcharges="6" chargetype="normal" tags="offensive"/>
+    <active id="25" name="Techincal Record" gfx="technical_record_item.png" description="placeholder" quality="3" craftquality="3" maxcharges="0" chargetype="special" tags="offensive"/>
+    <active id="26" name="Dig" gfx="placeholder.png" description="placeholder" quality="1" craftquality="1" maxcharges="270" chargetype="timed" tags="offensive"/>
+    <active id="27" name="Ability Capsule" gfx="ability_capsule_item.png" description="placeholder" quality="3" craftquality="3" maxcharges="0" chargetype="special" tags="offensive"/>
+    <passive id="28" name="Empty Set" gfx="placeholder.png" description="placeholder" quality="3" craftquality="3" tags="offensive"/>
+    <trinket id="29" name="Choice Band" gfx="placeholder.png" description="I choose strength"/>
+    <trinket id="30" name="Choice Specs" gfx="placeholder.png" description="I choose power"/>
+    <trinket id="31" name="Choice Scarf" gfx="placeholder.png" description="I choose speed"/>
+    <trinket id="32" name="Air Balloon" gfx="air_balloon_item.png" description="placeholder"/>
 </items>

@@ -4,7 +4,7 @@ local TEARS_MULTIPLIER = 3/5
 
 function mod:TearEffect(tear)
     local player = Isaac.GetPlayer()
-    if player:HasCollectible(momsLashes) then
+    if player:GetData().momsLashes then
         tear.TearFlags = tear.TearFlags | TearFlags.TEAR_PIERCING
         tear.Scale = tear.Scale * 1.25
         tear:GetData().isWindTear = true
@@ -24,7 +24,7 @@ function mod:DragEnemy(tear, enemy, _)
 end
 
 function mod:ApplyStats(player, cacheFlags)
-    local itemCount = player:GetCollectibleNum(momsLashes)
+    local itemCount = math.max(player:GetCollectibleNum(momsLashes), player:GetData().momsLashes and 1 or 0)
 	if (cacheFlags & CacheFlag.CACHE_FIREDELAY) == CacheFlag.CACHE_FIREDELAY and itemCount > 0 then
 	    local tearsPerSecond = mod:ToTearsPerSecond(player.MaxFireDelay)
 	    tearsPerSecond = tearsPerSecond * TEARS_MULTIPLIER

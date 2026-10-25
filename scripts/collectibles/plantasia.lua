@@ -1,4 +1,3 @@
-local plantasia = Isaac.GetItemIdByName("Plantasia")
 local vines = Isaac.GetEntityVariantByName("Plantasia Vines")
 
 local SLOWDOWN_DURATION = 30
@@ -9,7 +8,7 @@ function mod:ApplyEffect(tear)
     local spawner = tear.SpawnerEntity
     if spawner then
         local player = spawner:ToPlayer()
-        if player and player:HasCollectible(plantasia) then
+        if player and player:GetData().bulletSeed then
             local x = math.random()
             local effectChance = math.max(math.min(math.ceil(player.Luck + 1) / 20, 0.3), 0.05)
             if x < effectChance then
