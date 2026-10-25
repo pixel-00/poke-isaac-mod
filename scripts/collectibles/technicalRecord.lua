@@ -53,6 +53,14 @@ local function IsVanilla(ID)
         or ID == CollectibleType.COLLECTIBLE_BRIMSTONE
 end
 
+local function PoolSize(pool)
+    local size = 0
+    for _, i in pairs(pool) do
+        size = size + 1
+    end
+    return size
+end
+
 local function TRPool(player)
     local trPool = {}
     for _, collectible in pairs(TR_POOL) do
@@ -64,13 +72,13 @@ local function TRPool(player)
         elseif collectible == looseFeathers then
             hasCollectible = player:GetData().momsLashes
         elseif collectible == plantasia then
-            hasCollectible = player:GetData().bulletSeed
+            hasCollectible = player:GetData().plantasia
         end
         if not hasCollectible then
             table.insert(trPool, collectible)
         end
     end
-    if trPool.Size == 0 then
+    if PoolSize(trPool) == 0 then
         return STACKABLE_POOL
     else
         return trPool
@@ -79,7 +87,7 @@ end
 
 function mod:UseTechnicalRecord(item, rng, player, useFlags, activeSlot, varData)
     local trPool = TRPool(player)
-    local collectible = trPool[math.random(trPool.Size - 1)]
+    local collectible = trPool[math.random(PoolSize(trPool) - 1)]
     player:AddCollectible(collectible, 0, true, 0, nil, ItemPoolType.POOL_NULL)
     return {
         Remove = true,

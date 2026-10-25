@@ -28,11 +28,19 @@ local currentFloorItems = {}
 local currentPool = {}
 local currentStage = nil
 
+local function PoolSize(pool)
+    local size = 0
+    for _, i in pairs(pool) do
+        size = size + 1
+    end
+    return size
+end
+
 local function GetTMItem()
-    if currentPool.Size == 0 then
+    if PoolSize(currentPool) == 0 then
         return false
     else
-        return currentPool[math.random(currentPool.Size - 1)]
+        return currentPool[math.random(PoolSize(currentPool) - 1)]
     end
 end
 
