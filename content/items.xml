@@ -22,8 +22,8 @@
     <passive id="21" name="Loose Feathers" gfx="loose_feathers_item.png" description="Blow them away" quality="2" craftquality="2" cache="firedelay tearflag size shotspeed" tags="offensive summonable"/>
     <passive id="22" name="Plantasia" gfx="placeholder.png" description="placeholder" quality="2" craftquality="2" tags="offensive summonable"/>
     <passive id="23" name="Fly Swatter" gfx="fly_swatter_item.png" description="I hate bugs" quality="1" craftquality="1" cache="shotspeed" tags="offensive summonable"/>
-    <active id="24" name="Techincal Machine" gfx="technical_machine_item.png" description="placeholder" quality="3" craftquality="3" maxcharges="6" chargetype="normal" tags="offensive"/>
-    <active id="25" name="Techincal Record" gfx="technical_record_item.png" description="placeholder" quality="3" craftquality="3" maxcharges="0" chargetype="special" tags="offensive"/>
+    <active id="24" name="Technical Machine" gfx="technical_machine_item.png" description="placeholder" quality="3" craftquality="3" maxcharges="6" chargetype="normal" tags="offensive"/>
+    <active id="25" name="Technical Record" gfx="technical_record_item.png" description="placeholder" quality="3" craftquality="3" maxcharges="0" chargetype="special" tags="offensive"/>
     <active id="26" name="Dig" gfx="placeholder.png" description="placeholder" quality="1" craftquality="1" maxcharges="270" chargetype="timed" tags="offensive"/>
     <active id="27" name="Ability Capsule" gfx="ability_capsule_item.png" description="placeholder" quality="3" craftquality="3" maxcharges="0" chargetype="special" tags="offensive"/>
     <passive id="28" name="Empty Set" gfx="placeholder.png" description="placeholder" quality="3" craftquality="3" tags="offensive"/>
