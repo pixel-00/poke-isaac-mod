@@ -40,7 +40,7 @@ local function GetTMItem()
     if PoolSize(currentPool) == 0 then
         return false
     else
-        return currentPool[math.random(PoolSize(currentPool) - 1)]
+        return currentPool[math.random(PoolSize(currentPool)) - 1]
     end
 end
 

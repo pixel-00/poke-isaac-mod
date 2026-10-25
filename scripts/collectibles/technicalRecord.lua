@@ -87,7 +87,7 @@ end
 
 function mod:UseTechnicalRecord(item, rng, player, useFlags, activeSlot, varData)
     local trPool = TRPool(player)
-    local collectible = trPool[math.random(PoolSize(trPool) - 1)]
+    local collectible = trPool[math.random(PoolSize(trPool)) - 1]
     player:AddCollectible(collectible, 0, true, 0, nil, ItemPoolType.POOL_NULL)
     return {
         Remove = true,
