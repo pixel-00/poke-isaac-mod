@@ -25,7 +25,6 @@ local TM_POOL = {
 }
 
 local currentFloorItems = {}
-local currentPool = {}
 local currentStage = nil
 
 local function PoolSize(pool)
@@ -36,11 +35,11 @@ local function PoolSize(pool)
     return size
 end
 
-local function GetTMItem()
-    if PoolSize(currentPool) == 0 then
+local function GetTMItem(tmPool)
+    if PoolSize(tmPool) == 0 then
         return false
     else
-        return currentPool[math.random(PoolSize(currentPool)) - 1]
+        return tmPool[math.random(PoolSize(tmPool)) - 1]
     end
 end
 
@@ -74,33 +73,35 @@ local function GiveEffect(effect, player)
     end
 end
 
-local function UpdateTMPool(player)
-    currentPool = {}
+local function TMPool(player)
+    local tmPool = {}
     for _, collectible in pairs(TM_POOL) do
-        local hasCollectible = false
+        local hasEffect = false
         if IsVanilla(collectible) then
-            hasCollectible = not player:GetEffects():HasCollectibleEffect(collectible)
+            hasEffect = player:GetEffects():HasCollectibleEffect(collectible)
         elseif collectible == bubbleBeam then
-            hasCollectible = player:GetData().bubbleBeam
+            hasEffect = player:GetData().bubbleBeam
         elseif collectible == momsLashes then
-            hasCollectible = player:GetData().momsLashes
+            hasEffect = player:GetData().momsLashes
         elseif collectible == plantasia then
-            hasCollectible = player:GetData().bulletSeed
+            hasEffect = player:GetData().bulletSeed
         end
-        if not hasCollectible then
-            table.insert(currentPool, collectible)
+        if not (hasEffect or player:hasCollectible(collectible)) then
+            table.insert(tmPool, collectible)
         end
     end
+    return tmPool
 end
 
 function mod:UseTechnicalMachine(item, rng, player, useFlags, activeSlot, varData)
-    UpdateTMPool(player)
     local hud = Game():GetHUD()
-    local effectToGive = GetTMItem()
+    local effectToGive = GetTMItem(TMPool(player))
     if effectToGive then
         GiveEffect(effectToGive, player)
         table.insert(currentFloorItems, effectToGive)
         hud:ShowItemText(player, Isaac.GetItemConfig():GetCollectible(effectToGive), true)
+    else
+        hud:ShowItemText("Technical Machine", "Nothing left to learn")
     end
     return {ShowAnim = true}
 end
