@@ -86,7 +86,7 @@ local function TMPool(player)
         elseif collectible == plantasia then
             hasEffect = player:GetData().bulletSeed
         end
-        if not (hasEffect or player:hasCollectible(collectible)) then
+        if not (hasEffect or player:HasCollectible(collectible)) then
             table.insert(tmPool, collectible)
         end
     end
