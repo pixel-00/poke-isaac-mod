@@ -95,11 +95,12 @@ end
 
 function mod:UseTechnicalMachine(item, rng, player, useFlags, activeSlot, varData)
     UpdateTMPool(player)
+    local hud = Game():GetHUD()
     local effectToGive = GetTMItem()
     if effectToGive then
         GiveEffect(effectToGive, player)
         table.insert(currentFloorItems, effectToGive)
-        print(Isaac.GetItemConfig(effectToGive).Name)
+        hud:ShowItemText(player, Isaac.GetItemConfig():GetCollectible(effectToGive), true)
     end
     return {ShowAnim = true}
 end

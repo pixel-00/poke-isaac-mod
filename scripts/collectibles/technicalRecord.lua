@@ -86,9 +86,11 @@ local function TRPool(player)
 end
 
 function mod:UseTechnicalRecord(item, rng, player, useFlags, activeSlot, varData)
+    local hud = Game():GetHUD()
     local trPool = TRPool(player)
     local collectible = trPool[math.random(PoolSize(trPool)) - 1]
     player:AddCollectible(collectible, 0, true, 0, nil, ItemPoolType.POOL_NULL)
+    hud:ShowItemText(player, Isaac.GetItemConfig():GetCollectible(collectible), true)
     return {
         Remove = true,
         ShowAnim = true
