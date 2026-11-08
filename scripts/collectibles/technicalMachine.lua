@@ -3,7 +3,7 @@ local bubbleBeam = Isaac.GetItemIdByName("Bubble Beam")
 local looseFeathers = Isaac.GetItemIdByName("Loose Feathers")
 local plantasia = Isaac.GetItemIdByName("Plantasia")
 
-local hiddenItemManager = require("poke-isaac-mod.lib.hidden_item_manager")
+local hiddenItemManager = require("lib.hidden_item_manager")
 
 local TM_POOL = {
     CollectibleType.COLLECTIBLE_SPOON_BENDER,
@@ -65,4 +65,19 @@ function mod:UseTechnicalMachine(item, rng, player, useFlags, activeSlot, varDat
     return {ShowAnim = true}
 end
 
+function mod:SaveHiddenWisps(shouldSave)
+    if shouldSave then
+        local hiddenItemData = hiddenItemManager:GetSaveData()
+        mod:SaveData().HIDDEN_ITEM_DATA = hiddenItemData
+    end
+end
+
+function mod:LoadHiddenWisps(continued)
+    if continued then
+        hiddenItemManager:LoadData(mod:SaveData().HIDDEN_ITEM_DATA)
+    end
+end
+
 mod:AddCallback(ModCallbacks.MC_USE_ITEM, mod.UseTechnicalMachine, technicalMachine)
+mod:AddCallback(ModCallbacks.MC_PRE_GAME_EXIT, mod.SaveHiddenWisps)
+mod:AddCallback(ModCallbacks.MC_POST_GAME_STARTED, mod.LoadHiddenWisps)

@@ -1,5 +1,5 @@
 local mod = RegisterMod("My Mod", 1)
-local hiddenItemManager = require("poke-isaac-mod.lib.hidden_item_manager")
+local hiddenItemManager = require("lib.hidden_item_manager")
 
 hiddenItemManager:Init(mod)
 
