@@ -1,3 +1,5 @@
+include("scripts.utilities")
+
 local couchCushion = Isaac.GetItemIdByName("Couch Cushion")
 
 function mod:GetCushionPickup(roomType)

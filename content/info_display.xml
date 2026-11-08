@@ -63,10 +63,21 @@
         <info text="Shoot piercing gusts of wind that blow enemies away"/>
     </collectible>
     <collectible id="22">
-        <info text="Chance to shoot seeds which grow into vines and trap enemies on contact"/>
+        <info text="Increased damage against all flies and spiders"/>
     </collectible>
     <collectible id="23">
-        <info text="Increased damage against all flies and spiders"/>
+        <info text="Grants a powerful tear effect for the floor"/>
+    </collectible>
+    <collectible id="24">
+        <info text="Permanently grants a powerful tear effect"/>
+    </collectible>
+    <collectible id="25">
+        <info text="Grants a passive ability on use"/>
+        <info text="A new Ability Capsule will spawn on the next floor"/>
+        <info text="Isaac can only have one ability at a time"/>
+    </collectible>
+    <collectible id="26">
+        <info text="Consumes a key to spawn a random chest"/>
     </collectible>
 </collectibles>
 <trinkets>

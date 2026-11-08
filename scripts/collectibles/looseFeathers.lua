@@ -39,6 +39,8 @@ end
 function mod:UpdateLooseFeathersFlag(player)
     if player:HasCollectible(looseFeathers) then
         player:GetData().looseFeathers = true
+    else
+        player:GetData().looseFeathers = false
     end
 end
 

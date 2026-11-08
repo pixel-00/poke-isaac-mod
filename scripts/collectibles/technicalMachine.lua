@@ -1,7 +1,6 @@
 local technicalMachine = Isaac.GetItemIdByName("Technical Machine")
 local bubbleBeam = Isaac.GetItemIdByName("Bubble Beam")
 local looseFeathers = Isaac.GetItemIdByName("Loose Feathers")
-local plantasia = Isaac.GetItemIdByName("Plantasia")
 
 local hiddenItemManager = require("lib.hidden_item_manager")
 local json = require("json")
@@ -11,6 +10,7 @@ local saveData = {}
 local TM_POOL = {
     CollectibleType.COLLECTIBLE_SPOON_BENDER,
     CollectibleType.COLLECTIBLE_FIRE_MIND,
+    CollectibleType.COLLECTIBLE_APPLE,
     CollectibleType.COLLECTIBLE_JACOBS_LADDER,
     CollectibleType.COLLECTIBLE_URANUS,
     CollectibleType.COLLECTIBLE_TERRA,
@@ -26,7 +26,6 @@ local TM_POOL = {
     CollectibleType.COLLECTIBLE_BRIMSTONE,
     bubbleBeam,
     looseFeathers,
-    plantasia
 }
 
 local function PoolSize(pool)
@@ -41,7 +40,7 @@ local function GetTMItem(tmPool)
     if PoolSize(tmPool) == 0 then
         return false
     else
-        return tmPool[math.random(PoolSize(tmPool)) - 1]
+        return tmPool[math.random(PoolSize(tmPool))]
     end
 end
 
@@ -87,6 +86,11 @@ function mod:LoadHiddenWisps(continued)
     end
 end
 
+function mod:ResetCustomItems()
+    
+end
+
 mod:AddCallback(ModCallbacks.MC_USE_ITEM, mod.UseTechnicalMachine, technicalMachine)
 mod:AddCallback(ModCallbacks.MC_PRE_GAME_EXIT, mod.SaveHiddenWisps)
 mod:AddCallback(ModCallbacks.MC_POST_GAME_STARTED, mod.LoadHiddenWisps)
+mod:AddCallback(ModCallbacks.MC_POST_NEW_LEVEL, mod.ResetCustomItems)

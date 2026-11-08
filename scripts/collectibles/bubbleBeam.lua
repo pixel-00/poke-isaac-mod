@@ -42,6 +42,8 @@ end
 function mod:UpdateBubbleBeamFlag(player)
     if player:HasCollectible(bubbleBeam) then
         player:GetData().bubbleBeam = true
+    else
+        player:GetData().bubbleBeam = false
     end
 end
 
