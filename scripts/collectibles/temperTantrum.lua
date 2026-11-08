@@ -3,19 +3,20 @@ local temperTantrum = Isaac.GetItemIdByName("Temper Tantrum")
 local temperTantrumStage = 0
 
 function mod:SetMissFlag(tear)
-    local player = tear.SpawnerEntity:ToPlayer()
-    if player then
+    if tear.SpawnerEntity and tear.SpawnerEntity:ToPlayer() then
         tear:GetData().missed = true
     end
 end
 
 function mod:TearHitEnemy(tear, collider, low)
-    local player = tear.SpawnerEntity:ToPlayer()
-    if player and collider:IsEnemy() then
-        tear:GetData().missed = false
-        temperTantrumStage = math.max(temperTantrumStage - 2, 0)
-        player:AddCacheFlags(CacheFlag.CACHE_DAMAGE)
-        player:EvaluateItems()
+    if tear.SpawnerEntity then
+        local player = tear.SpawnerEntity:ToPlayer()
+        if player and collider:IsEnemy() then
+            tear:GetData().missed = false
+            temperTantrumStage = math.max(temperTantrumStage - 2, 0)
+            player:AddCacheFlags(CacheFlag.CACHE_DAMAGE)
+            player:EvaluateItems()
+        end
     end
 end
 
