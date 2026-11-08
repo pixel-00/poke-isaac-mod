@@ -76,11 +76,14 @@ function mod:SaveHiddenWisps(shouldSave)
 end
 
 function mod:LoadHiddenWisps(continued)
-    if continued then
-        if mod:HasData() then
-            saveData = json.decode(mod:LoadData())
-            hiddenItemManager:LoadData(saveData.HIDDEN_ITEM_DATA)
+    if continued and mod:HasData() then
+        local loadedData = json.decode(mod:LoadData())
+        if type(loadedData) == "table" then
+            saveData = loadedData
+        else
+            savedata = {}
         end
+        hiddenItemManager:LoadData(saveData.HIDDEN_ITEM_DATA)
     end
 end
 
