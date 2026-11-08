@@ -1,7 +1,9 @@
 local technicalMachine = Isaac.GetItemIdByName("Technical Machine")
 local bubbleBeam = Isaac.GetItemIdByName("Bubble Beam")
-local momsLashes = Isaac.GetItemIdByName("Mom's Lashes")
+local looseFeathers = Isaac.GetItemIdByName("Loose Feathers")
 local plantasia = Isaac.GetItemIdByName("Plantasia")
+
+local hiddenItemManager = require("poke-isaac-mod.lib.hidden_item_manager")
 
 local TM_POOL = {
     CollectibleType.COLLECTIBLE_SPOON_BENDER,
@@ -20,12 +22,9 @@ local TM_POOL = {
     CollectibleType.COLLECTIBLE_COMPOUND_FRACTURE,
     CollectibleType.COLLECTIBLE_BRIMSTONE,
     bubbleBeam,
-    momsLashes,
+    looseFeathers,
     plantasia
 }
-
-local currentFloorItems = {}
-local currentStage = nil
 
 local function PoolSize(pool)
     local size = 0
@@ -43,50 +42,11 @@ local function GetTMItem(tmPool)
     end
 end
 
-local function IsVanilla(ID)
-    return ID == CollectibleType.COLLECTIBLE_SPOON_BENDER
-        or ID == CollectibleType.COLLECTIBLE_FIRE_MIND
-        or ID == CollectibleType.COLLECTIBLE_JACOBS_LADDER
-        or ID == CollectibleType.COLLECTIBLE_URANUS
-        or ID == CollectibleType.COLLECTIBLE_TERRA
-        or ID == CollectibleType.COLLECTIBLE_PARASITOID
-        or ID == CollectibleType.COLLECTIBLE_HOLY_LIGHT
-        or ID == CollectibleType.COLLECTIBLE_KNOCKOUT_DROPS
-        or ID == CollectibleType.COLLECTIBLE_DARK_MATTER
-        or ID == CollectibleType.COLLECTIBLE_DEATHS_TOUCH
-        or ID == CollectibleType.COLLECTIBLE_SCORPIO
-        or ID == CollectibleType.COLLECTIBLE_8_INCH_NAILS
-        or ID == CollectibleType.COLLECTIBLE_POLYPHEMUS
-        or ID == CollectibleType.COLLECTIBLE_COMPOUND_FRACTURE
-        or ID == CollectibleType.COLLECTIBLE_BRIMSTONE
-end
-
-local function GiveEffect(effect, player)
-    if IsVanilla(effect) then
-        player:GetEffects():AddCollectibleEffect(effect, true, 1)
-    elseif effect == bubbleBeam then
-        player:GetData().bubbleBeam = true
-    elseif effect == momsLashes then
-        player:GetData().momsLashes = true
-    elseif effect == plantasia then
-        player:GetData().bulletSeed = true
-    end
-end
-
+-- Creates pool of item effects for items which the player does not already have
 local function TMPool(player)
     local tmPool = {}
     for _, collectible in pairs(TM_POOL) do
-        local hasEffect = false
-        if IsVanilla(collectible) then
-            hasEffect = player:GetEffects():HasCollectibleEffect(collectible)
-        elseif collectible == bubbleBeam then
-            hasEffect = player:GetData().bubbleBeam
-        elseif collectible == momsLashes then
-            hasEffect = player:GetData().momsLashes
-        elseif collectible == plantasia then
-            hasEffect = player:GetData().bulletSeed
-        end
-        if not (hasEffect or player:HasCollectible(collectible)) then
+        if not player:HasCollectible(collectible) then
             table.insert(tmPool, collectible)
         end
     end
@@ -97,8 +57,7 @@ function mod:UseTechnicalMachine(item, rng, player, useFlags, activeSlot, varDat
     local hud = Game():GetHUD()
     local effectToGive = GetTMItem(TMPool(player))
     if effectToGive then
-        GiveEffect(effectToGive, player)
-        table.insert(currentFloorItems, effectToGive)
+        hiddenItemManager:AddForFloor(player, effectToGive)
         hud:ShowItemText(player, Isaac.GetItemConfig():GetCollectible(effectToGive), true)
     else
         hud:ShowItemText("Technical Machine", "Nothing left to learn")
@@ -106,20 +65,4 @@ function mod:UseTechnicalMachine(item, rng, player, useFlags, activeSlot, varDat
     return {ShowAnim = true}
 end
 
-function mod:GiveTMEffects()
-    local player = Isaac.GetPlayer()
-    if currentStage == Game():GetLevel():GetStage() then
-        for _, effect in pairs(currentFloorItems) do
-            GiveEffect(effect, player)
-        end
-    end
-end
-
-function mod:ClearTMs()
-    currentFloorItems = {}
-    currentStage = Game():GetLevel():GetStage()
-end
-
 mod:AddCallback(ModCallbacks.MC_USE_ITEM, mod.UseTechnicalMachine, technicalMachine)
-mod:AddCallback(ModCallbacks.MC_POST_NEW_ROOM, mod.GiveTMEffects)
-mod:AddCallback(ModCallbacks.MC_POST_NEW_LEVEL, mod.ClearTMs)

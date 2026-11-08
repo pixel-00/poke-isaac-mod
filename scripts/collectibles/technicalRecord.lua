@@ -70,7 +70,7 @@ local function TRPool(player)
         elseif collectible == bubbleBeam then
             hasCollectible = player:GetData().bubbleBeam
         elseif collectible == looseFeathers then
-            hasCollectible = player:GetData().momsLashes
+            hasCollectible = player:GetData().looseFeathers
         elseif collectible == plantasia then
             hasCollectible = player:GetData().plantasia
         end

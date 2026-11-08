@@ -1,4 +1,7 @@
 local mod = RegisterMod("My Mod", 1)
+local hiddenItemManager = require("poke-isaac-mod.lib.hidden_item_manager")
+
+hiddenItemManager:Init(mod)
 
 include("scripts.collectibles.lifeOrb")
 include("scripts.collectibles.amuletCoin")
