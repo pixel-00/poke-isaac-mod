@@ -12,6 +12,7 @@ function mod:IntrepidSword()
         else
             activeToggle = 0
         end
+        player:AddCacheFlags(CacheFlag.CACHE_DAMAGE)
         player:EvaluateItems()
     end
 end

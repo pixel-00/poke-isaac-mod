@@ -8,7 +8,7 @@ function mod:ApplyBoost(player, cacheFlags)
             player.MoveSpeed = multiplier * player.MoveSpeed
         end
         if (cacheFlags & CacheFlag.CACHE_RANGE) == CacheFlag.CACHE_RANGE then
-            player.Range = multiplier * player.Range
+            player.TearRange = multiplier * player.TearRange
         end
 	end
 end

@@ -12,8 +12,9 @@ function mod:CountRoomClear()
     if player:HasCollectible(slowStart) then
         local n = player:GetData().SlowStartAbilityRooms
         if n then
-            if n < 5 then
-                player:GetData().SlowStartAbilityRooms = n + 1
+            player:GetData().SlowStartAbilityRooms = n + 1
+            if n >= 4 then
+                player:EvaluateItems()
             end
         else
             player:GetData().SlowStartAbilityRooms = 1

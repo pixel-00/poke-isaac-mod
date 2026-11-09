@@ -38,7 +38,7 @@ function mod:ApplyBoosts(player, cacheFlags)
         end
         if (cacheFlags & CacheFlag.CACHE_RANGE) == CacheFlag.CACHE_RANGE then
             local rangeToAdd = 40 * 2.5 * boosts.Range
-            player.Range = player.Range + rangeToAdd
+            player.TearRange = player.TearRange + rangeToAdd
         end
     end
 end

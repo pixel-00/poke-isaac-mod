@@ -11,7 +11,7 @@ function mod:TearSize(tear)
 	local player = tear.SpawnerEntity
 	if player and player:ToPlayer() and player:ToPlayer():HasCollectible(megaLauncher) then
         tear.TearFlags = tear.TearFlags | TearFlags.TEAR_PIERCING
-		tear.Scale = tear.Scale * 3
+		tear.Scale = max(tear.Scale, 3)
     end
 end
 

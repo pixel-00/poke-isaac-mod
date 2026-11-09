@@ -6,7 +6,7 @@ local charging = false
 function mod:ExtraCharge(player)
     if player:HasCollectible(plus) or player:HasCollectible(minus) then
         local oldCharge = player:GetData().PlusMinusAbilityActiveCharge
-        if oldCharge < player:GetActiveCharge() and not charging then
+        if oldCharge and oldCharge < player:GetActiveCharge() and not charging then
             charging = true
             player:SetActiveCharge(player:GetActiveCharge() + 1)
             charging = false
