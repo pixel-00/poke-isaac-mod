@@ -1,7 +1,7 @@
 local blaze = Isaac.GetItemIdByName("Blaze")
 
 function mod:CheckHealth(player)
-    if player:HasCollectible(overgrow) then
+    if player:HasCollectible(blaze) then
         if not (
             player:GetData().AbilityHealth == player:GetHearts() and
             player:GetData().AbilityMaxHealth == player:GetEffectiveMaxHearts()

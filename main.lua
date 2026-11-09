@@ -40,7 +40,7 @@ include("scripts.collectibles.abilities.technician")
 include("scripts.collectibles.abilities.weakArmor")--
 include("scripts.collectibles.abilities.sereneGrace")
 include("scripts.collectibles.abilities.speedBoost")--save boost progress?
-include("scripts.collectibles.abilities.stall")--
+include("scripts.collectibles.abilities.stall")
 include("scripts.collectibles.abilities.parentalBond")
 include("scripts.collectibles.abilities.effectSpore")
 include("scripts.collectibles.abilities.cheekPouch")--
@@ -54,8 +54,8 @@ include("scripts.collectibles.abilities.hustle")
 include("scripts.collectibles.abilities.emergencyExit")
 include("scripts.collectibles.abilities.intrepidSword")
 include("scripts.collectibles.abilities.dauntlessShield")
-include("scripts.collectibles.abilities.beastBoost")--cache eval
-include("scripts.collectibles.abilities.pickpocket")--
+include("scripts.collectibles.abilities.beastBoost")
+include("scripts.collectibles.abilities.pickpocket")
 include("scripts.collectibles.abilities.plusMinus")--rework
 include("scripts.collectibles.abilities.megaLauncher")--slight rework
 include("scripts.collectibles.abilities.stamina")

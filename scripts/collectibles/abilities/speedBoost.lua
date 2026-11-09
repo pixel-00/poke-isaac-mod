@@ -1,5 +1,9 @@
 local speedBoost = Isaac.GetItemIdByName("Speed Boost")
 
+local json = require("json")
+
+local saveData = {}
+
 function mod:StackSpeedBoost()
     local player = Isaac.GetPlayer()
     if player:HasCollectible(speedBoost) then
@@ -27,6 +31,36 @@ function mod:ResetSpeedBoostStacks()
     player:GetData().SpeedBoostStacks = 0
 end
 
+function mod:SaveSpeedBoost(shouldSave)
+    if shouldSave then
+        if mod:HasData() then
+            saveData = json.decode(mod:LoadData())
+        end
+        local player = Isaac.GetPlayer()
+        saveData.SPEED_BOOST_STACKS = player:GetData().SpeedBoostStacks
+        mod:SaveData(json.encode(saveData))
+    end
+end
+
+function mod:LoadSpeedBoost(continued)
+    if continued and mod:HasData() then
+        local loadedData = json.decode(mod:LoadData())
+        if type(loadedData) == "table" then
+            saveData = loadedData
+        else
+            savedata = {}
+        end
+        local player = Isaac.GetPlayer()
+        if saveData.SPEED_BOOST_STACKS then
+            player:GetData().SpeedBoostStacks = saveData.SPEED_BOOST_STACKS
+        else
+            player:GetData().SpeedBoostStacks = 0
+        end
+    end
+end
+
 mod:AddCallback(ModCallbacks.MC_PRE_SPAWN_CLEAN_AWARD, mod.StackSpeedBoost)
 mod:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, mod.ApplySpeed)
 mod:AddCallback(ModCallbacks.MC_POST_NEW_LEVEL, mod.ResetSpeedBoostStacks)
+mod:AddCallback(ModCallbacks.MC_PRE_GAME_EXIT, mod.SaveSpeedBoost)
+mod:AddCallback(ModCallbacks.MC_POST_GAME_STARTED, mod.LoadSpeedBoost)
