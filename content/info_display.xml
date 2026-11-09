@@ -72,12 +72,12 @@
         <info text="Permanently grants a powerful tear effect"/>
     </collectible>
     <collectible id="25">
-        <info text="Grants a passive ability on use"/>
-        <info text="A new Ability Capsule will spawn on the next floor"/>
-        <info text="Isaac can only have one ability at a time"/>
+        <info text="Consumes a key to spawn a random chest"/>
     </collectible>
     <collectible id="26">
-        <info text="Consumes a key to spawn a random chest"/>
+        <info text="Grants a unique passive ability on use"/>
+        <info text="A new Ability Capsule will spawn on the following floor"/>
+        <info text="Isaac can only have one ability at a time"/>
     </collectible>
 </collectibles>
 <trinkets>

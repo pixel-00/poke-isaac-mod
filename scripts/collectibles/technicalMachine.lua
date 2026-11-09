@@ -86,11 +86,6 @@ function mod:LoadHiddenWisps(continued)
     end
 end
 
-function mod:ResetCustomItems()
-    
-end
-
 mod:AddCallback(ModCallbacks.MC_USE_ITEM, mod.UseTechnicalMachine, technicalMachine)
 mod:AddCallback(ModCallbacks.MC_PRE_GAME_EXIT, mod.SaveHiddenWisps)
 mod:AddCallback(ModCallbacks.MC_POST_GAME_STARTED, mod.LoadHiddenWisps)
-mod:AddCallback(ModCallbacks.MC_POST_NEW_LEVEL, mod.ResetCustomItems)

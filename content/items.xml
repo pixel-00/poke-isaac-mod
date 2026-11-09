@@ -16,17 +16,48 @@
     <passive id="15" name="Temper Tantrum" gfx="temper_tantrum_item.png" description="May your rage consume you" quality="2" craftquality="2" tags="offensive summonable"/>
     <active id="16" name="Pair o' Dice" gfx="pair_o_dice_item.png" description="Shake 'em, then roll 'em!" quality="4" craftquality="4" maxcharges="4" chargetype="normal" tags="offensive"/>
     <passive id="17" name="Lazy Bones" gfx="lazy_bones_item.png" description="placeholder" quality="2" craftquality="2" tags="nolostbr summonable"/>
-    <passive id="18" name="Junk Food" gfx="junk_food_item.png" description="placeholder" quality="1" craftquality="1" maxhearts="2" hearts="2" tags="nolostbr"/>
+    <passive id="18" name="Junk Food" gfx="junk_food_item.png" description="HP up + you feel rotten" quality="1" craftquality="1" maxhearts="2" hearts="2" tags="nolostbr"/>
     <passive id="19" name="Early Onset" gfx="early_onset_item.png" description="What's going on?!" quality="3" craftquality="3" tags="offensive summonable"/>
     <passive id="20" name="Couch Cushion" gfx="couch_cushion_item.png" description="I can't believe it was under there!" quality="2" craftquality="2" tags="offensive summonable"/>
     <passive id="21" name="Loose Feathers" gfx="loose_feathers_item.png" description="Blow them away" quality="2" craftquality="2" cache="firedelay tearflag size shotspeed" tags="offensive summonable"/>
     <passive id="22" name="Fly Swatter" gfx="fly_swatter_item.png" description="I hate bugs" quality="1" craftquality="1" cache="shotspeed" tags="offensive summonable"/>
     <active id="23" name="Technical Machine" gfx="technical_machine_item.png" description="Wield the power of learning" quality="3" craftquality="3" maxcharges="6" chargetype="normal" tags="offensive"/>
     <active id="24" name="Technical Record" gfx="technical_record_item.png" description="Teach yourself something amazing" quality="3" craftquality="3" maxcharges="0" chargetype="special" tags="offensive"/>
-    <active id="25" name="Ability Capsule" gfx="ability_capsule_item.png" description="placeholder" quality="2" craftquality="2" maxcharges="0" chargetype="special" tags="offensive"/>
-    <active id="26" name="Chest of Chests" gfx="chest_of_chests_item.png" description="placeholder" quality="2" craftquality="2" maxcharges="1" chargetype="normal" keys="5" tags="offensive"/>
-    <trinket id="27" name="Choice Band" gfx="placeholder.png" description="I choose strength"/>
-    <trinket id="28" name="Choice Specs" gfx="placeholder.png" description="I choose power"/>
-    <trinket id="29" name="Choice Scarf" gfx="placeholder.png" description="I choose speed"/>
-    <trinket id="30" name="Air Balloon" gfx="air_balloon_item.png" description="placeholder"/>
+    <active id="25" name="Chest of Chests" gfx="chest_of_chests_item.png" description="Chest spawner" quality="2" craftquality="2" maxcharges="1" chargetype="normal" keys="5" tags="offensive"/>
+    <active id="26" name="Ability Capsule" gfx="ability_capsule_item.png" description="placeholder" quality="2" craftquality="2" maxcharges="0" chargetype="special" tags="offensive"/>
+    <!-- Remember to make abilities hidden after testing -->
+    <passive id="27" name="Huge Power" gfx="ability_capsule_item.png" description="DMG up" cache="damage"/>
+    <passive id="28" name="Intimidate" gfx="ability_capsule_item.png" description="Mass fear"/>
+    <passive id="29" name="Levitate" gfx="ability_capsule_item.png" description="Flight + ground immunity" cache="flying"/>
+    <passive id="30" name="Pickup" gfx="ability_capsule_item.png" description="Bonus items"/>
+    <passive id="31" name="Flash Fire" gfx="ability_capsule_item.png" description="Heat immunity + powerup"/>
+    <passive id="32" name="Regenerator" gfx="ability_capsule_item.png" description="Heal between floors"/>
+    <passive id="33" name="Technician" gfx="ability_capsule_item.png" description="Increased damage floor" cache="damage"/>
+    <passive id="34" name="Weak Armor" gfx="ability_capsule_item.png" description="It won't protect you!" cache="speed"/>
+    <passive id="35" name="Serene Grace" gfx="ability_capsule_item.png" description="Promotes added effects" cache="luck"/>
+    <passive id="36" name="Speed Boost" gfx="ability_capsule_item.png" description="Gradually boosts speed" cache="speed"/>
+    <passive id="37" name="Stall" gfx="ability_capsule_item.png" description="Speed down" cache="speed"/>
+    <passive id="38" name="Parental Bond" gfx="ability_capsule_item.png" description="Li'l buddy"/>
+    <passive id="39" name="Effect Spore" gfx="ability_capsule_item.png" description="Leave spores on contact"/>
+    <passive id="40" name="Cheek Pouch" gfx="ability_capsule_item.png" description="Extra healing"/>
+    <passive id="41" name="Soul-Heart" gfx="ability_capsule_item.png" description="Their blood brings sorrow" cache="firedelay"/>
+    <passive id="42" name="Sturdy" gfx="ability_capsule_item.png" description="Negates knockout"/>
+    <passive id="43" name="Slow Start" gfx="ability_capsule_item.png" description="You feel groggy" cache="damage speed"/>
+    <passive id="44" name="Overgrow" gfx="ability_capsule_item.png" description="Speed + range up in a pinch" cache="speed range"/>
+    <passive id="45" name="Blaze" gfx="ability_capsule_item.png" description="DMG up in a pinch" cache="damage"/>
+    <passive id="46" name="Torrent" gfx="ability_capsule_item.png" description="Tears up in a pinch" cache="firedelay"/>
+    <passive id="47" name="Hustle" gfx="ability_capsule_item.png" description="DMG up + accuracy down" cache="damage"/>
+    <passive id="48" name="Emergency Exit" gfx="ability_capsule_item.png" description="Escape from danger"/>
+    <passive id="49" name="Intrepid Sword" gfx="ability_capsule_item.png" description="I feel the power!" cache="damage"/>
+    <passive id="50" name="Dauntless Shield" gfx="ability_capsule_item.png" description="Can you feel the strength?"/>
+    <passive id="51" name="Beast Boost" gfx="ability_capsule_item.png" description="Boss bounty" cache="damage firedelay speed range"/>
+    <passive id="52" name="Pickpocket" gfx="ability_capsule_item.png" description="Loot your enemies"/>
+    <passive id="53" name="Plus" gfx="ability_capsule_item.png" description="Powers up with Minus" cache="damage firedelay"/>
+    <passive id="54" name="Minus" gfx="ability_capsule_item.png" description="Powers up with Plus" cache="damage firedelay"/>
+    <passive id="55" name="Mega Launcher" gfx="ability_capsule_item.png" description="Water pulse tears" cache="damage tearflag size"/>
+    <passive id="56" name="Stamina" gfx="ability_capsule_item.png" description="ability"/>
+    <trinket id="100" name="Choice Band" gfx="placeholder.png" description="I choose strength"/>
+    <trinket id="101" name="Choice Specs" gfx="placeholder.png" description="I choose power"/>
+    <trinket id="102" name="Choice Scarf" gfx="placeholder.png" description="I choose speed"/>
+    <trinket id="103" name="Air Balloon" gfx="air_balloon_item.png" description="placeholder"/>
 </items>

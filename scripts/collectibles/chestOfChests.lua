@@ -46,7 +46,7 @@ function mod:UseItem(item, rng, player, useFlags, activeSlot, varData)
             end
         end
         local room = Game():GetLevel():GetCurrentRoom()
-        Game():Spawn(EntityType.ENTITY_PICKUP, variant, room:FindFreePickupSpawnPosition(player.Position), Vector(0, 0), player, subType, rng:GetSeed())
+        Game():Spawn(EntityType.ENTITY_PICKUP, variant, room:FindFreePickupSpawnPosition(player.Position + RandomVector()), Vector(0, 0), player, subType, rng:GetSeed())
     end
     return{ShowAnim = true}
 end

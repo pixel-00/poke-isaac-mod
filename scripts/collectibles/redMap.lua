@@ -1,3 +1,5 @@
+include("scripts.utilities")
+
 local redMap = Isaac.GetItemIdByName("Red Map")
 local keyCrusher = Isaac.GetTrinketIdByName("Key Crusher")
 local needToDisplayUltraSecret = true
