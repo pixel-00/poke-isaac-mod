@@ -18,7 +18,7 @@ function mod:ApplySpeed(player, cacheFlags)
     local itemCount = player:GetCollectibleNum(speedBoost)
     if itemCount > 0 and ((cacheFlags & CacheFlag.CACHE_SPEED) == CacheFlag.CACHE_SPEED) then
         local speedToAdd = 0.1 * player:GetData().SpeedBoostStacks * itemCount
-        player.Speed = player.Speed + speedToAdd
+        player.MoveSpeed = player.MoveSpeed + speedToAdd
     end
 end
 

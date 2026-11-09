@@ -4,8 +4,8 @@ function mod:ApplySpeed(player, cacheFlags)
     local itemCount = player:GetCollectibleNum(stall)
     if itemCount > 0 and ((cacheFlags & CacheFlag.CACHE_SPEED) == CacheFlag.CACHE_SPEED) then
         local toggle = player:GetData().StallAbilityActive and 1 or 0
-        local speedToAdd = toggle * ((0.1 - player.Speed)^itemCount)
-        player.Speed = player.Speed + speedToAdd
+        local speedToAdd = toggle * ((0.1 - player.MoveSpeed)^itemCount)
+        player.MoveSpeed = player.MoveSpeed + speedToAdd
     end
 end
 

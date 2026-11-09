@@ -1,7 +1,7 @@
 local soulHeart = Isaac.GetItemIdByName("Soul-Heart")
 
 function mod:UpdateRecentDamage(entity, amount, damageFlags, source)
-    if source.Entity.SpawnerEntity:ToPlayer() then
+    if source.Entity and source.Entity.SpawnerEntity and source.Entity.SpawnerEntity:ToPlayer() then
         local player = source.Entity.SpawnerEntity:ToPlayer()
         if player:HasCollectible(soulHeart) then
             entity:GetData().SoulHeartAbilityMostRecentDamageSource = player
