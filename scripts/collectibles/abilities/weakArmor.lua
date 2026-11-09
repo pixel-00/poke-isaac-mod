@@ -7,6 +7,7 @@ function mod:ActivateWeakArmor(entity, amount, flags, source)
         else
             amount = amount + 1
         end
+        entity:ToPlayer():EvaluateItems()
     end
 end
 

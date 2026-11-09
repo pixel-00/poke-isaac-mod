@@ -10,12 +10,16 @@ local function BeastBoost(player)
     local boost = math.random(4)
     if boost == 1 then
         playerBoosts.Damage = playerBoosts.Damage + 1
+        return CacheFlag.CACHE_DAMAGE
     elseif boost == 2 then
         playerBoosts.Tears = playerBoosts.Tears + 1
+        return CacheFlag.CACHE_FIREDELAY
     elseif boost == 3 and player.MoveSpeed < 2 then
         playerBoosts.Speed = playerBoosts.Speed + 1
+        return CacheFlag.CACHE_SPEED
     else
         playerBoosts.Range = playerBoosts.Range + 1
+        return CacheFlag.CACHE_RANGE
     end
 end
 
@@ -47,7 +51,8 @@ function mod:BossReward()
     local player = Isaac.GetPlayer(0)
     local roomType = Game():GetRoom():GetType()
     if roomType == RoomType.ROOM_BOSS and player:HasCollectible(beastBoost) then
-        BeastBoost(player)
+        local cacheFlag = BeastBoost(player)
+        player:AddCacheFlags(cacheFlag)
         player:EvaluateItems()
         player:AnimateHappy()
     end

@@ -1,5 +1,9 @@
 local slowStart = Isaac.GetItemIdByName("Slow Start")
 
+local json = require("json")
+
+local saveData = {}
+
 function mod:ResetSlowStart()
     local player = Isaac.GetPlayer()
     if player:HasCollectible(slowStart) then
@@ -14,6 +18,7 @@ function mod:CountRoomClear()
         if n then
             player:GetData().SlowStartAbilityRooms = n + 1
             if n >= 4 then
+                player:AddCacheFlags(CacheFlag.CACHE_SPEED)
                 player:EvaluateItems()
             end
         else
@@ -41,6 +46,36 @@ function mod:ApplyStats(player, cacheFlags)
     end
 end
 
+function mod:SaveClearCount(shouldSave)
+    if shouldSave then
+        if mod:HasData() then
+            saveData = json.decode(mod:LoadData())
+        end
+        local player = Isaac.GetPlayer()
+        saveData.SLOW_START_COUNT = player:GetData().SlowStartAbilityRooms
+        mod:SaveData(json.encode(saveData))
+    end
+end
+
+function mod:LoadClearCount(continued)
+    if continued and mod:HasData() then
+        local loadedData = json.decode(mod:LoadData())
+        if type(loadedData) == "table" then
+            saveData = loadedData
+        else
+            savedata = {}
+        end
+        local player = Isaac.GetPlayer()
+        if saveData.SLOW_START_COUNT then
+            player:GetData().SlowStartAbilityRooms = saveData.SLOW_START_COUNT
+        else
+            player:GetData().SlowStartAbilityRooms = 0
+        end
+    end
+end
+
 mod:AddCallback(ModCallbacks.MC_POST_NEW_LEVEL, mod.ResetSlowStart)
 mod:AddCallback(ModCallbacks.MC_PRE_SPAWN_CLEAN_AWARD, mod.CountRoomClear)
 mod:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, mod.ApplyStats)
+mod:AddCallback(ModCallbacks.MC_PRE_GAME_EXIT, mod.SaveClearCount)
+mod:AddCallback(ModCallbacks.MC_POST_GAME_STARTED, mod.LoadHiddenWisps)

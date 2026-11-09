@@ -69,6 +69,9 @@ end
 
 function mod:SaveHiddenWisps(shouldSave)
     if shouldSave then
+        if mod:HasData() then
+            saveData = json.decode(mod:LoadData())
+        end
         saveData.HIDDEN_ITEM_DATA = hiddenItemManager:GetSaveData()
         mod:SaveData(json.encode(saveData))
     end

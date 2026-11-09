@@ -1,15 +1,12 @@
 local plus = Isaac.GetItemIdByName("Plus")
 local minus = Isaac.GetItemIdByName("Minus")
 
-local charging = false
-
 function mod:ExtraCharge(player)
     if player:HasCollectible(plus) or player:HasCollectible(minus) then
-        local oldCharge = player:GetData().PlusMinusAbilityActiveCharge
-        if oldCharge and oldCharge < player:GetActiveCharge() and not charging then
-            charging = true
-            player:SetActiveCharge(player:GetActiveCharge() + 1)
-            charging = false
+        local charge = player:GetData().PlusMinusAbilityActiveCharge
+        local maxCharges = Isaac.GetItemConfig():GetCollectible(player:GetActiveItem()).MaxCharges
+        if charge and charge == maxCharges then
+            player:SetActiveCharge(maxCharges + 1)
         end
         player:GetData().PlusMinusAbilityActiveCharge = player:GetActiveCharge()
     end
