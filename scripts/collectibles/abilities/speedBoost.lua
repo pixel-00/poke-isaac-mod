@@ -9,6 +9,8 @@ function mod:StackSpeedBoost()
         else
             player:GetData().SpeedBoostStacks = 1
         end
+        player:EvaluateItems()
+        print(n)
     end
 end
 

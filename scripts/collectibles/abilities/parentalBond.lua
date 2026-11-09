@@ -6,6 +6,8 @@ function mod:UpdateMinisaac(player)
         if not mini then
             mini = player:AddMinisaac(player.Position)
             mini:GetData().ParentalBondInvincibility = true
+            print("tried to spawn minisaac")
+            player:AddMinisaac(player.Position)
         end
     end
 end

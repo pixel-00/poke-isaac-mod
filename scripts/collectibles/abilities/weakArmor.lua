@@ -12,7 +12,7 @@ end
 
 function mod:ApplySpeed(player, cacheFlags)
     local itemCount = player:GetCollectibleNum(weakArmor)
-    if itemCount > 0 and ((cacheFlags & CacheFlag.CACHE_SPEED) == CacheFlag.CACHE_SPEED) and entity:GetData().weakArmorActive then
+    if itemCount > 0 and ((cacheFlags & CacheFlag.CACHE_SPEED) == CacheFlag.CACHE_SPEED) and player:GetData().weakArmorActive then
         local speedToAdd = 0.3 * itemCount
         player.Speed = player.Speed + speedToAdd
     end
