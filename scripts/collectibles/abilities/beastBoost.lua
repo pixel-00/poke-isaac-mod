@@ -12,7 +12,7 @@ local function BeastBoost(player)
         playerBoosts.Damage = playerBoosts.Damage + 1
     elseif boost == 2 then
         playerBoosts.Tears = playerBoosts.Tears + 1
-    elseif boost == 3 and player.Speed < 2 then
+    elseif boost == 3 and player.MoveSpeed < 2 then
         playerBoosts.Speed = playerBoosts.Speed + 1
     else
         playerBoosts.Range = playerBoosts.Range + 1

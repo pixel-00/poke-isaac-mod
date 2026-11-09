@@ -1,11 +1,8 @@
 local soulHeart = Isaac.GetItemIdByName("Soul-Heart")
 
 function mod:UpdateRecentDamage(entity, amount, damageFlags, source)
-    if source.Entity and source.Entity.SpawnerEntity and source.Entity.SpawnerEntity:ToPlayer() then
-        local player = source.Entity.SpawnerEntity:ToPlayer()
-        if player:HasCollectible(soulHeart) then
-            entity:GetData().SoulHeartAbilityMostRecentDamageSource = player
-        end
+    if entity:IsActiveEnemy() then
+        entity:GetData().SoulHeartAbilityMostRecentDamageSource = source
     end
 end
 
@@ -18,15 +15,27 @@ function mod:ResetFireRate()
 end
 
 function mod:UpdateStacks(entity)
-    if entity:IsActiveEnemy() then
-        local player = entity:GetData().SoulHeartAbilityMostRecentDamageSource
-        if player and player:ToPlayer() and player:ToPlayer():HasCollectible(soulHeart) then
+    local source = entity:GetData().SoulHeartAbilityMostRecentDamageSource
+    local player
+    if source then
+        -- check if the source is a player or spawned by a player
+        if source.Type == EntityType.ENTITY_PLAYER then
+            player = source.Entity
+        else
+            player = source.Entity.SpawnerEntity
+            if not (player and player:ToPlayer()) then
+                return
+            end
+        end
+        if player:ToPlayer():HasCollectible(soulHeart) then
             local n = player:GetData().SoulHeartAbilityFireRateStack
             if n then
-                player:GetData().SoulHeartAbilityFireRateStack = min(n + 1, 10)
+                player:GetData().SoulHeartAbilityFireRateStack = math.min(n + 1, 10)
             else
                 player:GetData().SoulHeartAbilityFireRateStack = 1
             end
+            player:AddCacheFlags(CacheFlag.CACHE_FIREDELAY)
+            player:EvaluateItems()
         end
     end
 end

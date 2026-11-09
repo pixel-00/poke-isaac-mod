@@ -31,7 +31,7 @@ function mod:ApplyStats(player, cacheFlags)
         end
         local multiplier = 0.5^(itemCount * applyDebuff)
         if (cacheFlags & CacheFlag.CACHE_SPEED) == CacheFlag.CACHE_SPEED then
-            player.Speed = player.Speed * multiplier
+            player.MoveSpeed = player.MoveSpeed * multiplier
         end
         if (cacheFlags & CacheFlag.CACHE_DAMAGE) == CacheFlag.CACHE_DAMAGE then
             local damageToAdd = 2 * itemCount

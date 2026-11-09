@@ -8,7 +8,7 @@ function mod:EvaluateCache(player, cacheFlags)
     end
 end
 
-function mod:BlockFallingProjectiles(entity, amount, flags, source)
+function mod:BlockGroundDamage(entity, amount, flags, source)
     if entity.Type == EntityType.ENTITY_PLAYER and entity:ToPlayer():HasCollectible(levitate) then
         if source.Type == EntityType.ENTITY_EFFECT and (source.Variant == EffectVariant.SHOCKWAVE or source.Variant == EffectVariant.SHOCKWAVE_DIRECTIONAL or source.Variant == EffectVariant.CRACKWAVE or source.Variant == EffectVariant.SHOCKWAVE_RANDOM or source.Variant == EffectVariant.BIG_CRACKWAVE or source.Variant == EffectVariant.MOTHER_SHOCKWAVE) then
             return false
@@ -17,4 +17,4 @@ function mod:BlockFallingProjectiles(entity, amount, flags, source)
 end
 
 mod:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, mod.EvaluateCache)
-mod:AddCallback(ModCallbacks.MC_ENTITY_TAKE_DMG, mod.BlockFallingProjectiles)
+mod:AddCallback(ModCallbacks.MC_ENTITY_TAKE_DMG, mod.BlockGroundDamage)

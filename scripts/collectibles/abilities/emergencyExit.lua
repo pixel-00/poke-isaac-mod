@@ -1,6 +1,6 @@
 local emergencyExit = Isaac.GetItemIdByName("Emergency Exit")
 
-function mod:PreventFireDamage(entity, amount, flags, source)
+function mod:EmergencyExit(entity, amount, flags, source)
     if entity.Type == EntityType.ENTITY_PLAYER and entity:ToPlayer():HasCollectible(emergencyExit) then
         local player = entity:ToPlayer()
         local health = player:GetHearts() + player:GetSoulHearts() + player:GetBoneHearts() + player:GetRottenHearts() + player:GetEternalHearts()

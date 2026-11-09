@@ -4,8 +4,8 @@ function mod:UpdateMinisaac(player)
     if player:HasCollectible(parentalBond) then
         local mini = player:GetData().ParentalBondMinisaac
         if not mini then
-            mini = player:AddMinisaac(player.Position)
-            mini:GetData().ParentalBondInvincibility = true
+            player:GetData().ParentalBondMinisaac = player:AddMinisaac(player.Position)
+            player:GetData().ParentalBondMinisaac:GetData().ParentalBondInvincibility = true
         end
     end
 end
