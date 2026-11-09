@@ -23,7 +23,7 @@ end
 
 function mod:UpdateFlashFire(player)
     local t = player:GetData().flashFireCountdown
-    if t > 0 then
+    if t and t > 0 then
         player:GetData().flashFireCountdown = math.max(t - (1/30), 0)
         player:EvaluateItems()
     end
