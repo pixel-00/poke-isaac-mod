@@ -159,12 +159,10 @@ local function GetPickupSubType(variant)
 end
 
 function mod:PreSpawnCleanAward()
-    print("rolling pickup lottery")
     local player = Isaac.GetPlayer(0)
     if player:HasCollectible(pickup) and math.random() < 0.15 + math.min(0.85, 0.01 * player.Luck) then
         local variant = GetPickupVariant()
         local subtype = GetPickupSubType(variant)
-        print("spawning" .. variant)
         Game():Spawn(EntityType.ENTITY_PICKUP, variant, Game():GetRoom():GetCenterPos(), Vector(0, 0), nil, subtype, Game():GetRoom():GetSpawnSeed())
     end
 end

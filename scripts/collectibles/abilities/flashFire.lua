@@ -3,21 +3,18 @@ local flashFire = Isaac.GetItemIdByName("Flash Fire")
 local FLASH_FIRE_TIME = 9
 
 local function IsFire(flags, entityRef)
-    return (entityRef.Entity:ToProjectile() and ((entityRef.Entity.Variant == ProjectileVariant.PROJECTILE_FIRE) or (entityRef.Entity.Variant == ProjectileVariant.PROJECTILE_LAVA)))
+    return (entityRef.Variant == ProjectileVariant.PROJECTILE_FIRE)
+    or (entityRef.Variant == ProjectileVariant.PROJECTILE_LAVA)
     or (entityRef.SpawnerType == EntityType.ENTITY_FIREPLACE)
     or (flags & DamageFlag.DAMAGE_FIRE == DamageFlag.DAMAGE_FIRE)
     or (flags & DamageFlag.DAMAGE_EXPLOSION == DamageFlag.DAMAGE_EXPLOSION)
 end
 
 function mod:PreventFireDamage(entity, amount, flags, source)
-    print("=== PLAYER DAMAGE ===")
-    print("Amount:", amount)
-    print("Flags:", flags)
-    print("Source Type:", source and source.Type)
-    print("Source Variant:", source and source.Variant)
     if entity.Type == EntityType.ENTITY_PLAYER and entity:ToPlayer():HasCollectible(flashFire) then
         if IsFire(flags, source) then
             player:GetData().flashFireCountdown = FLASH_FIRE_TIME
+            player:SetColor(Color(1, 0.3, 0, 0.5), FLASH_FIRE_TIME * 30, 1, true, false)
             return false
         end
     end
