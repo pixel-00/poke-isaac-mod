@@ -33,7 +33,7 @@ include("scripts.collectibles.chestOfChests")
 include("scripts.collectibles.abilities.hugePower")
 include("scripts.collectibles.abilities.intimidate")
 include("scripts.collectibles.abilities.levitate")
-include("scripts.collectibles.abilities.pickup")--checking spawn behaviour
+include("scripts.collectibles.abilities.pickup")
 include("scripts.collectibles.abilities.flashFire")--- need to give immunity from other fire effects
 include("scripts.collectibles.abilities.regenerator")
 include("scripts.collectibles.abilities.technician")
@@ -47,9 +47,9 @@ include("scripts.collectibles.abilities.cheekPouch")
 include("scripts.collectibles.abilities.soulHeart")
 include("scripts.collectibles.abilities.sturdy")
 include("scripts.collectibles.abilities.slowStart")
-include("scripts.collectibles.abilities.overgrow")--
-include("scripts.collectibles.abilities.blaze")-- ?
-include("scripts.collectibles.abilities.torrent")-- ??
+include("scripts.collectibles.abilities.overgrow")
+include("scripts.collectibles.abilities.blaze")
+include("scripts.collectibles.abilities.torrent")
 include("scripts.collectibles.abilities.hustle")
 include("scripts.collectibles.abilities.emergencyExit")
 include("scripts.collectibles.abilities.intrepidSword")

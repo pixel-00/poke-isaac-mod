@@ -2,15 +2,14 @@ local blaze = Isaac.GetItemIdByName("Blaze")
 
 function mod:CheckHealth(player)
     if player:HasCollectible(blaze) then
-        local oldHealth = player:GetData().AbilityHealth
-        local oldMaxHealth = player:GetData().AbilityMaxHealth
+        local oldHealth = player:GetData().BlazeAbilityHealth
+        local oldMaxHealth = player:GetData().BlazeAbilityMaxHealth
         if oldHealth and oldMaxHealth and not (oldHealth == (player:GetHearts() + player:GetRottenHearts()) and oldMaxHealth == player:GetEffectiveMaxHearts()) then
-            print("blaze health changed")
             player:AddCacheFlags(CacheFlag.CACHE_DAMAGE)
             player:EvaluateItems()
         end
-        player:GetData().AbilityHealth = player:GetHearts() + player:GetRottenHearts()
-        player:GetData().AbilityMaxHealth = player:GetEffectiveMaxHearts()
+        player:GetData().BlazeAbilityHealth = player:GetHearts() + player:GetRottenHearts()
+        player:GetData().BlazeAbilityMaxHealth = player:GetEffectiveMaxHearts()
     end
 end
 
