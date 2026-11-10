@@ -24,8 +24,8 @@ function mod:UpdateFlashFire(player)
     if t and t > 0 then
         local tNormal = t / FLASH_FIRE_TIME
         local R = 1
-        local G = math.min(1, 1.7 - 1.4 * tNormal)
-        local B = math.min(1, 2 * (1 - tNormal))
+        local G = math.min(1, 0.3 + 0.7 * 4 * (1 - tNormal))
+        local B = math.min(1, 4 * (1 - tNormal))
         player:SetColor(Color(R, G, B), 1, 1, false, false)
         player:GetData().flashFireCountdown = math.max(t - (1/30), 0)
         player:AddCacheFlags(CacheFlag.CACHE_DAMAGE)
