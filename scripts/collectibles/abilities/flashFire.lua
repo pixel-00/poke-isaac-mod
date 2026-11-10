@@ -14,7 +14,6 @@ function mod:PreventFireDamage(entity, amount, flags, source)
     if entity.Type == EntityType.ENTITY_PLAYER and entity:ToPlayer():HasCollectible(flashFire) then
         if IsFire(flags, source) then
             player:GetData().flashFireCountdown = FLASH_FIRE_TIME
-            player:SetColor(Color(1, 0.3, 0, 0.5), FLASH_FIRE_TIME * 30, 1, true, false)
             return false
         end
     end
@@ -23,6 +22,10 @@ end
 function mod:UpdateFlashFire(player)
     local t = player:GetData().flashFireCountdown
     if t and t > 0 then
+        local R = 1
+        local G = math.min(1, 1.7 - 1.4 * t)
+        local B = math.min(1, 2 * (1 - t))
+        player:SetColor(Color(R, G, B), 1, 1, false, false)
         player:GetData().flashFireCountdown = math.max(t - (1/30), 0)
         player:AddCacheFlags(CacheFlag.CACHE_DAMAGE)
         player:EvaluateItems()
