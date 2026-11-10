@@ -122,8 +122,8 @@
     </collectible>
     <collectible id="40">
         <info text="Consuming any pill will heal 1/2 red heart" />
-        <info text="Heals 1 red heart instead &lt;collectible=75&gt;" collectible=75/>
-        <info text="Heals 1 rotten heart instead &lt;collectible=654&gt;" collectible=654 notcollectible=75/>
+        <info text="Heals 1 red heart instead &lt;collectible=75&gt;" collectible="75"/>
+        <info text="Heals 1 rotten heart instead &lt;collectible=654&gt;" collectible="654" notcollectible="75"/>
     </collectible>
     <collectible id="41">
         <info text="+0.5 tears for each enemy killed up to a maximum of +5"/>
