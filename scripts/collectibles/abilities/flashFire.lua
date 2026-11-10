@@ -10,13 +10,11 @@ local function IsFire(flags, entityRef)
 end
 
 function mod:PreventFireDamage(entity, amount, flags, source)
-    local src = source and source.Entity
     print("=== PLAYER DAMAGE ===")
     print("Amount:", amount)
     print("Flags:", flags)
     print("Source Type:", source and source.Type)
     print("Source Variant:", source and source.Variant)
-    print("Source Entity:", src and src.Type)
     if entity.Type == EntityType.ENTITY_PLAYER and entity:ToPlayer():HasCollectible(flashFire) then
         if IsFire(flags, source) then
             player:GetData().flashFireCountdown = FLASH_FIRE_TIME
