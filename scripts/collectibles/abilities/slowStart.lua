@@ -6,6 +6,8 @@ function mod:ResetSlowStart()
     local player = Isaac.GetPlayer()
     if player:HasCollectible(slowStart) then
         player:GetData().SlowStartAbilityRooms = 0
+        player:AddCacheFlags(CacheFlag.CACHE_DAMAGE | CacheFlag.CACHE_SPEED)
+        player:EvaluateItems()
     end
 end
 
@@ -16,7 +18,7 @@ function mod:CountRoomClear()
         if n then
             player:GetData().SlowStartAbilityRooms = n + 1
             if n >= 4 then
-                player:AddCacheFlags(CacheFlag.CACHE_SPEED)
+                player:AddCacheFlags(CacheFlag.CACHE_DAMAGE | CacheFlag.CACHE_SPEED)
                 player:EvaluateItems()
             end
         else
@@ -44,7 +46,7 @@ function mod:ApplyStats(player, cacheFlags)
     end
 end
 
-function mod:SaveClearCount(shouldSave)
+function mod:SaveSlowStart(shouldSave)
     if shouldSave then
         local saveData = {}
         if mod:HasData() then
@@ -59,7 +61,7 @@ function mod:SaveClearCount(shouldSave)
     end
 end
 
-function mod:LoadClearCount(continued)
+function mod:LoadSlowStart(continued)
     if continued and mod:HasData() then
         local saveData = {}
         local loadedData = json.decode(mod:LoadData())
@@ -72,11 +74,15 @@ function mod:LoadClearCount(continued)
         else
             player:GetData().SlowStartAbilityRooms = 0
         end
+        if player:HasCollectible(slowStart) then
+            player:AddCacheFlags(CacheFlag.CACHE_DAMAGE | CacheFlag.CACHE_SPEED)
+            player:EvaluateItems()
+        end
     end
 end
 
 mod:AddCallback(ModCallbacks.MC_POST_NEW_LEVEL, mod.ResetSlowStart)
 mod:AddCallback(ModCallbacks.MC_PRE_SPAWN_CLEAN_AWARD, mod.CountRoomClear)
 mod:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, mod.ApplyStats)
-mod:AddCallback(ModCallbacks.MC_PRE_GAME_EXIT, mod.SaveClearCount)
-mod:AddCallback(ModCallbacks.MC_POST_GAME_STARTED, mod.LoadClearCount)
+mod:AddCallback(ModCallbacks.MC_PRE_GAME_EXIT, mod.SaveSlowStart)
+mod:AddCallback(ModCallbacks.MC_POST_GAME_STARTED, mod.LoadSlowStart)

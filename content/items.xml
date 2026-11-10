@@ -28,7 +28,7 @@
     <!-- Remember to make abilities hidden after testing -->
     <passive id="27" name="Huge Power" gfx="ability_capsule_item.png" description="DMG up" cache="damage"/>
     <passive id="28" name="Intimidate" gfx="ability_capsule_item.png" description="Mass fear"/>
-    <passive id="29" name="Levitate" gfx="ability_capsule_item.png" description="Flight + ground immunity" cache="flying"/>
+    <passive id="29" name="Levitate" gfx="ability_capsule_item.png" description="Flight without frills" cache="flying"/>
     <passive id="30" name="Pickup" gfx="ability_capsule_item.png" description="Bonus items"/>
     <passive id="31" name="Flash Fire" gfx="ability_capsule_item.png" description="Heat immunity + powerup"/>
     <passive id="32" name="Regenerator" gfx="ability_capsule_item.png" description="Heal between floors"/>

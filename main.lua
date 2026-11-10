@@ -32,21 +32,21 @@ include("scripts.collectibles.chestOfChests")
 -- Ability Capsule Passives
 include("scripts.collectibles.abilities.hugePower")
 include("scripts.collectibles.abilities.intimidate")
-include("scripts.collectibles.abilities.levitate")--
+include("scripts.collectibles.abilities.levitate")
 include("scripts.collectibles.abilities.pickup")---
 include("scripts.collectibles.abilities.flashFire")--- need to give immunity from other fire effects
 include("scripts.collectibles.abilities.regenerator")
 include("scripts.collectibles.abilities.technician")
-include("scripts.collectibles.abilities.weakArmor")--fix take extra damage effect
+include("scripts.collectibles.abilities.weakArmor")
 include("scripts.collectibles.abilities.sereneGrace")
-include("scripts.collectibles.abilities.speedBoost")--save boost progress
+include("scripts.collectibles.abilities.speedBoost")--need to evaluate cache
 include("scripts.collectibles.abilities.stall")
 include("scripts.collectibles.abilities.parentalBond")
 include("scripts.collectibles.abilities.effectSpore")
-include("scripts.collectibles.abilities.cheekPouch")--fix typo
-include("scripts.collectibles.abilities.soulHeart")-- any death raises stack now, matching lusty blood
+include("scripts.collectibles.abilities.cheekPouch")--fix heart animation
+include("scripts.collectibles.abilities.soulHeart")-- need to figure out how to check if an enemy died (and exclude fire places etc)
 include("scripts.collectibles.abilities.sturdy")
-include("scripts.collectibles.abilities.slowStart")--reworked saving, should no longer error
+include("scripts.collectibles.abilities.slowStart")--need to evaluate cache on new floor
 include("scripts.collectibles.abilities.overgrow")--
 include("scripts.collectibles.abilities.blaze")-- ?
 include("scripts.collectibles.abilities.torrent")-- ??

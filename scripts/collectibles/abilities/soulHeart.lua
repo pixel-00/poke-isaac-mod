@@ -9,9 +9,11 @@ function mod:ResetFireRate()
 end
 
 function mod:UpdateStacks(entity)
-    if entity:IsActiveEnemy() then
+    if entity:IsActiveEnemy(true) then
+        print("an enemy died")
         local player = Isaac.GetPlayer()
         if player:HasCollectible(soulHeart) then
+            print("the player has soul-heart")
             local n = player:GetData().SoulHeartAbilityFireRateStack
             if n then
                 player:GetData().SoulHeartAbilityFireRateStack = math.min(n + 1, 10)

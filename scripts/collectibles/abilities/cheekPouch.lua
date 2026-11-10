@@ -4,7 +4,7 @@ local cheekPouch = Isaac.GetItemIdByName("Cheek Pouch")
 
 function mod:ExtraHealing(pillEffect, player, useFlags)
     if player:HasCollectible(cheekPouch) then
-        Game():SpawnParticles(player.Position - Vector(0, 32), EffectVariant.HEART, 1, 1)
+        Game():Spawn(EntityType.ENTITY_EFFECT, EffectVariant.HEART, player.Position - Vector(0,64), Vector(0, 0), player, 0, mod:RandomPositive())
         if player:HasCollectible(CollectibleType.COLLECTIBLE_PHD) then
             player:AddHearts(2)
         elseif player:HasCollectible(CollectibleType.COLLECTIBLE_FALSE_PHD) then
