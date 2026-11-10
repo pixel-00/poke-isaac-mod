@@ -6,8 +6,10 @@ function mod:CheckHealth(player)
     if player:HasCollectible(overgrow) then
         local oldHealth = player:GetData().AbilityHealth
         local oldMaxHealth = player:GetData().AbilityMaxHealth
+        if oldHealth and oldMaxHealth then
         print("old health: " .. oldHealth)
         print("old max health: " .. oldMaxHealth)
+        end
         if oldHealth and oldMaxHealth and not (oldHealth == player:GetHearts() and oldMaxHealth == player:GetEffectiveMaxHearts()) then
             print("health changed")
             player:AddCacheFlags(CacheFlag.CACHE_SPEED | CacheFlag.CACHE_RANGE)
