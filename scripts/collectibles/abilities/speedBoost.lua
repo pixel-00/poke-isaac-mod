@@ -2,8 +2,6 @@ local speedBoost = Isaac.GetItemIdByName("Speed Boost")
 
 local json = require("json")
 
-local saveData = {}
-
 function mod:StackSpeedBoost()
     local player = Isaac.GetPlayer()
     if player:HasCollectible(speedBoost) then
@@ -33,30 +31,29 @@ end
 
 function mod:SaveSpeedBoost(shouldSave)
     if shouldSave then
+        local saveData = {}
         if mod:HasData() then
-            saveData = json.decode(mod:LoadData())
+            local loadedData = json.decode(mod:LoadData())
+            if type(loadedData) == "table" then
+                saveData = loadedData
+            end
         end
         local player = Isaac.GetPlayer()
         saveData.SPEED_BOOST_STACKS = player:GetData().SpeedBoostStacks
-        print("SAVING SPEED BOOST")
-        print(saveData.SPEED_BOOST_STACKS)
         mod:SaveData(json.encode(saveData))
     end
 end
 
 function mod:LoadSpeedBoost(continued)
     if continued and mod:HasData() then
+        local saveData = {}
         local loadedData = json.decode(mod:LoadData())
         if type(loadedData) == "table" then
             saveData = loadedData
-        else
-            savedata = {}
         end
         local player = Isaac.GetPlayer()
         if saveData.SPEED_BOOST_STACKS then
             player:GetData().SpeedBoostStacks = saveData.SPEED_BOOST_STACKS
-            print("LOADING SPEED BOOST")
-            print(saveData.SPEED_BOOST_STACKS)
         else
             player:GetData().SpeedBoostStacks = 0
         end

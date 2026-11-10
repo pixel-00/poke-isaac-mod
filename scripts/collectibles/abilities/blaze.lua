@@ -6,6 +6,7 @@ function mod:CheckHealth(player)
             player:GetData().AbilityHealth == player:GetHearts() and
             player:GetData().AbilityMaxHealth == player:GetEffectiveMaxHearts()
         ) then
+            print("blaze about to evaluate")
             player:AddCacheFlags(CacheFlag.CACHE_DAMAGE)
             player:EvaluateItems()
         end

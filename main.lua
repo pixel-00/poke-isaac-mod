@@ -34,30 +34,30 @@ include("scripts.collectibles.abilities.hugePower")
 include("scripts.collectibles.abilities.intimidate")
 include("scripts.collectibles.abilities.levitate")--
 include("scripts.collectibles.abilities.pickup")---
-include("scripts.collectibles.abilities.flashFire")--
+include("scripts.collectibles.abilities.flashFire")--- need to give immunity from other fire effects
 include("scripts.collectibles.abilities.regenerator")
 include("scripts.collectibles.abilities.technician")
-include("scripts.collectibles.abilities.weakArmor")--add cacheflag
+include("scripts.collectibles.abilities.weakArmor")--fix take extra damage effect
 include("scripts.collectibles.abilities.sereneGrace")
-include("scripts.collectibles.abilities.speedBoost")--save boost progress?
+include("scripts.collectibles.abilities.speedBoost")--save boost progress
 include("scripts.collectibles.abilities.stall")
 include("scripts.collectibles.abilities.parentalBond")
 include("scripts.collectibles.abilities.effectSpore")
-include("scripts.collectibles.abilities.cheekPouch")--adjusted animation, added (false) phd synergy
-include("scripts.collectibles.abilities.soulHeart")--
+include("scripts.collectibles.abilities.cheekPouch")--fix typo
+include("scripts.collectibles.abilities.soulHeart")-- any death raises stack now, matching lusty blood
 include("scripts.collectibles.abilities.sturdy")
-include("scripts.collectibles.abilities.slowStart")--add callback for speed, saves between exiting
+include("scripts.collectibles.abilities.slowStart")--reworked saving, should no longer error
 include("scripts.collectibles.abilities.overgrow")--
-include("scripts.collectibles.abilities.blaze")--
-include("scripts.collectibles.abilities.torrent")--
+include("scripts.collectibles.abilities.blaze")-- ?
+include("scripts.collectibles.abilities.torrent")-- ??
 include("scripts.collectibles.abilities.hustle")
 include("scripts.collectibles.abilities.emergencyExit")
 include("scripts.collectibles.abilities.intrepidSword")
 include("scripts.collectibles.abilities.dauntlessShield")
 include("scripts.collectibles.abilities.beastBoost")
 include("scripts.collectibles.abilities.pickpocket")
-include("scripts.collectibles.abilities.plusMinus")--rework
-include("scripts.collectibles.abilities.megaLauncher")--slight rework
+include("scripts.collectibles.abilities.plusMinus")
+include("scripts.collectibles.abilities.megaLauncher")
 include("scripts.collectibles.abilities.stamina")
 
 -- Trinkets

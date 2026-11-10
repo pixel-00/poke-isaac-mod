@@ -5,8 +5,6 @@ local looseFeathers = Isaac.GetItemIdByName("Loose Feathers")
 local hiddenItemManager = require("lib.hidden_item_manager")
 local json = require("json")
 
-local saveData = {}
-
 local TM_POOL = {
     CollectibleType.COLLECTIBLE_SPOON_BENDER,
     CollectibleType.COLLECTIBLE_FIRE_MIND,
@@ -69,8 +67,12 @@ end
 
 function mod:SaveHiddenWisps(shouldSave)
     if shouldSave then
+        local saveData = {}
         if mod:HasData() then
-            saveData = json.decode(mod:LoadData())
+            local loadedData = json.decode(mod:LoadData())
+            if type(loadedData) == "table" then
+                saveData = loadedData
+            end
         end
         saveData.HIDDEN_ITEM_DATA = hiddenItemManager:GetSaveData()
         mod:SaveData(json.encode(saveData))
@@ -79,13 +81,14 @@ end
 
 function mod:LoadHiddenWisps(continued)
     if continued and mod:HasData() then
+        local saveData = {}
         local loadedData = json.decode(mod:LoadData())
         if type(loadedData) == "table" then
             saveData = loadedData
-        else
-            savedata = {}
         end
-        hiddenItemManager:LoadData(saveData.HIDDEN_ITEM_DATA)
+        if saveData.HIDDEN_ITEM_DATA then
+            hiddenItemManager:LoadData(saveData.HIDDEN_ITEM_DATA)
+        end
     end
 end
 

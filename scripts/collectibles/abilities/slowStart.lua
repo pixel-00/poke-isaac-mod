@@ -2,8 +2,6 @@ local slowStart = Isaac.GetItemIdByName("Slow Start")
 
 local json = require("json")
 
-local saveData = {}
-
 function mod:ResetSlowStart()
     local player = Isaac.GetPlayer()
     if player:HasCollectible(slowStart) then
@@ -48,8 +46,12 @@ end
 
 function mod:SaveClearCount(shouldSave)
     if shouldSave then
+        local saveData = {}
         if mod:HasData() then
-            saveData = json.decode(mod:LoadData())
+            local loadedData = json.decode(mod:LoadData())
+            if type(loadedData) == "table" then
+                saveData = loadedData
+            end
         end
         local player = Isaac.GetPlayer()
         saveData.SLOW_START_COUNT = player:GetData().SlowStartAbilityRooms
@@ -59,11 +61,10 @@ end
 
 function mod:LoadClearCount(continued)
     if continued and mod:HasData() then
+        local saveData = {}
         local loadedData = json.decode(mod:LoadData())
         if type(loadedData) == "table" then
             saveData = loadedData
-        else
-            savedata = {}
         end
         local player = Isaac.GetPlayer()
         if saveData.SLOW_START_COUNT then

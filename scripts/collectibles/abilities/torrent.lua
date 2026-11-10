@@ -6,6 +6,7 @@ function mod:CheckHealth(player)
             player:GetData().AbilityHealth == player:GetHearts() and
             player:GetData().AbilityMaxHealth == player:GetEffectiveMaxHearts()
         ) then
+            print("torrent about to evaluate")
             player:AddCacheFlags(CacheFlag.CACHE_FIREDELAY)
             player:EvaluateItems()
         end

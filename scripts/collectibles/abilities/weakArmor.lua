@@ -1,14 +1,21 @@
 local weakArmor = Isaac.GetItemIdByName("Weak Armor")
 
+local preventInfiniteLoop = false
+
 function mod:ActivateWeakArmor(entity, amount, flags, source)
-    if entity.Type == EntityType.ENTITY_PLAYER and entity:ToPlayer():HasCollectible(weakArmor) then
-        if not entity:GetData().weakArmorActive then
-            entity:GetData().weakArmorActive = true
-        else
-            return amount + 1
+    if entity.Type == EntityType.ENTITY_PLAYER then
+        local player = entity:ToPlayer()
+        if player:HasCollectible(weakArmor) then
+            if not player:GetData().weakArmorActive then
+                player:GetData().weakArmorActive = true
+            elseif not preventInfiniteLoop then
+                preventInfiniteLoop = true
+                player:TakeDamage(1, DamageFlag.DAMAGE_NO_PENALTIES | DamageFlag.DAMAGE_INVINCIBLE, EntityRef(player), 0)
+                preventInfiniteLoop = false
+            end
+            player:AddCacheFlags(CacheFlag.CACHE_SPEED | CacheFlag.CACHE_FIREDELAY)
+            player:EvaluateItems()
         end
-        entity:ToPlayer():AddCacheFlags(CacheFlag.CACHE_SPEED | CacheFlag.CACHE_FIREDELAY)
-        entity:ToPlayer():EvaluateItems()
     end
 end
 
