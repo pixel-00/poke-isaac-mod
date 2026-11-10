@@ -16,4 +16,4 @@ function mod:BlockFallingProjectiles(entity, amount, flags, source)
 end
 
 mod:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, mod.GiveStats)
-mod:AddCallback(ModCallbacks.MC_ENTITY_TAKE_DMG, mod.BlockFallingProjectiles)
+mod:AddCallback(ModCallbacks.MC_ENTITY_TAKE_DMG, mod.BlockFallingProjectiles) --Holy Mantle!!

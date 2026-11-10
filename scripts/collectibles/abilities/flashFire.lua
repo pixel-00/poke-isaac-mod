@@ -42,6 +42,6 @@ function mod:GiveDamage(player, cacheFlags)
     end
 end
 
-mod:AddCallback(ModCallbacks.MC_ENTITY_TAKE_DMG, mod.PreventFireDamage)
+mod:AddCallback(ModCallbacks.MC_ENTITY_TAKE_DMG, mod.PreventFireDamage) --Holy Mantle
 mod:AddCallback(ModCallbacks.MC_POST_PEFFECT_UPDATE, mod.UpdateFlashFire)
 mod:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, mod.GiveDamage)

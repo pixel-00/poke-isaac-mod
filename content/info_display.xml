@@ -79,10 +79,113 @@
         <info text="A new Ability Capsule will spawn on the following floor"/>
         <info text="Isaac can only have one ability at a time"/>
     </collectible>
+    <collectible id="27">
+        <info text="2x damage multiplier"/>
+    </collectible>
+    <collectible id="28">
+        <info text="Inflict fear on all enemies at the start of each room"/>
+    </collectible>
+    <collectible id="29">
+        <info text="Grants flight"/>
+    </collectible>
+    <collectible id="30">
+        <info text="Chance to drop an extra room-clear reward"/>
+    </collectible>
+    <collectible id="31">
+        <info text="Immunity to explosions and fires"/>
+        <info text="Getting hit by an explosion or fire grants a fading damage boost"/>
+    </collectible>
+    <collectible id="32">
+        <info text="Heals all of Isaac's red hearts when entering a new floor"/>
+    </collectible>
+    <collectible id="33">
+        <info text="Prevents damage from going below 5"/>
+    </collectible>
+    <collectible id="34">
+        <info text="Upon taking damage, Isaac gains increased speed and tears, but takes additional of damage from all sources"/>
+    </collectible>
+    <collectible id="35">
+        <info text="2x luck multiplier"/>
+    </collectible>
+    <collectible id="36">
+        <info text="On room clear, grants a stacking speed boost which lasts for the floor"/>
+    </collectible>
+    <collectible id="37">
+        <info text="Greatly slows Isaac in uncleared rooms"/>
+    </collectible>
+    <collectible id="38">
+        <info text="Grants an invincible mini familiar that chases and attacks enemies"/>
+    </collectible>
+    <collectible id="39">
+        <info text="Chance to inflict fear, poison, petrify, or slow enemies on contact"/>
+        <info text="Additional chance for Isaac to fart on contact, dealing knockback, damage, or charming"/>
+    </collectible>
+    <collectible id="40">
+        <info text="Consuming any pill will heal 1/2 red heart" />
+        <info text="Heals 1 red heart instead &lt;collectible=75&gt;" collectible=75/>
+        <info text="Heals 1 rotten heart instead &lt;collectible=654&gt;" collectible=654 notcollectible=75/>
+    </collectible>
+    <collectible id="41">
+        <info text="+0.5 tears for each enemy killed up to a maximum of +5"/>
+        <info text="Tears reset each room"/>
+    </collectible>
+    <collectible id="42">
+        <info text="Once per floor, prevents a lethal hit and grants a shield for 10 seconds"/>
+    </collectible>
+    <collectible id="43">
+        <info text="Grants a damage boost, but halves damage and speed for the first 5 rooms of each floor"/>
+    </collectible>
+    <collectible id="44">
+        <info text="Grants a speed and range multiplier while at 1/3 of Isaac's maximum red health or less"/>
+        <info text="Effect is permanently active if Isaac has no red hearts"/>
+    </collectible>
+    <collectible id="45">
+        <info text="Grants a damage multiplier while at 1/3 of Isaac's maximum red health or less"/>
+        <info text="Effect is permanently active if Isaac has no red hearts"/>
+    </collectible>
+    <collectible id="46">
+        <info text="Grants a tears multiplier while at 1/3 of Isaac's maximum red health or less"/>
+        <info text="Effect is permanently active if Isaac has no red hearts"/>
+    </collectible>
+    <collectible id="47">
+        <info text="1.5x damage multiplier"/>
+        <info text="Tears are fired in unpredictable directions, but become more accurate with increased luck"/>
+    </collectible>
+    <collectible id="48">
+        <info text="When damaged to 1 heart or less, Isaac instantly teleports to the starting room"/>
+    </collectible>
+    <collectible id="49">
+        <info text="Grants a 1.5x damage multiplier while in a boss, mini-boss, or challenge room"/>
+    </collectible>
+    <collectible id="50">
+        <info text="Grants the wafer effect while in a boss, mini-boss, or challenge room"/>
+    </collectible>
+    <collectible id="51">
+        <info text="After defeating the floor's boss, grants a random permanent stat increase"/>
+    </collectible>
+    <collectible id="52">
+        <info text="Luck-based chance for enemies to drop a trinket on death"/>
+        <info text="This chance decreases the more trinkets are dropped, but resets each floor"/>
+    </collectible>
+    <collectible id="53">
+        <info text="Overcharges Isaac's active item by 1 bar when it becomes fully charged"/>
+        <info text="If another character has Minus, grants a 1.5x damage and tears multiplier"/>
+    </collectible>
+    <collectible id="54">
+        <info text="Overcharges Isaac's active item by 1 bar when it becomes fully charged"/>
+        <info text="If another character has Plus, grants a 1.5x damage and tears multiplier"/>
+    </collectible>
+    <collectible id="55">
+        <info text="x1.16 damage multiplier"/>
+        <info text="x3 tear size"/>
+    </collectible>
+    <collectible id="56">
+        <info text="Luck-based chance to grant the holy mantle effect when damaged"/>
+    </collectible>
 </collectibles>
 <trinkets>
     <trinket id="13">
-        <info text="Prevents a lethal hit"/>
+        <info text="Prevents a lethal hit and grants a shield for 10 seconds"/>
     </trinket>
     <trinket id="14">
         <info text="Keys have a chance to drop Cracked Keys when collected"/>

@@ -34,7 +34,7 @@ include("scripts.collectibles.abilities.hugePower")
 include("scripts.collectibles.abilities.intimidate")
 include("scripts.collectibles.abilities.levitate")
 include("scripts.collectibles.abilities.pickup")
-include("scripts.collectibles.abilities.flashFire")--- need to give immunity from other fire effects
+include("scripts.collectibles.abilities.flashFire")
 include("scripts.collectibles.abilities.regenerator")
 include("scripts.collectibles.abilities.technician")
 include("scripts.collectibles.abilities.weakArmor")
