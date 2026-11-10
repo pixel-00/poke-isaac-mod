@@ -2,15 +2,14 @@ local torrent = Isaac.GetItemIdByName("Torrent")
 
 function mod:CheckHealth(player)
     if player:HasCollectible(torrent) then
-        if not (
-            player:GetData().AbilityHealth == player:GetHearts() and
-            player:GetData().AbilityMaxHealth == player:GetEffectiveMaxHearts()
-        ) then
-            print("torrent about to evaluate")
+        local oldHealth = player:GetData().AbilityHealth
+        local oldMaxHealth = player:GetData().AbilityMaxHealth
+        if oldHealth and oldMaxHealth and not (oldHealth == (player:GetHearts() + player:GetRottenHearts()) and oldMaxHealth == player:GetEffectiveMaxHearts()) then
+            print("torrent health changed")
             player:AddCacheFlags(CacheFlag.CACHE_FIREDELAY)
             player:EvaluateItems()
         end
-        player:GetData().AbilityHealth = player:GetHearts()
+        player:GetData().AbilityHealth = player:GetHearts() + player:GetRottenHearts()
         player:GetData().AbilityMaxHealth = player:GetEffectiveMaxHearts()
     end
 end
