@@ -1,11 +1,13 @@
 local overgrow = Isaac.GetItemIdByName("Overgrow")
 
 function mod:CheckHealth(player)
+    print("check health called")
     if player:HasCollectible(overgrow) then
-        if not (
-            player:GetData().AbilityHealth == player:GetHearts() and
-            player:GetData().AbilityMaxHealth == player:GetEffectiveMaxHearts()
-        ) then
+        local oldHealth = player:GetData().AbilityHealth
+        local maxHealth = player:GetData().AbilityMaxHealth
+        print("checking health")
+        if oldHealth and maxHealth and not (oldHealth == player:GetHearts() and maxHealth == player:GetEffectiveMaxHearts()) then
+            print("health changed")
             player:AddCacheFlags(CacheFlag.CACHE_SPEED | CacheFlag.CACHE_RANGE)
             player:EvaluateItems()
         end

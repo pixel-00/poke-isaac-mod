@@ -4,20 +4,11 @@ local FLASH_FIRE_TIME = 9
 
 function mod:PreventFireDamage(entity, amount, flags, source)
     if entity.Type == EntityType.ENTITY_PLAYER and entity:ToPlayer():HasCollectible(flashFire) then
-        if (flags & DamageFlag.DAMAGE_FIRE == DamageFlag.DAMAGE_FIRE) or (flags & DamageFlag.DAMAGE_EXPLOSION == DamageFlag.DAMAGE_EXPLOSION) then
-            if player:GetData().FlashFireAvailable then
-                player:GetData().flashFireCountdown = FLASH_FIRE_TIME
-                player:GetData().FlashFireAvailable = false
-            end
+        if (source.Entity:ToProjectile() and (((source.Entity:ToProjectile().ProjectileFlags & ProjectileFlags.FIRE) == ProjectileFlags.FIRE) or (source.Entity.Variant == ProjectileVariant.PROJECTILE_FIRE) or (source.Entity.Variant == ProjectileVariant.PROJECTILE_LAVA)))
+        or (flags & DamageFlag.DAMAGE_FIRE == DamageFlag.DAMAGE_FIRE) or (flags & DamageFlag.DAMAGE_EXPLOSION == DamageFlag.DAMAGE_EXPLOSION) then
+            player:GetData().flashFireCountdown = FLASH_FIRE_TIME
             return false
         end
-    end
-end
-
-function mod:ResetFlashFire()
-    local player = Isaac.GetPlayer()
-    if player:HasCollectible(flashFire) then
-        player:GetData().FlashFireAvailable = true
     end
 end
 
@@ -40,6 +31,5 @@ function mod:GiveDamage(player, cacheFlags)
 end
 
 mod:AddCallback(ModCallbacks.MC_ENTITY_TAKE_DMG, mod.PreventFireDamage)
-mod:AddCallback(ModCallbacks.MC_POST_NEW_ROOM, mod.ResetFlashFire)
 mod:AddCallback(ModCallbacks.MC_POST_PEFFECT_UPDATE, mod.UpdateFlashFire)
 mod:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, mod.GiveDamage)

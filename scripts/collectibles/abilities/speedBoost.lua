@@ -30,6 +30,10 @@ end
 function mod:ResetSpeedBoostStacks()
     local player = Isaac.GetPlayer()
     player:GetData().SpeedBoostStacks = 0
+    if player:HasCollectible(speedBoost) then
+        player:AddCacheFlags(CacheFlag.CACHE_SPEED)
+        player:EvaluateItems()
+    end
 end
 
 function mod:SaveSpeedBoost(shouldSave)
