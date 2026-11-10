@@ -38,6 +38,8 @@ function mod:SaveSpeedBoost(shouldSave)
         end
         local player = Isaac.GetPlayer()
         saveData.SPEED_BOOST_STACKS = player:GetData().SpeedBoostStacks
+        print("SAVING SPEED BOOST")
+        print(saveData.SPEED_BOOST_STACKS)
         mod:SaveData(json.encode(saveData))
     end
 end
@@ -53,6 +55,8 @@ function mod:LoadSpeedBoost(continued)
         local player = Isaac.GetPlayer()
         if saveData.SPEED_BOOST_STACKS then
             player:GetData().SpeedBoostStacks = saveData.SPEED_BOOST_STACKS
+            print("LOADING SPEED BOOST")
+            print(saveData.SPEED_BOOST_STACKS)
         else
             player:GetData().SpeedBoostStacks = 0
         end

@@ -21,9 +21,12 @@ function mod:UpdateStacks(entity)
         -- check if the source is a player or spawned by a player
         if source.Type == EntityType.ENTITY_PLAYER then
             player = source.Entity
+            print("source is player")
         else
             player = source.Entity.SpawnerEntity
+            print("source spawner is player?")
             if not (player and player:ToPlayer()) then
+                print("actually not")
                 return
             end
         end
@@ -34,6 +37,7 @@ function mod:UpdateStacks(entity)
             else
                 player:GetData().SoulHeartAbilityFireRateStack = 1
             end
+            print(n)
             player:AddCacheFlags(CacheFlag.CACHE_FIREDELAY)
             player:EvaluateItems()
         end

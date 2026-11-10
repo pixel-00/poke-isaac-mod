@@ -5,17 +5,26 @@ function mod:ActivateWeakArmor(entity, amount, flags, source)
         if not entity:GetData().weakArmorActive then
             entity:GetData().weakArmorActive = true
         else
-            amount = amount + 1
+            return amount + 1
         end
+        entity:ToPlayer():AddCacheFlags(CacheFlag.CACHE_SPEED | CacheFlag.CACHE_FIREDELAY)
         entity:ToPlayer():EvaluateItems()
     end
 end
 
 function mod:ApplySpeed(player, cacheFlags)
     local itemCount = player:GetCollectibleNum(weakArmor)
-    if itemCount > 0 and ((cacheFlags & CacheFlag.CACHE_SPEED) == CacheFlag.CACHE_SPEED) and player:GetData().weakArmorActive then
-        local speedToAdd = 0.3 * itemCount
-        player.MoveSpeed = player.MoveSpeed + speedToAdd
+    if itemCount > 0 and player:GetData().weakArmorActive then
+        if (cacheFlags & CacheFlag.CACHE_SPEED) == CacheFlag.CACHE_SPEED then
+            local speedToAdd = 0.3 * itemCount
+            player.MoveSpeed = player.MoveSpeed + speedToAdd
+        end
+        if (cacheFlags & CacheFlag.CACHE_FIREDELAY) == CacheFlag.CACHE_FIREDELAY then
+            local multiplier = (3/2)^itemCount
+	        local tearsPerSecond = mod:ToTearsPerSecond(player.MaxFireDelay)
+	        tearsPerSecond = multiplier * tearsPerSecond
+	        player.MaxFireDelay = mod:ToMaxFireDelay(tearsPerSecond)
+        end
     end
 end
 

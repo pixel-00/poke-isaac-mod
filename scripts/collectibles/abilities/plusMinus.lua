@@ -3,9 +3,10 @@ local minus = Isaac.GetItemIdByName("Minus")
 
 function mod:ExtraCharge(player)
     if player:HasCollectible(plus) or player:HasCollectible(minus) then
-        local charge = player:GetData().PlusMinusAbilityActiveCharge
+        local oldCharge = player:GetData().PlusMinusAbilityActiveCharge
+        local newCharge = player:GetActiveCharge()
         local maxCharges = Isaac.GetItemConfig():GetCollectible(player:GetActiveItem()).MaxCharges
-        if charge and charge == maxCharges then
+        if oldCharge and oldCharge < maxCharges and newCharge == maxCharges then
             player:SetActiveCharge(maxCharges + 1)
         end
         player:GetData().PlusMinusAbilityActiveCharge = player:GetActiveCharge()
@@ -15,7 +16,7 @@ end
 function mod:ApplyStats(player, cacheFlags)
     local hasPlus = false
     local hasMinus = false
-    for i = 0, Game():GetNumPlayers() do
+    for i = 0, Game():GetNumPlayers() - 1 do
         local p = Isaac.GetPlayer(i)
         hasPlus = hasPlus or p:HasCollectible(plus)
         hasMinus = hasMinus or p:HasCollectible(minus)

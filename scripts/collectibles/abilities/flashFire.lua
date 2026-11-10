@@ -25,6 +25,7 @@ function mod:UpdateFlashFire(player)
     local t = player:GetData().flashFireCountdown
     if t and t > 0 then
         player:GetData().flashFireCountdown = math.max(t - (1/30), 0)
+        player:AddCacheFlags(CacheFlag.CACHE_DAMAGE)
         player:EvaluateItems()
     end
 end

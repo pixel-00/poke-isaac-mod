@@ -34,20 +34,20 @@ include("scripts.collectibles.abilities.hugePower")
 include("scripts.collectibles.abilities.intimidate")
 include("scripts.collectibles.abilities.levitate")--
 include("scripts.collectibles.abilities.pickup")---
-include("scripts.collectibles.abilities.flashFire")---
+include("scripts.collectibles.abilities.flashFire")--
 include("scripts.collectibles.abilities.regenerator")
 include("scripts.collectibles.abilities.technician")
-include("scripts.collectibles.abilities.weakArmor")--
+include("scripts.collectibles.abilities.weakArmor")--add cacheflag
 include("scripts.collectibles.abilities.sereneGrace")
 include("scripts.collectibles.abilities.speedBoost")--save boost progress?
 include("scripts.collectibles.abilities.stall")
 include("scripts.collectibles.abilities.parentalBond")
 include("scripts.collectibles.abilities.effectSpore")
-include("scripts.collectibles.abilities.cheekPouch")--
+include("scripts.collectibles.abilities.cheekPouch")--adjusted animation, added (false) phd synergy
 include("scripts.collectibles.abilities.soulHeart")--
 include("scripts.collectibles.abilities.sturdy")
 include("scripts.collectibles.abilities.slowStart")--add callback for speed, saves between exiting
-include("scripts.collectibles.abilities.overgrow")-- add health checks and caches for all 3
+include("scripts.collectibles.abilities.overgrow")--
 include("scripts.collectibles.abilities.blaze")--
 include("scripts.collectibles.abilities.torrent")--
 include("scripts.collectibles.abilities.hustle")
