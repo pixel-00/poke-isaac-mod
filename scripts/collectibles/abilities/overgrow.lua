@@ -1,12 +1,14 @@
 local overgrow = Isaac.GetItemIdByName("Overgrow")
 
+--need to account for rotten hearts!!
+
 function mod:CheckHealth(player)
-    print("check health called")
     if player:HasCollectible(overgrow) then
         local oldHealth = player:GetData().AbilityHealth
-        local maxHealth = player:GetData().AbilityMaxHealth
-        print("checking health")
-        if oldHealth and maxHealth and not (oldHealth == player:GetHearts() and maxHealth == player:GetEffectiveMaxHearts()) then
+        local oldMaxHealth = player:GetData().AbilityMaxHealth
+        print("old health: " .. oldHealth)
+        print("old max health: " .. oldMaxHealth)
+        if oldHealth and oldMaxHealth and not (oldHealth == player:GetHearts() and oldMaxHealth == player:GetEffectiveMaxHearts()) then
             print("health changed")
             player:AddCacheFlags(CacheFlag.CACHE_SPEED | CacheFlag.CACHE_RANGE)
             player:EvaluateItems()

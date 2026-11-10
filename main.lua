@@ -39,12 +39,12 @@ include("scripts.collectibles.abilities.regenerator")
 include("scripts.collectibles.abilities.technician")
 include("scripts.collectibles.abilities.weakArmor")
 include("scripts.collectibles.abilities.sereneGrace")
-include("scripts.collectibles.abilities.speedBoost")--need to evaluate cache on new floor
+include("scripts.collectibles.abilities.speedBoost")
 include("scripts.collectibles.abilities.stall")
 include("scripts.collectibles.abilities.parentalBond")
 include("scripts.collectibles.abilities.effectSpore")
 include("scripts.collectibles.abilities.cheekPouch")
-include("scripts.collectibles.abilities.soulHeart")--evaluate cache fix
+include("scripts.collectibles.abilities.soulHeart")
 include("scripts.collectibles.abilities.sturdy")
 include("scripts.collectibles.abilities.slowStart")
 include("scripts.collectibles.abilities.overgrow")--
