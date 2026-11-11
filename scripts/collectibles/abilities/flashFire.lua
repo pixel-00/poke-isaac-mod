@@ -13,7 +13,7 @@ end
 function mod:PreventFireDamage(entity, amount, flags, source)
     if entity.Type == EntityType.ENTITY_PLAYER and entity:ToPlayer():HasCollectible(flashFire) then
         if IsFire(flags, source) then
-            player:GetData().flashFireCountdown = FLASH_FIRE_TIME
+            entity:GetData().flashFireCountdown = FLASH_FIRE_TIME
             return false
         end
     end
