@@ -110,8 +110,12 @@ function mod:UseItem(item, rng, player, useFlags, activeSlot, varData)
     ClearAbilities(player)
     local newAbility = GetAbility(player, rng)
     GiveAbility(player, newAbility)
-    hud:ShowItemText(player, Isaac.GetItemConfig():GetCollectible(Isaac.GetItemIdByName(newAbility)), true)
-    return {ShowAnim = true}
+    Game():GetHUD():ShowItemText(player, Isaac.GetItemConfig():GetCollectible(Isaac.GetItemIdByName(newAbility)), true)
+    SFXManager():Play(SoundEffect.SOUND_VAMP_GULP)
+    return {
+        Remove = true,
+        ShowAnim = true
+    }
 end
 
 mod:AddCallback(ModCallbacks.MC_USE_ITEM, mod.UseItem, abilityCapsule)
