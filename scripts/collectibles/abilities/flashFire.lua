@@ -52,6 +52,17 @@ function mod:GiveDamage(player, cacheFlags)
     end
 end
 
+function mod:FlashFire(entity, amount, flags, source, countdown)
+    local player = entity:ToPlayer()
+    if player and player:HasCollectible(flashFire) then
+        if (flags & DamageFlag.DAMAGE_FIRE) == DamageFlag.DAMAGE_FIRE or (flags & DamageFlag.DAMAGE_EXPLOSION) == DamageFlag.DAMAGE_EXPLOSION then
+            local index = mod:GetPlayerIndex(player)
+            FLASH_FIRE_COUNTDOWN[index] = FLASH_FIRE_TIME
+        end
+    end
+end
+
+mod:AddCallback(ModCallbacks.MC_ENTITY_TAKE_DMG, mod.FlashFire)
 mod:AddCallback(ModCallbacks.MC_PRE_PROJECTILE_COLLISION, mod.PreventFireDamage)
 mod:AddCallback(ModCallbacks.MC_PRE_NPC_COLLISION, mod.PreventFireDamage)
 mod:AddCallback(ModCallbacks.MC_POST_PEFFECT_UPDATE, mod.UpdateFlashFire)
