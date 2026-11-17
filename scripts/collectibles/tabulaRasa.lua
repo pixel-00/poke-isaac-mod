@@ -17,12 +17,35 @@ function mod:EnsureTabulaRasaPool(itemPool, decrease, seed)
     end
 end
 
-function mod:ResetTabulaRasa(isContinued)
-    if not isContinued then
+function mod:SaveTabulaRasa(shouldSave)
+    if shouldSave then
+        local function f(player)
+            mod:SavePlayerData(player, "Tabula Rasa", tabulaRasaItemPool)
+        end
+
+        mod:DoForAllPlayers(f) -- although the pool is fixed for all players, it is easier to use the existing framework
+    end
+end
+
+function mod:LoadTabulaRasa(continued)
+    if continued then
+        local function f(player)
+            local data = mod:LoadPlayerData(player, "Tabula Rasa")
+
+            if not data then
+                data = false
+            end
+
+            tabulaRasaItemPool = data
+        end
+
+        mod:DoForAllPlayers(f)
+    else
         tabulaRasaItemPool = false
     end
 end
 
 mod:AddCallback(ModCallbacks.MC_USE_ITEM, mod.UseItem, tabulaRasa)
 mod:AddCallback(ModCallbacks.MC_PRE_GET_COLLECTIBLE, mod.EnsureTabulaRasaPool)
-mod:AddCallback(ModCallbacks.MC_POST_GAME_STARTED, mod.ResetTabulaRasa)
+mod:AddCallback(ModCallbacks.MC_PRE_GAME_EXIT, mod.SaveTabulaRasa)
+mod:AddCallback(ModCallbacks.MC_POST_GAME_STARTED, mod.LoadTabulaRasa)

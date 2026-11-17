@@ -34,37 +34,34 @@ local STACKABLE_POOL = {
     looseFeathers,
 }
 
-local function PoolSize(pool)
-    local size = 0
-    for _, i in pairs(pool) do
-        size = size + 1
-    end
-    return size
-end
-
 local function TRPool(player)
     local trPool = {}
-    for _, collectible in pairs(TR_POOL) do
+
+    for _, collectible in ipairs(TR_POOL) do
         if not player:HasCollectible(collectible) and Isaac.GetItemConfig():GetCollectible(collectible):IsAvailable() then
             table.insert(trPool, collectible)
         end
     end
-    if PoolSize(trPool) == 0 then
-        for _, collectible in pairs(STACKABLE_POOL) do
+
+    if #trPool == 0 then
+        for _, collectible in ipairs(STACKABLE_POOL) do
             if Isaac.GetItemConfig():GetCollectible(collectible):IsAvailable() then
                 table.insert(trPool, collectible)
             end
         end
     end
+
     return trPool
 end
 
 function mod:UseTechnicalRecord(item, rng, player, useFlags, activeSlot, varData)
     local hud = Game():GetHUD()
     local trPool = TRPool(player)
-    local collectible = trPool[math.random(PoolSize(trPool))]
+    local collectible = trPool[rng:RandomInt(#trPool) + 1]
+
     player:AddCollectible(collectible, 0, true, 0, nil, ItemPoolType.POOL_NULL)
     hud:ShowItemText(player, Isaac.GetItemConfig():GetCollectible(collectible), true)
+
     return {
         Remove = true,
         ShowAnim = true

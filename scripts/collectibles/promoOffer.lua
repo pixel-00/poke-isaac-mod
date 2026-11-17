@@ -1,5 +1,3 @@
-include("scripts.utilities")
-
 local promoOffer = Isaac.GetItemIdByName("Promo Offer")
 
 function mod:CanPurchase(player, pickup)
@@ -33,8 +31,8 @@ function mod:CanPurchase(player, pickup)
     return result
 end
 
-function mod:GetSoulHeartSubType()
-    local x = math.random()
+function mod:GetSoulHeartSubType(rng)
+    local x = rng:RandomFloat()
     if x < 0.83 then
         return HeartSubType.HEART_SOUL
     elseif x < 0.93 then
@@ -45,18 +43,18 @@ function mod:GetSoulHeartSubType()
 end
 
 function mod:DuplicatePurchase(pickup, collider, low)
-    local player = Isaac.GetPlayer()
-    if player:HasCollectible(promoOffer) and pickup:IsShopItem() and not pickup:GetData().Duplicated then
+    local player = collider:ToPlayer()
+    if player and player:HasCollectible(promoOffer) and pickup:IsShopItem() then
         if pickup.Price <= player:GetNumCoins() and mod:CanPurchase(player, pickup) then
             local spawnPosition = Game():GetLevel():GetCurrentRoom():FindFreePickupSpawnPosition(pickup.Position)
             local subType = 0
             if pickup.SubType == HeartSubType.HEART_SOUL then
-                subType = mod:GetSoulHeartSubType()
+                local rng = player:GetCollectibleRNG(promoOffer)
+                subType = mod:GetSoulHeartSubType(rng)
             elseif pickup.SubType == HeartSubType.HEART_ETERNAL or pickup.SubType == HeartSubType.HEART_BLACK or pickup.SubType == HeartSubType.HEART_BONE or (pickup.SubType == Card.CARD_HOLY and Game():GetLevel():GetCurrentRoom():GetType() == RoomType.ROOM_ANGEL) then
                 subType = pickup.SubType
             end
-            Game():Spawn(EntityType.ENTITY_PICKUP, pickup.Variant, spawnPosition, Vector(0,0), collider, subType, mod:RandomPositive())
-            pickup:GetData().Duplicated = true
+            Game():Spawn(EntityType.ENTITY_PICKUP, pickup.Variant, spawnPosition, Vector(0,0), collider, subType, rng:GetSeed())
         end
     end
 end

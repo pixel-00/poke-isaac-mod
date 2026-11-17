@@ -3,6 +3,13 @@ local hiddenItemManager = require("lib.hidden_item_manager")
 
 hiddenItemManager:Init(mod)
 
+include("scripts.utilities")
+
+-- Notes
+-- Remove use of GetData()
+-- Make randomness seeded as much as possible
+-- pair o dice needs a complete rework, use multiple items and switch between them to switch icon
+
 -- Collectibles
 include("scripts.collectibles.lifeOrb")
 include("scripts.collectibles.amuletCoin")
@@ -28,6 +35,13 @@ include("scripts.collectibles.technicalMachine")
 include("scripts.collectibles.technicalRecord")
 include("scripts.collectibles.abilityCapsule")
 include("scripts.collectibles.chestOfChests")
+-- gummy bears: spawns minisaacs on picking up a new item. these minisaacs are textured like gummy bears, and each different colour has a unique ability:
+-- red: double damage
+-- orange: 
+-- yellow: enemies killed by this drop coins
+-- green: chance to fire poison tears
+-- blue: double fire rate
+-- purple: homing
 
 -- Ability Capsule Passives
 include("scripts.collectibles.abilities.hugePower")
@@ -56,7 +70,7 @@ include("scripts.collectibles.abilities.intrepidSword")
 include("scripts.collectibles.abilities.dauntlessShield")
 include("scripts.collectibles.abilities.beastBoost")
 include("scripts.collectibles.abilities.pickpocket")
-include("scripts.collectibles.abilities.plusMinus")
+include("scripts.collectibles.abilities.plusMinus") -- test multiple active items
 include("scripts.collectibles.abilities.megaLauncher")
 include("scripts.collectibles.abilities.stamina")
 

@@ -1,8 +1,8 @@
 local flySwatter = Isaac.GetItemIdByName("Fly Swatter")
 
 function mod:TearEffect(tear)
-    local player = Isaac.GetPlayer()
-    if player:HasCollectible(flySwatter) then
+    local player = tear.SpawnerEntity
+    if player and player:ToPlayer() and player:ToPlayer():HasCollectible(flySwatter) then
         tear:GetData().flySwatter = true
     end
 end
@@ -94,7 +94,7 @@ end
 
 function mod:KillFamiliars(tear)
     if tear:GetData().flySwatter then
-        entities = Isaac.FindInRadius(tear.Position, tear.Size, EntityPartition.FAMILIAR)
+        local entities = Isaac.FindInRadius(tear.Position, tear.Size, EntityPartition.FAMILIAR)
         for _, e in pairs(entities) do
             if e.Type == EntityType.ENTITY_FAMILIAR and (e.Variant == FamiliarVariant.BLUE_FLY or e.Variant == FamiliarVariant.BLUE_SPIDER) then
                 if e.Variant == FamiliarVariant.BLUE_FLY then
@@ -110,8 +110,10 @@ end
 
 function mod:ApplyStats(player, cacheFlags)
     local itemCount = player:GetCollectibleNum(flySwatter)
+
     if (cacheFlags & CacheFlag.CACHE_SHOTSPEED) == CacheFlag.CACHE_SHOTSPEED then
         local shotSpeedToAdd = 0.6 * itemCount
+
         player.ShotSpeed = player.ShotSpeed + shotSpeedToAdd
     end
 end

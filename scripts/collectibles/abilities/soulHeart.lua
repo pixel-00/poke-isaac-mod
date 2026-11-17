@@ -1,27 +1,33 @@
 local soulHeart = Isaac.GetItemIdByName("Soul-Heart")
 
 function mod:ResetFireRate()
-    local player = Isaac.GetPlayer()
-    if player:HasCollectible(soulHeart) then
-        player:GetData().SoulHeartAbilityFireRateStack = 0
-        player:AddCacheFlags(CacheFlag.CACHE_FIREDELAY)
-        player:EvaluateItems()
+    local function f(player)
+        if player:GetData().SoulHeartAbilityFireRateStack ~= 0 then
+            player:GetData().SoulHeartAbilityFireRateStack = 0
+            player:AddCacheFlags(CacheFlag.CACHE_FIREDELAY)
+            player:EvaluateItems()
+        end
     end
+
+    mod:DoForAllPlayers(f)
 end
 
 function mod:UpdateStacks(entity)
     if entity:IsActiveEnemy(true) then
-        local player = Isaac.GetPlayer()
-        if player:HasCollectible(soulHeart) then
-            local n = player:GetData().SoulHeartAbilityFireRateStack
-            if n then
-                player:GetData().SoulHeartAbilityFireRateStack = math.min(n + 1, 10)
-            else
-                player:GetData().SoulHeartAbilityFireRateStack = 1
+        local function f(player)
+            if player:HasCollectible(soulHeart) then
+                local n = player:GetData().SoulHeartAbilityFireRateStack
+                if n then
+                    player:GetData().SoulHeartAbilityFireRateStack = math.min(n + 1, 10)
+                else
+                    player:GetData().SoulHeartAbilityFireRateStack = 1
+                end
+                player:AddCacheFlags(CacheFlag.CACHE_FIREDELAY)
+                player:EvaluateItems()
             end
-            player:AddCacheFlags(CacheFlag.CACHE_FIREDELAY)
-            player:EvaluateItems()
         end
+
+        mod:DoForAllPlayers(f)
     end
 end
 

@@ -1,24 +1,27 @@
 local speedBoost = Isaac.GetItemIdByName("Speed Boost")
 
-local json = require("json")
+local SPEED_BOOST_STACKS = {}
 
 function mod:StackSpeedBoost()
-    local player = Isaac.GetPlayer()
-    if player:HasCollectible(speedBoost) then
-        local n = player:GetData().SpeedBoostStacks
-        if n then
-            player:GetData().SpeedBoostStacks = n + 1
-        else
-            player:GetData().SpeedBoostStacks = 1
+    local function f(player)
+        if player:HasCollectible(speedBoost) then
+            local index = mod:GetPlayerIndex(player)
+            local stacks = SPEED_BOOST_STACKS[index]
+
+            SPEED_BOOST_STACKS[index] = (stacks or 0) + 1
+            player:AddCacheFlags(CacheFlag.CACHE_SPEED)
+            player:EvaluateItems()
         end
-        player:AddCacheFlags(CacheFlag.CACHE_SPEED)
-        player:EvaluateItems()
     end
+
+    mod:DoForAllPlayers(f)
 end
 
 function mod:ApplySpeed(player, cacheFlags)
     local itemCount = player:GetCollectibleNum(speedBoost)
-    local stacks = player:GetData().SpeedBoostStacks
+    local index = mod:GetPlayerIndex(player)
+    local stacks = SPEED_BOOST_STACKS[index]
+
     if stacks then
         if itemCount > 0 and ((cacheFlags & CacheFlag.CACHE_SPEED) == CacheFlag.CACHE_SPEED) then
             local speedToAdd = 0.1 * stacks * itemCount
@@ -28,46 +31,50 @@ function mod:ApplySpeed(player, cacheFlags)
 end
 
 function mod:ResetSpeedBoostStacks()
-    local player = Isaac.GetPlayer()
-    player:GetData().SpeedBoostStacks = 0
-    if player:HasCollectible(speedBoost) then
-        player:AddCacheFlags(CacheFlag.CACHE_SPEED)
-        player:EvaluateItems()
+    local function f(player)
+        if player:HasCollectible(speedBoost) then
+            local index = mod:GetPlayerIndex(player)
+            SPEED_BOOST_STACKS[index] = 0
+            player:AddCacheFlags(CacheFlag.CACHE_SPEED)
+            player:EvaluateItems()
+        end
     end
+
+    mod:DoForAllPlayers(f)
 end
 
 function mod:SaveSpeedBoost(shouldSave)
     if shouldSave then
-        local saveData = {}
-        if mod:HasData() then
-            local loadedData = json.decode(mod:LoadData())
-            if type(loadedData) == "table" then
-                saveData = loadedData
-            end
+        local function f(player)
+            local index = mod:GetPlayerIndex(player)
+
+            mod:SavePlayerData(player, "Speed Boost", SPEED_BOOST_STACKS[index])
         end
-        local player = Isaac.GetPlayer()
-        saveData.SPEED_BOOST_STACKS = player:GetData().SpeedBoostStacks
-        mod:SaveData(json.encode(saveData))
+
+        mod:DoForAllPlayers(f)
     end
 end
 
 function mod:LoadSpeedBoost(continued)
-    if continued and mod:HasData() then
-        local saveData = {}
-        local loadedData = json.decode(mod:LoadData())
-        if type(loadedData) == "table" then
-            saveData = loadedData
+    if continued then
+        local function f(player)
+            local playerData = mod:LoadPlayerData(player, "Speed Boost")
+
+            if not playerData then
+                playerData = 0
+            end
+
+            local index = mod:GetPlayerIndex(player)
+
+            SPEED_BOOST_STACKS[index] = playerData
+
+            if player:HasCollectible(speedBoost) then
+                player:AddCacheFlags(CacheFlag.CACHE_SPEED)
+                player:EvaluateItems()
+            end
         end
-        local player = Isaac.GetPlayer()
-        if saveData.SPEED_BOOST_STACKS then
-            player:GetData().SpeedBoostStacks = saveData.SPEED_BOOST_STACKS
-        else
-            player:GetData().SpeedBoostStacks = 0
-        end
-        if player:HasCollectible(speedBoost) then
-            player:AddCacheFlags(CacheFlag.CACHE_SPEED)
-            player:EvaluateItems()
-        end
+
+        mod:DoForAllPlayers(f)
     end
 end
 

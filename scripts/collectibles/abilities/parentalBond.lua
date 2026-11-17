@@ -1,11 +1,15 @@
 local parentalBond = Isaac.GetItemIdByName("Parental Bond")
 
+local PLAYER_MINISAACS = {}
+
 function mod:UpdateMinisaac(player)
     if player:HasCollectible(parentalBond) then
-        local mini = player:GetData().ParentalBondMinisaac
+        local index = mod:GetPlayerIndex(player)
+        local mini = PLAYER_MINISAACS[index]
+
         if not mini then
-            player:GetData().ParentalBondMinisaac = player:AddMinisaac(player.Position)
-            player:GetData().ParentalBondMinisaac:GetData().ParentalBondInvincibility = true
+            PLAYER_MINISAACS[index] = player:AddMinisaac(player.Position)
+            PLAYER_MINISAACS[index]:GetData().ParentalBondInvincibility = true
         end
     end
 end

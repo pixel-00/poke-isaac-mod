@@ -2,34 +2,45 @@ local slowStart = Isaac.GetItemIdByName("Slow Start")
 
 local json = require("json")
 
+local SLOW_START_ROOMS = {}
+
 function mod:ResetSlowStart()
-    local player = Isaac.GetPlayer()
-    if player:HasCollectible(slowStart) then
-        player:GetData().SlowStartAbilityRooms = 0
-        player:AddCacheFlags(CacheFlag.CACHE_DAMAGE | CacheFlag.CACHE_SPEED)
-        player:EvaluateItems()
+    local function f(player)
+        if player:HasCollectible(slowStart) then
+            local index = mod:GetPlayerIndex(player)
+            SLOW_START_ROOMS[index] = 0
+            player:AddCacheFlags(CacheFlag.CACHE_DAMAGE | CacheFlag.CACHE_SPEED)
+            player:EvaluateItems()
+        end
     end
+
+    mod:DoForAllPlayers(f)
 end
 
 function mod:CountRoomClear()
-    local player = Isaac.GetPlayer()
-    if player:HasCollectible(slowStart) then
-        local n = player:GetData().SlowStartAbilityRooms
-        if n then
-            player:GetData().SlowStartAbilityRooms = n + 1
-            if n >= 4 then
-                player:AddCacheFlags(CacheFlag.CACHE_DAMAGE | CacheFlag.CACHE_SPEED)
-                player:EvaluateItems()
+    local function f(player)
+        if player:HasCollectible(slowStart) then
+            local index = mod:GetPlayerIndex(player)
+            local n = SLOW_START_ROOMS[index]
+            if n then
+                SLOW_START_ROOMS[index] = n + 1
+                if n >= 4 then
+                    player:AddCacheFlags(CacheFlag.CACHE_DAMAGE | CacheFlag.CACHE_SPEED)
+                    player:EvaluateItems()
+                end
+            else
+                SLOW_START_ROOMS[index] = 1
             end
-        else
-            player:GetData().SlowStartAbilityRooms = 1
         end
     end
+
+    mod:DoForAllPlayers(f)
 end
 
 function mod:ApplyStats(player, cacheFlags)
     local itemCount = player:GetCollectibleNum(slowStart)
-    local n = player:GetData().SlowStartAbilityRooms
+    local index = mod:GetPlayerIndex(player)
+    local n = SLOW_START_ROOMS[index]
     if itemCount > 0 then
         local applyDebuff = 1
         if n then
@@ -48,36 +59,36 @@ end
 
 function mod:SaveSlowStart(shouldSave)
     if shouldSave then
-        local saveData = {}
-        if mod:HasData() then
-            local loadedData = json.decode(mod:LoadData())
-            if type(loadedData) == "table" then
-                saveData = loadedData
-            end
+        local function f(player)
+            local index = mod:GetPlayerIndex(player)
+
+            mod:SavePlayerData(player, "Slow Start", SLOW_START_ROOMS[index])
         end
-        local player = Isaac.GetPlayer()
-        saveData.SLOW_START_COUNT = player:GetData().SlowStartAbilityRooms
-        mod:SaveData(json.encode(saveData))
+
+        mod:DoForAllPlayers(f)
     end
 end
 
 function mod:LoadSlowStart(continued)
-    if continued and mod:HasData() then
-        local saveData = {}
-        local loadedData = json.decode(mod:LoadData())
-        if type(loadedData) == "table" then
-            saveData = loadedData
+    if continued then
+        local function f(player)
+            local playerData = mod:LoadPlayerData(player, "Slow Start")
+
+            if not playerData then
+                playerData = 0
+            end
+
+            local index = mod:GetPlayerIndex(player)
+
+            SLOW_START_ROOMS[index] = playerData
+
+            if player:HasCollectible(slowStart) then
+                player:AddCacheFlags(CacheFlag.CACHE_DAMAGE | CacheFlag.CACHE_SPEED)
+                player:EvaluateItems()
+            end
         end
-        local player = Isaac.GetPlayer()
-        if saveData.SLOW_START_COUNT then
-            player:GetData().SlowStartAbilityRooms = saveData.SLOW_START_COUNT
-        else
-            player:GetData().SlowStartAbilityRooms = 0
-        end
-        if player:HasCollectible(slowStart) then
-            player:AddCacheFlags(CacheFlag.CACHE_DAMAGE | CacheFlag.CACHE_SPEED)
-            player:EvaluateItems()
-        end
+
+        mod:DoForAllPlayers(f)
     end
 end
 

@@ -1,13 +1,12 @@
-include("scripts.utilities")
 local pickup = Isaac.GetItemIdByName("Pickup")
 
 local function IsEarlyStage(stage)
     return stage == LevelStage.STAGE1_1 or stage == LevelStage.STAGE1_2 or stage == LevelStage.STAGE2_1 or stage == LevelStage.STAGE2_2 or stage == LevelStage.STAGE3_1 or LevelStage.STAGE3_2
 end
 
-local function GetPickupVariant()
+local function GetPickupVariant(rng)
     local stage = Game():GetLevel():GetStage()
-    local x = math.random()
+    local x = rng:RandomFloat()
     if IsEarlyStage(stage) then
         if x < 0.26 then
             return PickupVariant.PICKUP_HEART
@@ -61,9 +60,9 @@ local function GetPickupVariant()
     end
 end
 
-local function GetPickupSubType(variant)
+local function GetPickupSubType(variant, rng)
     local stage = Game():GetLevel():GetStage()
-    local x = math.random()
+    local x = rng:RandomFloat()
     if IsEarlyStage(stage) then
         if variant == PickupVariant.PICKUP_HEART then
             if x < 0.50 then
@@ -112,7 +111,7 @@ local function GetPickupSubType(variant)
         end
     else
         if variant == PickupVariant.PICKUP_HEART then
-            if x < 10 then
+            if x < 0.1 then
                 return HeartSubType.HEART_ETERNAL
             elseif x < 0.25 then
                 return HeartSubType.HEART_FULL
@@ -124,7 +123,7 @@ local function GetPickupSubType(variant)
                 return HeartSubType.HEART_BLENDED
             elseif x < 0.75 then
                 return HeartSubType.HEART_SOUL
-            elseif x < 91 then
+            elseif x < 0.91 then
                 return HeartSubType.HEART_HALF_SOUL
             else
                 return HeartSubType.HEART_BLACK
@@ -158,13 +157,17 @@ local function GetPickupSubType(variant)
     return 0
 end
 
-function mod:PreSpawnCleanAward()
-    local player = Isaac.GetPlayer(0)
-    if player:HasCollectible(pickup) and math.random() < 0.15 + math.min(0.85, 0.01 * player.Luck) then
-        local variant = GetPickupVariant()
-        local subtype = GetPickupSubType(variant)
-        Game():Spawn(EntityType.ENTITY_PICKUP, variant, Game():GetRoom():GetCenterPos(), Vector(0, 0), nil, subtype, Game():GetRoom():GetSpawnSeed())
+function mod:PickupAward()
+    local function f(player)
+        local rng = player:GetCollectibleRNG(pickup)
+        if player:HasCollectible(pickup) and rng:RandomFloat() < 0.15 + 0.01 * math.min(85, player.Luck) then
+            local variant = GetPickupVariant(rng)
+            local subtype = GetPickupSubType(variant, rng)
+            Game():Spawn(EntityType.ENTITY_PICKUP, variant, Game():GetRoom():GetCenterPos(), Vector(0, 0), nil, subtype, Game():GetRoom():GetSpawnSeed())
+        end
     end
+
+    mod:DoForAllPlayers(f)
 end
 
-mod:AddCallback(ModCallbacks.MC_PRE_SPAWN_CLEAN_AWARD, mod.PreSpawnCleanAward)
+mod:AddCallback(ModCallbacks.MC_PRE_SPAWN_CLEAN_AWARD, mod.PickupAward)

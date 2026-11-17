@@ -4,8 +4,8 @@ local DEFAULT_FART_RADIUS = 85
 
 function mod:EffectSpore(player, collider, low)
     if player:HasCollectible(effectSpore) and collider:IsVulnerableEnemy() then
-        local x = math.random()
         if math.random(2) == 1 then
+            local x = math.random()
             if x < 1/3 then
                 Game():Fart(player.Position, DEFAULT_FART_RADIUS, player, 1, 0, Color.Default)
             elseif x < 2/3 then
@@ -16,7 +16,9 @@ function mod:EffectSpore(player, collider, low)
                 Game():ButterBeanFart(player.Position, DEFAULT_FART_RADIUS, player, true, true)
             end
         end
+
         if math.random(2) == 1 then
+            local x = math.random()
             if x < 0.25 then
                 collider:AddCharmed(player, 45, true)
             elseif x < 0.5 then
@@ -27,7 +29,9 @@ function mod:EffectSpore(player, collider, low)
                 collider:AddSlowing(player, 45, 0.5, Color.Default, true)
             end
         end
+
         if math.random(2) == 1 then
+            local x = math.random()
             if x < 0.25 then
                 collider:AddCharmed(player, 45, true)
             elseif x < 0.5 then

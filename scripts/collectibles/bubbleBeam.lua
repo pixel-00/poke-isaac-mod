@@ -22,16 +22,19 @@ function mod:EvaluateCache(player, cacheFlags)
 end
 
 function mod:bubbleTear(tear)
-	local player = Isaac.GetPlayer(0)
+	local player = tear.SpawnerEntity
 	local tearVelocity = tear.Velocity
-	if player:GetData().bubbleBeam then
+
+    if player and player:ToPlayer() and player:GetData().bubbleBeam then
 		tear.Velocity = tear.Velocity:Rotated(math.random(-bubbleBeamTearRadius, bubbleBeamTearRadius))
 		tear.Scale = tear.Scale * 1.5
 		if canSpawnExtraTears then
+            canSpawnExtraTears = false
 			local tearAmount = math.random(0,2)
 			while tearAmount > 0 do
-				canSpawnExtraTears = false
-				player:FireTear(player.Position, tearVelocity)
+                local newLength = tearVelocity:Length() * ((2 * math.random() + 9) / 10)
+                local newVelocity = tearVelocity:Resized(newLength)
+				player:FireTear(player.Position, newVelocity)
 				tearAmount = tearAmount - 1
 			end
 		end

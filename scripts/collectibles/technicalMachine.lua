@@ -2,9 +2,6 @@ local technicalMachine = Isaac.GetItemIdByName("Technical Machine")
 local bubbleBeam = Isaac.GetItemIdByName("Bubble Beam")
 local looseFeathers = Isaac.GetItemIdByName("Loose Feathers")
 
-local hiddenItemManager = require("lib.hidden_item_manager")
-local json = require("json")
-
 local TM_POOL = {
     CollectibleType.COLLECTIBLE_SPOON_BENDER,
     CollectibleType.COLLECTIBLE_FIRE_MIND,
@@ -26,26 +23,19 @@ local TM_POOL = {
     looseFeathers,
 }
 
-local function PoolSize(pool)
-    local size = 0
-    for _, i in pairs(pool) do
-        size = size + 1
-    end
-    return size
-end
-
-local function GetTMItem(tmPool)
-    if PoolSize(tmPool) == 0 then
-        return false
+local function GetTMItem(tmPool, rng)
+    if #tmPool == 0 then
+        return nil
     else
-        return tmPool[math.random(PoolSize(tmPool))]
+        return tmPool[rng:RandomInt(#tmPool) + 1]
     end
 end
 
 -- Creates pool of item effects for items which the player does not already have
 local function TMPool(player)
     local tmPool = {}
-    for _, collectible in pairs(TM_POOL) do
+
+    for _, collectible in ipairs(TM_POOL) do
         if not player:HasCollectible(collectible) then
             table.insert(tmPool, collectible)
         end
@@ -55,40 +45,36 @@ end
 
 function mod:UseTechnicalMachine(item, rng, player, useFlags, activeSlot, varData)
     local hud = Game():GetHUD()
-    local effectToGive = GetTMItem(TMPool(player))
+    local effectToGive = GetTMItem(TMPool(player), rng)
+
     if effectToGive then
         hiddenItemManager:AddForFloor(player, effectToGive)
         hud:ShowItemText(player, Isaac.GetItemConfig():GetCollectible(effectToGive), true)
     else
         hud:ShowItemText("Technical Machine", "Nothing left to learn")
     end
+
     return {ShowAnim = true}
 end
 
 function mod:SaveHiddenWisps(shouldSave)
     if shouldSave then
-        local saveData = {}
-        if mod:HasData() then
-            local loadedData = json.decode(mod:LoadData())
-            if type(loadedData) == "table" then
-                saveData = loadedData
-            end
+        local function f(player)
+            mod:SavePlayerData(player, "Technical Machine", hiddenItemManager:GetSaveData())
         end
-        saveData.HIDDEN_ITEM_DATA = hiddenItemManager:GetSaveData()
-        mod:SaveData(json.encode(saveData))
+
+        mod:DoForAllPlayers(f)
     end
 end
 
 function mod:LoadHiddenWisps(continued)
-    if continued and mod:HasData() then
-        local saveData = {}
-        local loadedData = json.decode(mod:LoadData())
-        if type(loadedData) == "table" then
-            saveData = loadedData
+    if continued then
+        local function f(player)
+            local loadedData = mod:LoadPlayerData(player, "Technical Machine")
+            hiddenItemManager:LoadData(loadedData)
         end
-        if saveData.HIDDEN_ITEM_DATA then
-            hiddenItemManager:LoadData(saveData.HIDDEN_ITEM_DATA)
-        end
+
+        mod:DoForAllPlayers(f)
     end
 end
 

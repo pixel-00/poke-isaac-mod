@@ -1,6 +1,7 @@
 local earlyOnset = Isaac.GetItemIdByName("Early Onset")
 
 local timer = 0
+
 local lastUsedStage = nil
 
 function mod:RestartFloor(player)
@@ -14,8 +15,30 @@ function mod:SetTimer()
     timer = Isaac.GetTime() + 30 * 1000
 end
 
-function mod:ResetTimer(isContinued)
-    if not isContinued then
+function mod:SaveEarlyOnset(shouldSave)
+    if shouldSave then
+        local function f(player)
+            mod:SavePlayerData(player, "Early Onset", timer)
+        end
+
+        mod:DoForAllPlayers(f) -- although the timer is fixed for all players, it is easier to use the existing framework
+    end
+end
+
+function mod:LoadEarlyOnset(continued)
+    if continued then
+        local function f(player)
+            local data = mod:LoadPlayerData(player, "Early Onset")
+
+            if not data then
+                data = 0
+            end
+
+            timer = data
+        end
+
+        mod:DoForAllPlayers(f)
+    else
         timer = 0
         lastUsedStage = nil
     end
@@ -23,4 +46,5 @@ end
 
 mod:AddCallback(ModCallbacks.MC_POST_PEFFECT_UPDATE, mod.RestartFloor)
 mod:AddCallback(ModCallbacks.MC_POST_NEW_LEVEL, mod.SetTimer)
-mod:AddCallback(ModCallbacks.MC_POST_GAME_STARTED, mod.ResetTimer)
+mod:AddCallback(ModCallbacks.MC_PRE_GAME_EXIT, mod.SaveEarlyOnset)
+mod:AddCallback(ModCallbacks.MC_POST_GAME_STARTED, mod.LoadEarlyOnset)

@@ -1,6 +1,5 @@
-include("scripts.utilities")
-
 local luckyStar = Isaac.GetItemIdByName("Lucky Star")
+
 local canRoll = true
 
 function mod:LuckyRoll(oldCollectibleID, itemPoolType, decrease, seed)

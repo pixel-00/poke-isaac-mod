@@ -3,15 +3,18 @@ local pickpocket = Isaac.GetItemIdByName("Pickpocket")
 local trinketsThisFloor = 0
 
 function mod:SpawnTrinket(entity)
-    local player = Isaac.GetPlayer()
-    if player:HasCollectible(pickpocket) then
-        local luck = player.Luck
-        if math.random(100) <= (25 + 3 * math.min(luck, 25)) / (trinketsThisFloor + 1) then
-            local spawnPosition = Game():GetLevel():GetCurrentRoom():FindFreePickupSpawnPosition(entity.Position)
-            Game():Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_TRINKET, spawnPosition, Vector(0,0), entity, 0, mod:RandomPositive())
-            trinketsThisFloor = trinketsThisFloor + 1
+    local function f(player)
+        if player:HasCollectible(pickpocket) then
+            local luck = player.Luck
+            if math.random(100) <= (25 + 3 * math.min(luck, 25)) / (trinketsThisFloor + 1) then
+                local spawnPosition = Game():GetLevel():GetCurrentRoom():FindFreePickupSpawnPosition(entity.Position)
+                Game():Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_TRINKET, spawnPosition, Vector(0,0), entity, 0, mod:RandomPositive())
+                trinketsThisFloor = trinketsThisFloor + 1
+            end
         end
     end
+
+    mod:DoForAllPlayers(f)
 end
 
 function mod:ResetCounter()

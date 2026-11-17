@@ -1,10 +1,11 @@
-include("scripts.utilities")
-
 local couchCushion = Isaac.GetItemIdByName("Couch Cushion")
 
-function mod:GetCushionPickup(roomType)
-    local pickupToSpawn = {Variant = 0, SubType = 0}
-    local x = math.random()
+-- lock behind golden penny unlock
+
+function mod:GetCushionPickup(roomType, rng)
+    local pickupToSpawn = {Variant = PickupVariant.PICKUP_COIN, SubType = 0}
+    local x = rng:RandomFloat()
+
     if roomType == RoomType.ROOM_SHOP then
         if x < 0.5 then
             pickupToSpawn.Variant = PickupVariant.PICKUP_COIN
@@ -14,12 +15,9 @@ function mod:GetCushionPickup(roomType)
             pickupToSpawn.SubType = HeartSubType.HEART_GOLDEN
         end
     elseif roomType == RoomType.ROOM_ERROR then
-        errorRoomVariants = {PickupVariant.PICKUP_HEART, PickupVariant.PICKUP_COIN, PickupVariant.PICKUP_KEY, PickupVariant.PICKUP_BOMB, PickupVariant.PICKUP_THROWABLEBOMB, PickupVariant.PICKUP_POOP, PickupVariant.PICKUP_CHEST, PickupVariant.PICKUP_BOMBCHEST, PickupVariant.PICKUP_SPIKEDCHEST, PickupVariant.PICKUP_ETERNALCHEST, PickupVariant.PICKUP_MIMICCHEST, PickupVariant.PICKUP_OLDCHEST, PickupVariant.PICKUP_WOODENCHEST, PickupVariant.PICKUP_MEGACHEST, PickupVariant.PICKUP_HAUNTEDCHEST, PickupVariant.PICKUP_LOCKEDCHEST, PickupVariant.PICKUP_GRAB_BAG, PickupVariant.PICKUP_PILL, PickupVariant.PICKUP_LIL_BATTERY, PickupVariant.PICKUP_COLLECTIBLE, PickupVariant.PICKUP_BROKEN_SHOVEL, PickupVariant.PICKUP_SHOPITEM, PickupVariant.PICKUP_TAROTCARD, PickupVariant.PICKUP_TRINKET, PickupVariant.PICKUP_REDCHEST}
-        local randomIndex = math.random(#errorRoomVariants)
-        pickupToSpawn.Variant = errorRoomVariants[randomIndex]
-        if pickupToSpawn.Variant == PickupVariant.PICKUP_TAROTCARD then
-            pickupToSpawn.SubType = Game():GetItemPool():GetCard(mod:RandomPositive(), true, true, false)
-        end
+        local errorRoomVariants = {PickupVariant.PICKUP_HEART, PickupVariant.PICKUP_COIN, PickupVariant.PICKUP_KEY, PickupVariant.PICKUP_BOMB, PickupVariant.PICKUP_THROWABLEBOMB, PickupVariant.PICKUP_POOP, PickupVariant.PICKUP_CHEST, PickupVariant.PICKUP_BOMBCHEST, PickupVariant.PICKUP_SPIKEDCHEST, PickupVariant.PICKUP_ETERNALCHEST, PickupVariant.PICKUP_MIMICCHEST, PickupVariant.PICKUP_OLDCHEST, PickupVariant.PICKUP_WOODENCHEST, PickupVariant.PICKUP_MEGACHEST, PickupVariant.PICKUP_HAUNTEDCHEST, PickupVariant.PICKUP_LOCKEDCHEST, PickupVariant.PICKUP_GRAB_BAG, PickupVariant.PICKUP_PILL, PickupVariant.PICKUP_LIL_BATTERY, PickupVariant.PICKUP_COLLECTIBLE, PickupVariant.PICKUP_BROKEN_SHOVEL, PickupVariant.PICKUP_SHOPITEM, PickupVariant.PICKUP_TAROTCARD, PickupVariant.PICKUP_TRINKET, PickupVariant.PICKUP_REDCHEST}
+        local randomIndex = rng:RandomInt(#errorRoomVariants)
+        pickupToSpawn.Variant = errorRoomVariants[randomIndex + 1]
     elseif roomType == RoomType.ROOM_TREASURE then
         pickupToSpawn.Variant = PickupVariant.PICKUP_TRINKET
     elseif roomType == RoomType.ROOM_BOSS then
@@ -75,7 +73,7 @@ function mod:GetCushionPickup(roomType)
         pickupToSpawn.SubType = Card.CARD_DICE_SHARD
     elseif roomType == RoomType.ROOM_PLANETARIUM then
         pickupToSpawn.Variant = PickupVariant.PICKUP_TAROTCARD
-        pickupToSpawn.SubType = Game():GetItemPool():GetCard(mod:RandomPositive(), false, true, true)
+        pickupToSpawn.SubType = Game():GetItemPool():GetCard(rng:GetSeed(), false, true, true)
     elseif roomType == RoomType.ROOM_ULTRASECRET then
         pickupToSpawn.Variant = PickupVariant.PICKUP_TAROTCARD
         pickupToSpawn.SubType = Card.CARD_CRACKED_KEY
@@ -86,14 +84,21 @@ end
 function mod:SpawnCushionPickup()
     local room = Game():GetLevel():GetCurrentRoom()
     local roomType = room:GetType()
-    local x = math.random()
-    local player = Isaac.GetPlayer()
-    local spawnChance = math.max(math.min(math.ceil(player.Luck + 4) / 10, 1), 0)
-    if room:IsFirstVisit() and player:HasCollectible(couchCushion) and x <= spawnChance and roomType ~= RoomType.ROOM_DEFAULT then
-        local pickupToSpawn = mod:GetCushionPickup(roomType)
-        local spawnPosition = room:FindFreePickupSpawnPosition(Isaac.GetRandomPosition())
-        Game():Spawn(EntityType.ENTITY_PICKUP, pickupToSpawn.Variant, spawnPosition, Vector(0, 0), player, pickupToSpawn.SubType, mod:RandomPositive())
+
+    local function f(player)
+        local rng = player:GetCollectibleRNG(couchCushion)
+        local x = rng:RandomFloat()
+        local spawnChance = math.max(0, math.min(1, math.ceil(player.Luck + 4) / 10))
+
+        if room:IsFirstVisit() and player:HasCollectible(couchCushion) and x <= spawnChance and roomType ~= RoomType.ROOM_DEFAULT then
+            local pickupToSpawn = mod:GetCushionPickup(roomType, rng)
+            local spawnPosition = room:FindFreePickupSpawnPosition(Isaac.GetRandomPosition())
+
+            Game():Spawn(EntityType.ENTITY_PICKUP, pickupToSpawn.Variant, spawnPosition, Vector(0, 0), player, pickupToSpawn.SubType, mod:RandomPositive())
+        end
     end
+
+    mod:DoForAllPlayers(f)
 end
 
 mod:AddCallback(ModCallbacks.MC_POST_NEW_ROOM, mod.SpawnCushionPickup)
