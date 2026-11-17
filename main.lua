@@ -36,12 +36,11 @@ include("scripts.collectibles.technicalRecord")
 include("scripts.collectibles.abilityCapsule")
 include("scripts.collectibles.chestOfChests")
 -- gummy bears: spawns minisaacs on picking up a new item. these minisaacs are textured like gummy bears, and each different colour has a unique ability:
--- red: double damage
--- orange: 
--- yellow: enemies killed by this drop coins
--- green: chance to fire poison tears
--- blue: double fire rate
--- purple: homing
+-- red: fire tears
+-- yellow: penny tears
+-- green: poison tears
+-- blue: ice tears
+-- purple: homing tears
 
 -- Ability Capsule Passives
 include("scripts.collectibles.abilities.hugePower")
@@ -77,7 +76,5 @@ include("scripts.collectibles.abilities.stamina")
 -- Trinkets
 include("scripts.trinkets.focusSash")
 include("scripts.trinkets.keyCrusher")
-include("scripts.trinkets.choiceBand")
-include("scripts.trinkets.choiceSpecs")
-include("scripts.trinkets.choiceScarf")
 include("scripts.trinkets.airBalloon")
+include("scripts.trinkets.magnifyingGlass")

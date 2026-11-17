@@ -27,7 +27,7 @@ function mod:UseItem(item, rng, player, useFlags, activeSlot, varData)
         player:AddKeys(-1)
 
         if x < 0.01 then
-            local y = rng:RandomInt(3)
+            local y = rng:RandomInt(6)
 
             if y <= 0 and Isaac.GetItemConfig():GetCollectible(CollectibleType.COLLECTIBLE_LIL_CHEST):IsAvailable() then
                 variant = PickupVariant.PICKUP_COLLECTIBLE
@@ -38,8 +38,16 @@ function mod:UseItem(item, rng, player, useFlags, activeSlot, varData)
             elseif y <= 2 and Isaac.GetItemConfig():GetCollectible(CollectibleType.COLLECTIBLE_ISAACS_TOMB):IsAvailable() then
                 variant = PickupVariant.PICKUP_COLLECTIBLE
                 subType = CollectibleType.COLLECTIBLE_ISAACS_TOMB
+            elseif y <= 3 and Isaac.GetItemConfig():GetCollectible(CollectibleType.COLLECTIBLE_KEEPERS_BOX):IsAvailable() then
+                variant = PickupVariant.PICKUP_COLLECTIBLE
+                subType = CollectibleType.COLLECTIBLE_KEEPERS_BOX
+            elseif y <= 4 and Isaac.GetItemConfig():GetCollectible(CollectibleType.COLLECTIBLE_MR_ME):IsAvailable() then
+                variant = PickupVariant.PICKUP_COLLECTIBLE
+                subType = CollectibleType.COLLECTIBLE_MR_ME
+            elseif y <= 5 and Isaac.GetItemConfig():GetCollectible(CollectibleType.COLLECTIBLE_BOX_OF_FRIENDS):IsAvailable() then
+                variant = PickupVariant.PICKUP_COLLECTIBLE
+                subType = CollectibleType.COLLECTIBLE_BOX_OF_FRIENDS
             end
-
         end
 
         local room = Game():GetLevel():GetCurrentRoom()

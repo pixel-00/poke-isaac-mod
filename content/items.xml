@@ -56,8 +56,6 @@
     <passive id="54" name="Minus" gfx="ability_capsule_item.png" description="Powers up with Plus" cache="damage firedelay"/>
     <passive id="55" name="Mega Launcher" gfx="ability_capsule_item.png" description="Water pulse tears" cache="damage tearflag size"/>
     <passive id="56" name="Stamina" gfx="ability_capsule_item.png" description="ability"/>
-    <trinket id="100" name="Choice Band" gfx="placeholder.png" description="I choose strength"/>
-    <trinket id="101" name="Choice Specs" gfx="placeholder.png" description="I choose power"/>
-    <trinket id="102" name="Choice Scarf" gfx="placeholder.png" description="I choose speed"/>
-    <trinket id="103" name="Air Balloon" gfx="air_balloon_item.png" description="placeholder"/>
+    <trinket id="57" name="Air Balloon" gfx="air_balloon_item.png" description="Don't let it pop!"/>
+    <trinket id="58" name="Magnifying Glass" gfx="placeholder.png" description="Smaller than I thought"/>
 </items>

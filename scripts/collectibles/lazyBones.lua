@@ -3,10 +3,11 @@ local lazyBones = Isaac.GetItemIdByName("Lazy Bones")
 local BONE_HEARTS = {}
 local BROKEN_BONE_HEARTS = {}
 
+-- needs rework
 function mod:CheckBones(player)
     local index = mod:GetPlayerIndex(player)
     local boneHearts = BONE_HEARTS[index]
-    if player:GetBoneHearts() ~= boneHearts then
+    if boneHearts and player:GetBoneHearts() ~= boneHearts then
         local extraBrokenBoneHearts = math.max(boneHearts - player:GetBoneHearts(), 0)
         BONE_HEARTS[index] = player:GetBoneHearts()
         if player:HasCollectible(lazyBones) then
