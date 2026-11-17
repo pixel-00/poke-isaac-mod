@@ -7,7 +7,7 @@ function mod:MakeTiny()
             for _, entity in pairs(Isaac.GetRoomEntities()) do
                 local x = rng:RandomFloat()
                 local trinketMultiplier = player:GetTrinketMultiplier(magnifyingGlass)
-                local chance = trinketMultiplier / 3
+                local chance = 2 -- trinketMultiplier / 3
                 if entity:IsActiveEnemy() and x < chance then
                     entity:ToNPC():MakeChampion(Game():GetRoom():GetSpawnSeed(), ChampionColor.TINY, true)
                 end

@@ -56,6 +56,6 @@
     <passive id="54" name="Minus" gfx="ability_capsule_item.png" description="Powers up with Plus" cache="damage firedelay"/>
     <passive id="55" name="Mega Launcher" gfx="ability_capsule_item.png" description="Water pulse tears" cache="damage tearflag size"/>
     <passive id="56" name="Stamina" gfx="ability_capsule_item.png" description="ability"/>
-    <trinket id="57" name="Air Balloon" gfx="air_balloon_item.png" description="Don't let it pop!"/>
+    <trinket id="57" name="Air Balloon" gfx="air_balloon_item.png" description="Don't let it pop!" cache="flying"/>
     <trinket id="58" name="Magnifying Glass" gfx="placeholder.png" description="Smaller than I thought"/>
 </items>

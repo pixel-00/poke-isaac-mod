@@ -12,12 +12,13 @@ local function IsFire(collider)
     or collider.Type == EntityType.ENTITY_FIREPLACE
 end
 
-function mod:PreventFireDamage(player, collider, _)
-    if player:HasCollectible(flashFire) then
-        if IsFire(collider) then
+function mod:PreventFireDamage(object, collider, _)
+    local player = collider:ToPlayer()
+    if player and player:HasCollectible(flashFire) then
+        if IsFire(object) then
             local index = mod:GetPlayerIndex(player)
             FLASH_FIRE_COUNTDOWN[index] = FLASH_FIRE_TIME
-            return true
+            return false
         end
     end
 end
@@ -51,6 +52,7 @@ function mod:GiveDamage(player, cacheFlags)
     end
 end
 
-mod:AddCallback(ModCallbacks.MC_PRE_PLAYER_COLLISION, mod.PreventFireDamage)
+mod:AddCallback(ModCallbacks.MC_PRE_PROJECTILE_COLLISION, mod.PreventFireDamage)
+mod:AddCallback(ModCallbacks.MC_PRE_NPC_COLLISION, mod.PreventFireDamage)
 mod:AddCallback(ModCallbacks.MC_POST_PEFFECT_UPDATE, mod.UpdateFlashFire)
 mod:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, mod.GiveDamage)
