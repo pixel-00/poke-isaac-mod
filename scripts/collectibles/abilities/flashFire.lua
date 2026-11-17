@@ -17,7 +17,7 @@ function mod:PreventFireDamage(player, collider, _)
         if IsFire(collider) then
             local index = mod:GetPlayerIndex(player)
             FLASH_FIRE_COUNTDOWN[index] = FLASH_FIRE_TIME
-            return false
+            return true
         end
     end
 end
@@ -41,6 +41,7 @@ end
 
 function mod:GiveDamage(player, cacheFlags)
     local itemCount = player:GetCollectibleNum(flashFire)
+    local index = mod:GetPlayerIndex(player)
     local t = FLASH_FIRE_COUNTDOWN[index]
 
     if itemCount > 0 and t and (cacheFlags & CacheFlag.CACHE_DAMAGE == CacheFlag.CACHE_DAMAGE) then

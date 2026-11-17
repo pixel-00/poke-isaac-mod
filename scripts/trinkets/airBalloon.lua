@@ -16,7 +16,7 @@ function mod:PopAirBalloon(entity, amount, damageFlags, source, countdownFrames)
         if trinketMultiplier <= 1 then
             player:TryRemoveTrinket(airBalloon)
             player:AddCacheFlags(CacheFlag.CACHE_FLYING)
-            player:EvaluateCache()
+            player:EvaluateItems()
         end
     end
 end

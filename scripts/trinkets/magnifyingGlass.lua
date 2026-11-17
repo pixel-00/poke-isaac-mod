@@ -9,7 +9,7 @@ function mod:MakeTiny()
                 local trinketMultiplier = player:GetTrinketMultiplier(magnifyingGlass)
                 local chance = trinketMultiplier / 3
                 if entity:IsActiveEnemy() and x < chance then
-                    entity:ToNPC():MakeChampion(Game():GetRoom():GetSpawnSeed(), ChampionColor.TINY, false)
+                    entity:ToNPC():MakeChampion(Game():GetRoom():GetSpawnSeed(), ChampionColor.TINY, true)
                 end
             end
         end
