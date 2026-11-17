@@ -22,14 +22,25 @@ function mod:ApplyStats(player, cacheFlags)
     local itemCount = player:GetCollectibleNum(lazyBones)
     local index = mod:GetPlayerIndex(player)
 
-    if (cacheFlags & CacheFlag.CACHE_DAMAGE) == CacheFlag.CACHE_DAMAGE then
-        local lazyBonesMultiplier = 1 + (0.15 * BONE_HEARTS[index] * itemCount)
-        player.Damage = player.Damage * lazyBonesMultiplier
-    end
-    if (cacheFlags & CacheFlag.CACHE_SPEED) == CacheFlag.CACHE_SPEED then
-        local lazyBonesSpeedUp = 0.1 * BROKEN_BONE_HEARTS[index]
-        local lazyBonesSpeedDown = 0.1 * BONE_HEARTS[index] * math.min(itemCount, 1)
-        player.MoveSpeed = player.MoveSpeed + (lazyBonesSpeedUp - lazyBonesSpeedDown)
+    if itemCount > 0 then
+        if (cacheFlags & CacheFlag.CACHE_DAMAGE) == CacheFlag.CACHE_DAMAGE then
+            local numBoneHearts = BONE_HEARTS[index]
+
+            if type(numBoneHearts) ~= "number" then
+                numBoneHearts = player:GetBoneHearts()
+            end
+
+            local lazyBonesMultiplier = 1 + (0.15 * numBoneHearts * itemCount)
+
+            player.Damage = player.Damage * lazyBonesMultiplier
+        end
+
+        if (cacheFlags & CacheFlag.CACHE_SPEED) == CacheFlag.CACHE_SPEED then
+            local lazyBonesSpeedUp = 0.1 * BROKEN_BONE_HEARTS[index]
+            local lazyBonesSpeedDown = 0.1 * BONE_HEARTS[index] * math.min(itemCount, 1)
+
+            player.MoveSpeed = player.MoveSpeed + (lazyBonesSpeedUp - lazyBonesSpeedDown)
+        end
     end
 end
 
@@ -49,9 +60,11 @@ end
 function mod:GiveBoneHeart(player)
     local queued = player.QueuedItem
     local data = player:GetData()
+
     if queued.Item and queued.Item:IsCollectible() and queued.Item.ID == lazyBones and not queued.Touched then
         data.numLazyBones = player:GetCollectibleNum(lazyBones)
     end
+
     if data.numLazyBones and data.numLazyBones < player:GetCollectibleNum(lazyBones) then
         player:AddBoneHearts(1)
         data.numLazyBones = nil

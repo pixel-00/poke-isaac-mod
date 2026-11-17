@@ -4,16 +4,17 @@ local FLASH_FIRE_TIME = 9
 
 local FLASH_FIRE_COUNTDOWN = {}
 
-local function IsFire(projectile)
-    return (projectile.Variant == ProjectileVariant.PROJECTILE_FIRE)
-    or (projectile.Variant == ProjectileVariant.PROJECTILE_LAVA)
-    or (projectile.SpawnerType == EntityType.ENTITY_FIREPLACE)
+local function IsFire(collider)
+    return (collider.Type == EntityType.ENTITY_PROJECTILE and
+    ((collider.Variant == ProjectileVariant.PROJECTILE_FIRE)
+    or (collider.Variant == ProjectileVariant.PROJECTILE_LAVA)
+    or (collider.SpawnerType == EntityType.ENTITY_FIREPLACE)))
+    or collider.Type == EntityType.ENTITY_FIREPLACE
 end
 
-function mod:PreventFireDamage(projectile, collider, _)
-    local player = collider:ToPlayer()
-    if player and player:HasCollectible(flashFire) then
-        if IsFire(projectile) then
+function mod:PreventFireDamage(player, collider, _)
+    if player:HasCollectible(flashFire) then
+        if IsFire(collider) then
             local index = mod:GetPlayerIndex(player)
             FLASH_FIRE_COUNTDOWN[index] = FLASH_FIRE_TIME
             return false
@@ -49,6 +50,6 @@ function mod:GiveDamage(player, cacheFlags)
     end
 end
 
-mod:AddCallback(ModCallbacks.MC_PRE_PLAYER_COLLISION, mod.PreventFireDamage) --Holy Mantle
+mod:AddCallback(ModCallbacks.MC_PRE_PLAYER_COLLISION, mod.PreventFireDamage)
 mod:AddCallback(ModCallbacks.MC_POST_PEFFECT_UPDATE, mod.UpdateFlashFire)
 mod:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, mod.GiveDamage)

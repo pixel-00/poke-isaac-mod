@@ -92,8 +92,8 @@
         <info text="Chance to drop an extra room-clear reward"/>
     </collectible>
     <collectible id="31">
-        <info text="Immunity to explosions and fires"/>
-        <info text="Getting hit by an explosion or fire grants a fading damage boost"/>
+        <info text="Immunity to fire"/>
+        <info text="Getting hit by fire grants a fading damage boost"/>
     </collectible>
     <collectible id="32">
         <info text="Heals all of Isaac's red hearts when entering a new floor"/>
