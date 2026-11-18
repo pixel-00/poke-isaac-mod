@@ -50,7 +50,7 @@ end
 function mod:DoForAllPlayers(f)
     local numPlayers = Game():GetNumPlayers()
 
-    for i = 1, numPlayers - 1 do
+    for i = 0, numPlayers - 1 do
         f(Isaac.GetPlayer(i))
     end
 end
