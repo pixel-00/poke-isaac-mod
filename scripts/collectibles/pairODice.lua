@@ -1,30 +1,26 @@
 local pairODice = Isaac.GetItemIdByName("Pair o' Dice")
+local pairODiceAlt = Isaac.GetItemIdByName("Pair o' Dicealt​")
 
-local shaken = false
-local itemPool = RoomType.ROOM_NULL
+function mod:UseUnshaken(item, rng, player, useFlags, activeSlot, varData)
+    local roomType = Game():GetLevel():GetCurrentRoom():GetType()
 
-function mod:UseItem(item, rng, player, useFlags, activeSlot, varData)
-    if shaken then
-        local items = Isaac.FindByType(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_COLLECTIBLE, -1, false, false)
-        for _, v in pairs(items) do
-            local newItem = Game():GetItemPool():GetCollectible(itemPool, true, mod:RandomPositive(), CollectibleType.COLLECTIBLE_NULL, ItemPoolType.POOL_TREASURE)
-            v:ToPickup():Morph(EntityType.ENTITY_PICKUP, v.Variant, newItem, true, false, false)
-        end
-        shaken = false
-    else
-        local roomType = Game():GetLevel():GetCurrentRoom():GetType()
-        itemPool = Game():GetItemPool():GetPoolForRoom(roomType, Game():GetSeeds():GetStartSeed())
-        shaken = true
-    end
+    varData = Game():GetItemPool():GetPoolForRoom(roomType, Game():GetSeeds():GetStartSeed())
+    player:AddCollectible(pairODiceAlt, 0, false, activeSlot, varData, ItemPoolType.POOL_TREASURE)
+
     return {ShowAnim = true}
 end
 
-function mod:ResetPairODice(onContinue)
-    if not onContinue then
-        shaken = false
-        itemPool = RoomType.ROOM_NULL
+function mod:UseShaken(item, rng, player, useFlags, activeSlot, varData)
+    local items = Isaac.FindByType(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_COLLECTIBLE, -1, false, false)
+
+    for _, v in pairs(items) do
+        local newItem = Game():GetItemPool():GetCollectible(varData, true, rng:Next(), CollectibleType.COLLECTIBLE_NULL, ItemPoolType.POOL_TREASURE)
+        v:ToPickup():Morph(EntityType.ENTITY_PICKUP, v.Variant, newItem, true, false, false)
     end
+
+    player:AddCollectible(pairODice, 0, false, activeSlot, 0, ItemPoolType.POOL_TREASURE)
+    return {ShowAnim = true}
 end
 
-mod:AddCallback(ModCallbacks.MC_USE_ITEM, mod.UseItem, pairODice)
-mod:AddCallback(ModCallbacks.MC_POST_GAME_STARTED, mod.ResetPairODice)
+mod:AddCallback(ModCallbacks.MC_USE_ITEM, mod.UseUnshaken, pairODice)
+mod:AddCallback(ModCallbacks.MC_USE_ITEM, mod.UseShaken, pairODiceAlt)

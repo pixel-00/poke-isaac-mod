@@ -14,6 +14,7 @@ function mod:ExtraCharge(rng, spawnPosition)
 
                         if maxCharges <= currentCharge and currentCharge < 2 * maxCharges then
                             player:SetActiveCharge(currentCharge + 1)
+                            SFXManager():Play(SoundEffect.SOUND_BEEP)
                         end
                     end
                 end

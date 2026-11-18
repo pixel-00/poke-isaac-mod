@@ -58,4 +58,5 @@
     <passive id="56" name="Stamina" gfx="ability_capsule_item.png" description="ability"/>
     <trinket id="57" name="Air Balloon" gfx="air_balloon_item.png" description="Don't let it pop!" cache="flying"/>
     <trinket id="58" name="Magnifying Glass" gfx="placeholder.png" description="Smaller than I thought"/>
+    <active id="59" name="Pair o' Dicealt​" gfx="pair_o_dice_alt.png" description="Shake 'em, then roll 'em!" quality="4" craftquality="4" maxcharges="4" chargetype="normal" tags="offensive"/>
 </items>
