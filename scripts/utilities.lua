@@ -68,15 +68,15 @@ function mod:GetSaveData()
 end
 
 function mod:AddPlayerData(player, key, value, saveData)
-    local index = mod:GetPlayerIndex(player)
+    local index = tostring(mod:GetPlayerIndex(player))
     local playerTable = {}
 
-    if type(saveData[0]) == "table" then
-        playerTable = saveData[0]
+    if type(saveData[index]) == "table" then
+        playerTable = saveData[index]
     end
 
     playerTable[key] = value
-    saveData[0] = playerTable
+    saveData[index] = playerTable
 end
 
 function mod:EncodeAndSaveData(saveData)
@@ -90,7 +90,7 @@ function mod:LoadPlayerData(player, key)
         local success, loadedData = pcall(json.decode, mod:LoadData())
         local saveData = {}
         local playerTable = {}
-        local index = mod:GetPlayerIndex(player)
+        local index = tostring(mod:GetPlayerIndex(player))
 
         if success and type(loadedData) == "table" then
             saveData = loadedData
@@ -102,6 +102,6 @@ function mod:LoadPlayerData(player, key)
 
         value = playerTable[key]
     end
-    
+
     return value
 end
