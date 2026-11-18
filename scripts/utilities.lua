@@ -68,7 +68,7 @@ function mod:GetSaveData()
 end
 
 function mod:AddPlayerData(player, key, value, saveData)
-    --local index = mod:GetPlayerIndex(player)
+    local index = mod:GetPlayerIndex(player)
     local playerTable = {}
 
     if type(saveData[0]) == "table" then
