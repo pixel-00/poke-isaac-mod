@@ -4,7 +4,7 @@ local SOUL_HEART_STACK = {}
 
 function mod:ResetFireRate()
     local function f(player)
-        local index = mod:GetPlayerIndex()
+        local index = mod:GetPlayerIndex(player)
 
         if SOUL_HEART_STACK[index] ~= 0 then
             SOUL_HEART_STACK[index] = 0

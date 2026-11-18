@@ -50,6 +50,7 @@ end
 function mod:ResetTemperTantrum(isContinued)
     if not isContinued then
         local function f(player)
+            local index = mod:GetPlayerIndex(player)
             TEMPER_TANTRUM_STAGE[index] = 0
         end
 

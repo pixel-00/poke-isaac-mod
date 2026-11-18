@@ -15,8 +15,12 @@ end
 
 local function IsPlayerMinisaac(familiar)
     local player = familiar.Player
-    local index = mod:GetPlayerIndex(player)
-    return familiar == PLAYER_MINISAACS[index]
+    if player then
+        local index = mod:GetPlayerIndex(player)
+        return familiar == PLAYER_MINISAACS[index]
+    else
+        return false
+    end
 end
 
 function mod:MinisaacInvincibility(entity, amount, flags, source)
