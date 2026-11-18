@@ -1,6 +1,9 @@
 local technicalMachine = Isaac.GetItemIdByName("Technical Machine")
+
 local bubbleBeam = Isaac.GetItemIdByName("Bubble Beam")
 local looseFeathers = Isaac.GetItemIdByName("Loose Feathers")
+
+local hiddenItemManager = require("lib.hidden_item_manager")
 
 local TM_POOL = {
     CollectibleType.COLLECTIBLE_SPOON_BENDER,

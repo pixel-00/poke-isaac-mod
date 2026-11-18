@@ -1,59 +1,28 @@
 local lazyBones = Isaac.GetItemIdByName("Lazy Bones")
 
-local BONE_HEARTS = {}
-local BROKEN_BONE_HEARTS = {}
-
--- needs rework
-function mod:CheckBones(player)
-    local index = mod:GetPlayerIndex(player)
-    local boneHearts = BONE_HEARTS[index]
-    if boneHearts and player:GetBoneHearts() ~= boneHearts then
-        local extraBrokenBoneHearts = math.max(boneHearts - player:GetBoneHearts(), 0)
-        BONE_HEARTS[index] = player:GetBoneHearts()
-        if player:HasCollectible(lazyBones) then
-            BROKEN_BONE_HEARTS[index] = BROKEN_BONE_HEARTS[index] + extraBrokenBoneHearts
-            player:AddCacheFlags(CacheFlag.CACHE_DAMAGE | CacheFlag.CACHE_SPEED)
-            player:EvaluateItems()
-        end
-    end
-end
-
 function mod:ApplyStats(player, cacheFlags)
     local itemCount = player:GetCollectibleNum(lazyBones)
-    local index = mod:GetPlayerIndex(player)
 
     if itemCount > 0 then
+        local numBoneHearts = player:GetBoneHearts()
+
         if (cacheFlags & CacheFlag.CACHE_DAMAGE) == CacheFlag.CACHE_DAMAGE then
-            local numBoneHearts = BONE_HEARTS[index]
-
-            if type(numBoneHearts) ~= "number" then
-                numBoneHearts = player:GetBoneHearts()
-            end
-
             local lazyBonesMultiplier = 1 + (0.15 * numBoneHearts * itemCount)
 
             player.Damage = player.Damage * lazyBonesMultiplier
         end
 
         if (cacheFlags & CacheFlag.CACHE_SPEED) == CacheFlag.CACHE_SPEED then
-            local lazyBonesSpeedUp = 0.1 * BROKEN_BONE_HEARTS[index]
-            local lazyBonesSpeedDown = 0.1 * BONE_HEARTS[index] * math.min(itemCount, 1)
+            local lazyBonesSpeedDown = 0
 
-            player.MoveSpeed = player.MoveSpeed + (lazyBonesSpeedUp - lazyBonesSpeedDown)
+            if numBoneHearts <= 2 then
+                lazyBonesSpeedDown = 0.1 * numBoneHearts * math.min(itemCount, 1)
+            else
+                lazyBonesSpeedDown = 0.05 * numBoneHearts * math.min(itemCount, 1) + 0.1
+            end
+
+            player.MoveSpeed = player.MoveSpeed - lazyBonesSpeedDown
         end
-    end
-end
-
-function mod:ResetLazyBones(isContinued)
-    if not isContinued then
-        local function f(player)
-            local index = mod:GetPlayerIndex(player)
-
-            BONE_HEARTS[index] = 0
-            BROKEN_BONE_HEARTS[index] = 0
-        end
-
-        mod:DoForAllPlayers(f)
     end
 end
 
@@ -72,8 +41,5 @@ function mod:GiveBoneHeart(player)
 end
 
 
-mod:AddCallback(ModCallbacks.MC_POST_PEFFECT_UPDATE, mod.CheckBones)
 mod:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, mod.ApplyStats)
-mod:AddCallback(ModCallbacks.MC_POST_GAME_STARTED, mod.ResetLazyBones)
 mod:AddCallback(ModCallbacks.MC_POST_PEFFECT_UPDATE, mod.GiveBoneHeart)
--- load and save

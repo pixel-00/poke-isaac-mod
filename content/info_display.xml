@@ -20,6 +20,7 @@
     </collectible>
     <collectible id="6">
         <info text="Reveals the Ultra Secret Room"/>
+        <info text="Chance to spawn a cracked key on room clear"/>
     </collectible>
     <collectible id="7">
         <info text="Grants immunity to hard projectiles"/>
@@ -48,7 +49,6 @@
     </collectible>
     <collectible id="17">
         <info text="Each bone heart grants bonus damage, but slows Isaac down"/>
-        <info text="Losing a bone heart removes the damage, but grants a permanent speed up"/>
     </collectible>
     <collectible id="18">
         <info text="Fills all heart containers with rotten hearts"/>

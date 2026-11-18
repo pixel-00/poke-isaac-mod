@@ -8,8 +8,8 @@ function mod:MakeTiny()
                 local x = rng:RandomFloat()
                 local trinketMultiplier = player:GetTrinketMultiplier(magnifyingGlass)
                 local chance = trinketMultiplier / 3
-                if entity:IsActiveEnemy() then
-                    entity:ToNPC():MakeChampion(Game():GetRoom():GetSpawnSeed(), ChampionColor.TINY, false)
+                if entity:IsActiveEnemy() and not entity:ToNPC():IsBoss() and x < chance then
+                    entity:ToNPC():MakeChampion(entity.InitSeed, ChampionColor.TINY, false)
                 end
             end
         end

@@ -1,5 +1,4 @@
 local redMap = Isaac.GetItemIdByName("Red Map")
-local keyCrusher = Isaac.GetTrinketIdByName("Key Crusher")
 
 local needToDisplayUltraSecret = true
 
@@ -30,19 +29,23 @@ function mod:newLevel()
     needToDisplayUltraSecret = true
 end
 
-function mod:SpawnTrinket(player)
-    local queued = player.QueuedItem
-    local data = player:GetData()
-    if queued.Item and queued.Item:IsCollectible() and queued.Item.ID == redMap and not queued.Touched then
-        data.numRedMap = player:GetCollectibleNum(redMap)
+function mod:SpawnCrackedKey()
+    local function f(player)
+        if player:HasCollectible(redMap) then
+            local rng = player:GetCollectibleRNG(redMap)
+            local x = rng:RandomFloat()
+
+            if x < 0.05 then
+                local spawnPosition = Game():GetRoom():FindFreePickupSpawnPosition(Game():GetRoom():GetCenterPos())
+
+                Game():Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_TAROTCARD, spawnPosition, Vector(0,0), pickup, Card.CARD_CRACKED_KEY, mod:RandomPositive())
+            end
+        end
     end
-    if data.numRedMap and data.numRedMap < player:GetCollectibleNum(redMap) then
-        local spawnPosition = Game():GetLevel():GetCurrentRoom():FindFreePickupSpawnPosition(player.Position)
-        Game():Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_TRINKET, spawnPosition, Vector(0,0), player, keyCrusher, mod:RandomPositive())
-        data.numRedMap = nil
-    end
+
+    mod:DoForAllPlayers(f)
 end
 
 mod:AddCallback(ModCallbacks.MC_POST_UPDATE, mod.redMap)
 mod:AddCallback(ModCallbacks.MC_POST_NEW_LEVEL, mod.newLevel)
-mod:AddCallback(ModCallbacks.MC_POST_PEFFECT_UPDATE, mod.SpawnTrinket)
+mod:AddCallback(ModCallbacks.MC_PRE_SPAWN_CLEAN_AWARD, mod.SpawnCrackedKey)

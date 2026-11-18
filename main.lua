@@ -74,7 +74,7 @@ include("scripts.collectibles.abilities.megaLauncher")
 include("scripts.collectibles.abilities.stamina")
 
 -- Trinkets
-include("scripts.trinkets.focusSash")
-include("scripts.trinkets.keyCrusher")
-include("scripts.trinkets.airBalloon")
+include("scripts.trinkets.focusSash") -- destroyed animation
+include("scripts.trinkets.keyCutter")
+include("scripts.trinkets.airBalloon") -- destroyed animation
 include("scripts.trinkets.magnifyingGlass")
