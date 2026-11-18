@@ -182,6 +182,10 @@
     <collectible id="56">
         <info text="Luck-based chance to grant the holy mantle effect when damaged"/>
     </collectible>
+    <collectible id="59">
+        <info text="Shaking the dice stores the current room's item pool"/>
+        <info text="Rolling the dice rerolls items using the stored item pool"/>
+    </collectible>
 </collectibles>
 <trinkets>
     <trinket id="13">
@@ -189,5 +193,12 @@
     </trinket>
     <trinket id="14">
         <info text="Keys have a chance to drop Cracked Keys when collected"/>
+    </trinket>
+    <trinket id="57">
+        <info text="Grants flight while held"/>
+        <info text="Taking damage pops the balloon, destroying the trinket"/>
+    </trinket>
+    <trinket id="58">
+        <info text="Chance for enemies to spawn tiny when entering a new room"/>
     </trinket>
 </trinkets>
