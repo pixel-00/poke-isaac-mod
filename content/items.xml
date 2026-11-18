@@ -15,7 +15,7 @@
     <trinket id="14" name="Key Cutter" gfx="placeholder.png" description="Recycle them"/>
     <passive id="15" name="Temper Tantrum" gfx="temper_tantrum_item.png" description="May your rage consume you" quality="2" craftquality="2" tags="offensive summonable"/>
     <active id="16" name="Pair o' Dice" gfx="pair_o_dice_item.png" description="Shake 'em, then roll 'em!" quality="4" craftquality="4" maxcharges="4" chargetype="normal" tags="offensive"/>
-    <passive id="17" name="Lazy Bones" gfx="lazy_bones_item.png" description="placeholder" quality="2" craftquality="2" tags="nolostbr summonable"/>
+    <passive id="17" name="Lazy Bones" gfx="lazy_bones_item.png" description="placeholder" quality="2" craftquality="2" cache="damage speed" tags="nolostbr summonable"/>
     <passive id="18" name="Junk Food" gfx="junk_food_item.png" description="HP up + you feel rotten" quality="1" craftquality="1" maxhearts="2" hearts="2" tags="nolostbr"/>
     <passive id="19" name="Early Onset" gfx="early_onset_item.png" description="What's going on?!" quality="3" craftquality="3" tags="offensive summonable"/>
     <passive id="20" name="Couch Cushion" gfx="couch_cushion_item.png" description="I can't believe it was under there!" quality="2" craftquality="2" tags="offensive summonable"/>

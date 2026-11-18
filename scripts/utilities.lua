@@ -22,7 +22,7 @@ function mod:GetAllPlayers()
     local numPlayers = Game():GetNumPlayers()
     local players = {}
 
-    for i = 1, numPlayers do
+    for i = 0, numPlayers - 1 do
         table.insert(players, Isaac.GetPlayer(i))
     end
 

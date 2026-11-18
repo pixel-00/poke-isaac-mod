@@ -40,6 +40,15 @@ function mod:GiveBoneHeart(player)
     end
 end
 
+function mod:CheckStats(entity, amount, damageFlags, source, countdownFrames)
+    local player = entity:ToPlayer()
+
+    if player and player:HasCollectible(lazyBones) then
+        player:AddCacheFlags(CacheFlag.CACHE_DAMAGE | CacheFlag.CACHE_SPEED)
+        player:EvaluateItems()
+    end
+end
 
 mod:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, mod.ApplyStats)
 mod:AddCallback(ModCallbacks.MC_POST_PEFFECT_UPDATE, mod.GiveBoneHeart)
+mod:AddCallback(ModCallbacks.MC_ENTITY_TAKE_DMG, mod.CheckStats)
