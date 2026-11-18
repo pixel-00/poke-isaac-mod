@@ -54,10 +54,8 @@ function mod:DoForAllPlayers(f)
     end
 end
 
-function mod:SavePlayerData(player, key, value)
+function mod:GetSaveData()
     local saveData = {}
-    local index = mod:GetPlayerIndex(player)
-    local playerTable = {}
 
     if mod:HasData() then
         local success, loadedData = pcall(json.decode, mod:LoadData())
@@ -66,12 +64,22 @@ function mod:SavePlayerData(player, key, value)
         end
     end
 
+    return saveData
+end
+
+function mod:AddPlayerData(player, key, value, saveData)
+    local index = mod:GetPlayerIndex(player)
+    local playerTable = {}
+
     if type(saveData[index]) == "table" then
         playerTable = saveData[index]
     end
 
     playerTable[key] = value
     saveData[index] = playerTable
+end
+
+function mod:EncodeAndSaveData(saveData)
     mod:SaveData(json.encode(saveData))
 end
 

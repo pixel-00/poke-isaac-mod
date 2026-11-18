@@ -17,11 +17,14 @@ end
 
 function mod:SaveEarlyOnset(shouldSave)
     if shouldSave then
+        local saveData = mod:GetSaveData()
+
         local function f(player)
-            --mod:SavePlayerData(player, "Early Onset", timer)
+            mod:AddPlayerData(player, "Early Onset", timer, saveData)
         end
 
         mod:DoForAllPlayers(f) -- although the timer is fixed for all players, it is easier to use the existing framework
+        mod:EncodeAndSaveData(saveData)
     end
 end
 
