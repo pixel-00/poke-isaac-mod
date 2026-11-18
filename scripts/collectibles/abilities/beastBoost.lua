@@ -74,7 +74,7 @@ function mod:SaveBeastBoost(shouldSave)
         local function f(player)
             local index = mod:GetPlayerIndex(player)
 
-            mod:SavePlayerData(player, "Beast Boost", PLAYER_BEAST_BOOSTS[index])
+            --mod:SavePlayerData(player, "Beast Boost", PLAYER_BEAST_BOOSTS[index])
         end
 
         mod:DoForAllPlayers(f)

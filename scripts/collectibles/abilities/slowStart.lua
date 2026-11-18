@@ -62,7 +62,7 @@ function mod:SaveSlowStart(shouldSave)
         local function f(player)
             local index = mod:GetPlayerIndex(player)
 
-            mod:SavePlayerData(player, "Slow Start", SLOW_START_ROOMS[index])
+            --mod:SavePlayerData(player, "Slow Start", SLOW_START_ROOMS[index])
         end
 
         mod:DoForAllPlayers(f)

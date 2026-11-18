@@ -34,7 +34,7 @@ function mod:SaveSturdy(shouldSave)
         local function f(player)
             local index = mod:GetPlayerIndex(player)
 
-            mod:SavePlayerData(player, "Sturdy", STURDY_STATUS[index])
+            --mod:SavePlayerData(player, "Sturdy", STURDY_STATUS[index])
         end
 
         mod:DoForAllPlayers(f)

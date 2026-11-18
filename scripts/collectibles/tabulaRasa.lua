@@ -20,7 +20,7 @@ end
 function mod:SaveTabulaRasa(shouldSave)
     if shouldSave then
         local function f(player)
-            mod:SavePlayerData(player, "Tabula Rasa", tabulaRasaItemPool)
+            --mod:SavePlayerData(player, "Tabula Rasa", tabulaRasaItemPool)
         end
 
         mod:DoForAllPlayers(f) -- although the pool is fixed for all players, it is easier to use the existing framework

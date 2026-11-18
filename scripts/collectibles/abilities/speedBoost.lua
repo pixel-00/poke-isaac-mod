@@ -48,7 +48,7 @@ function mod:SaveSpeedBoost(shouldSave)
         local function f(player)
             local index = mod:GetPlayerIndex(player)
 
-            mod:SavePlayerData(player, "Speed Boost", SPEED_BOOST_STACKS[index])
+            --mod:SavePlayerData(player, "Speed Boost", SPEED_BOOST_STACKS[index])
         end
 
         mod:DoForAllPlayers(f)
