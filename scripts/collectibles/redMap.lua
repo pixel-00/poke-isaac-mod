@@ -29,10 +29,9 @@ function mod:newLevel()
     needToDisplayUltraSecret = true
 end
 
-function mod:SpawnCrackedKey()
+function mod:SpawnCrackedKey(rng, spawnPosition)
     local function f(player)
         if player:HasCollectible(redMap) then
-            local rng = player:GetCollectibleRNG(redMap)
             local x = rng:RandomFloat()
 
             if x < 0.05 then

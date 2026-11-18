@@ -45,13 +45,16 @@ end
 
 function mod:SaveSpeedBoost(shouldSave)
     if shouldSave then
+        local saveData = mod:GetSaveData()
+
         local function f(player)
             local index = mod:GetPlayerIndex(player)
 
-            mod:SavePlayerData(player, "Speed Boost", SPEED_BOOST_STACKS[index])
+            mod:AddPlayerData(player, "Speed Boost", SPEED_BOOST_STACKS[index], saveData)
         end
 
         mod:DoForAllPlayers(f)
+        mod:EncodeAndSaveData(saveData)
     end
 end
 

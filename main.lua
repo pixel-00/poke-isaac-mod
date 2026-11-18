@@ -6,8 +6,6 @@ hiddenItemManager:Init(mod)
 include("scripts.utilities")
 
 -- Notes
--- Remove use of GetData()
--- Make randomness seeded as much as possible
 -- pair o dice needs a complete rework, use multiple items and switch between them to switch icon
 
 -- Collectibles
@@ -60,16 +58,14 @@ include("scripts.collectibles.abilities.cheekPouch")
 include("scripts.collectibles.abilities.soulHeart")
 include("scripts.collectibles.abilities.sturdy")
 include("scripts.collectibles.abilities.slowStart")
-include("scripts.collectibles.abilities.overgrow")
-include("scripts.collectibles.abilities.blaze")
-include("scripts.collectibles.abilities.torrent")
+include("scripts.collectibles.abilities.overgrowBlazeTorrent")
 include("scripts.collectibles.abilities.hustle")
 include("scripts.collectibles.abilities.emergencyExit")
 include("scripts.collectibles.abilities.intrepidSword")
 include("scripts.collectibles.abilities.dauntlessShield")
 include("scripts.collectibles.abilities.beastBoost")
 include("scripts.collectibles.abilities.pickpocket")
-include("scripts.collectibles.abilities.plusMinus") -- test multiple active items
+include("scripts.collectibles.abilities.plusMinus")
 include("scripts.collectibles.abilities.megaLauncher")
 include("scripts.collectibles.abilities.stamina")
 

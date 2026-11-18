@@ -2,12 +2,12 @@ local beastBoost = Isaac.GetItemIdByName("Beast Boost")
 
 local PLAYER_BEAST_BOOSTS = {}
 
-local function BeastBoost(player)
+local function BeastBoost(player, rng)
     local index = mod:GetPlayerIndex(player)
     if type(PLAYER_BEAST_BOOSTS[index]) ~= "table" then
         PLAYER_BEAST_BOOSTS[index] = {Damage = 0, Tears = 0, Speed = 0, Range = 0}
     end
-    local boost = math.random(4)
+    local boost = rng:RandomInt(4)
     if boost == 1 then
         PLAYER_BEAST_BOOSTS[index].Damage = PLAYER_BEAST_BOOSTS[index].Damage + 1
         return CacheFlag.CACHE_DAMAGE
@@ -52,32 +52,35 @@ function mod:ApplyBoosts(player, cacheFlags)
     end
 end
 
-function mod:BossReward()
+function mod:BossReward(rng, spawnPosition)
     local roomType = Game():GetRoom():GetType()
 
     if roomType == RoomType.ROOM_BOSS then
         local function f(player)
             if player:HasCollectible(beastBoost) then
-                local cacheFlag = BeastBoost(player)
+                local cacheFlag = BeastBoost(player, rng)
                 player:AddCacheFlags(cacheFlag)
                 player:EvaluateItems()
                 player:AnimateHappy()
             end
         end
-        
+
         mod:DoForAllPlayers(f)
     end
 end
 
 function mod:SaveBeastBoost(shouldSave)
     if shouldSave then
+        local saveData = mod:GetSaveData()
+
         local function f(player)
             local index = mod:GetPlayerIndex(player)
 
-            mod:SavePlayerData(player, "Beast Boost", PLAYER_BEAST_BOOSTS[index])
+            mod:AddPlayerData(player, "Beast Boost", PLAYER_BEAST_BOOSTS[index], saveData)
         end
 
         mod:DoForAllPlayers(f)
+        mod:EncodeAndSaveData(saveData)
     end
 end
 

@@ -4,12 +4,12 @@ function mod:GiveRottenHearts(player)
     local queued = player.QueuedItem
     local data = player:GetData()
     if queued.Item and queued.Item:IsCollectible() and queued.Item.ID == junkFood and not queued.Touched then
-        data.numJunkFood = player:GetCollectibleNum(junkFood)
+        data.NUM_JUNK_FOOD = player:GetCollectibleNum(junkFood)
     end
-    if data.numJunkFood and data.numJunkFood < player:GetCollectibleNum(junkFood) then
+    if data.NUM_JUNK_FOOD and data.NUM_JUNK_FOOD < player:GetCollectibleNum(junkFood) then
         local heartsToAdd = player:GetEffectiveMaxHearts()
         player:AddRottenHearts(heartsToAdd)
-        data.numJunkFood = nil
+        data.NUM_JUNK_FOOD = nil
     end
 end
 

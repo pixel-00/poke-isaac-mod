@@ -31,14 +31,14 @@ function mod:GiveBoneHeart(player)
     local data = player:GetData()
 
     if queued.Item and queued.Item:IsCollectible() and queued.Item.ID == lazyBones and not queued.Touched then
-        data.numLazyBones = player:GetCollectibleNum(lazyBones)
+        data.NUM_LAZY_BONES = player:GetCollectibleNum(lazyBones)
     end
 
-    if data.numLazyBones and data.numLazyBones < player:GetCollectibleNum(lazyBones) then
+    if data.NUM_LAZY_BONES and data.NUM_LAZY_BONES < player:GetCollectibleNum(lazyBones) then
         player:AddBoneHearts(1)
         player:AddCacheFlags(CacheFlag.CACHE_DAMAGE | CacheFlag.CACHE_SPEED)
         player:EvaluateItems()
-        data.numLazyBones = nil
+        data.NUM_LAZY_BONES = nil
     end
 end
 

@@ -62,11 +62,14 @@ end
 
 function mod:SaveHiddenWisps(shouldSave)
     if shouldSave then
+        local saveData = mod:GetSaveData()
+
         local function f(player)
-            mod:SavePlayerData(player, "Technical Machine", hiddenItemManager:GetSaveData())
+            mod:AddPlayerData(player, "Technical Machine", hiddenItemManager:GetSaveData(), saveData)
         end
 
         mod:DoForAllPlayers(f)
+        mod:EncodeAndSaveData(saveData)
     end
 end
 

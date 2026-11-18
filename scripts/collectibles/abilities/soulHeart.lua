@@ -1,9 +1,13 @@
 local soulHeart = Isaac.GetItemIdByName("Soul-Heart")
 
+local SOUL_HEART_STACK = {}
+
 function mod:ResetFireRate()
     local function f(player)
-        if player:GetData().SoulHeartAbilityFireRateStack ~= 0 then
-            player:GetData().SoulHeartAbilityFireRateStack = 0
+        local index = mod:GetPlayerIndex()
+
+        if SOUL_HEART_STACK[index] ~= 0 then
+            SOUL_HEART_STACK[index] = 0
             player:AddCacheFlags(CacheFlag.CACHE_FIREDELAY)
             player:EvaluateItems()
         end
@@ -16,12 +20,15 @@ function mod:UpdateStacks(entity)
     if entity:IsActiveEnemy(true) then
         local function f(player)
             if player:HasCollectible(soulHeart) then
-                local n = player:GetData().SoulHeartAbilityFireRateStack
+                local index = mod:GetPlayerIndex(player)
+                local n = SOUL_HEART_STACK[index]
+
                 if n then
-                    player:GetData().SoulHeartAbilityFireRateStack = math.min(n + 1, 10)
+                    SOUL_HEART_STACK[index] = math.min(n + 1, 10)
                 else
-                    player:GetData().SoulHeartAbilityFireRateStack = 1
+                    SOUL_HEART_STACK[index] = 1
                 end
+
                 player:AddCacheFlags(CacheFlag.CACHE_FIREDELAY)
                 player:EvaluateItems()
             end
@@ -34,7 +41,9 @@ end
 function mod:ApplyFireRate(player, cacheFlags)
     if (cacheFlags & CacheFlag.CACHE_FIREDELAY) == CacheFlag.CACHE_FIREDELAY then
         local itemCount = player:GetCollectibleNum(soulHeart)
-        local n = player:GetData().SoulHeartAbilityFireRateStack
+        local index = mod:GetPlayerIndex(player)
+        local n = SOUL_HEART_STACK[index]
+
         if itemCount > 0 and n then
 	        local tearsPerSecond = mod:ToTearsPerSecond(player.MaxFireDelay)
 	        tearsPerSecond = tearsPerSecond + ((0.5 * n)^itemCount)

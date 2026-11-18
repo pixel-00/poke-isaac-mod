@@ -1,5 +1,7 @@
 local weakArmor = Isaac.GetItemIdByName("Weak Armor")
 
+local WEAK_ARMOR_ACTIVE = {}
+
 local preventInfiniteLoop = false
 
 function mod:ActivateWeakArmor(entity, amount, flags, source)
@@ -7,8 +9,10 @@ function mod:ActivateWeakArmor(entity, amount, flags, source)
         local player = entity:ToPlayer()
 
         if player:HasCollectible(weakArmor) then
-            if not player:GetData().weakArmorActive then
-                player:GetData().weakArmorActive = true
+            local index = mod:GetPlayerIndex(player)
+
+            if not WEAK_ARMOR_ACTIVE[index] then
+                WEAK_ARMOR_ACTIVE[index] = true
             elseif not preventInfiniteLoop then
                 preventInfiniteLoop = true
                 player:TakeDamage(1, DamageFlag.DAMAGE_NO_PENALTIES | DamageFlag.DAMAGE_INVINCIBLE, EntityRef(player), 0)
@@ -23,8 +27,9 @@ end
 
 function mod:ApplySpeed(player, cacheFlags)
     local itemCount = player:GetCollectibleNum(weakArmor)
+    local index = mod:GetPlayerIndex(player)
 
-    if itemCount > 0 and player:GetData().weakArmorActive then
+    if itemCount > 0 and WEAK_ARMOR_ACTIVE[index] then
         if (cacheFlags & CacheFlag.CACHE_SPEED) == CacheFlag.CACHE_SPEED then
             local speedToAdd = 0.3 * itemCount
 

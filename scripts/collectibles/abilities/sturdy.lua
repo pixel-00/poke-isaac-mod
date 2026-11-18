@@ -31,13 +31,16 @@ end
 
 function mod:SaveSturdy(shouldSave)
     if shouldSave then
+        local saveData = mod:GetSaveData()
+
         local function f(player)
             local index = mod:GetPlayerIndex(player)
 
-            mod:SavePlayerData(player, "Sturdy", STURDY_STATUS[index])
+            mod:AddPlayerData(player, "Sturdy", STURDY_STATUS[index], saveData)
         end
 
         mod:DoForAllPlayers(f)
+        mod:EncodeAndSaveData(saveData)
     end
 end
 

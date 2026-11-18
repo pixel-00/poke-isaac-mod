@@ -9,13 +9,18 @@ function mod:UpdateMinisaac(player)
 
         if not mini then
             PLAYER_MINISAACS[index] = player:AddMinisaac(player.Position)
-            PLAYER_MINISAACS[index]:GetData().ParentalBondInvincibility = true
         end
     end
 end
 
+local function IsPlayerMinisaac(familiar)
+    local player = familiar.Player
+    local index = mod:GetPlayerIndex(player)
+    return familiar == PLAYER_MINISAACS[index]
+end
+
 function mod:MinisaacInvincibility(entity, amount, flags, source)
-    if entity:ToFamiliar() and entity:GetData().ParentalBondInvincibility then
+    if entity:ToFamiliar() and IsPlayerMinisaac(entity:ToFamiliar()) then
         return false
     end
 end

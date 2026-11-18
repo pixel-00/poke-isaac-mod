@@ -157,13 +157,13 @@ local function GetPickupSubType(variant, rng)
     return 0
 end
 
-function mod:PickupAward()
+function mod:PickupAward(rng, spawnPosition)
     local function f(player)
-        local rng = player:GetCollectibleRNG(pickup)
         if player:HasCollectible(pickup) and rng:RandomFloat() < 0.15 + 0.01 * math.min(85, player.Luck) then
             local variant = GetPickupVariant(rng)
             local subtype = GetPickupSubType(variant, rng)
-            Game():Spawn(EntityType.ENTITY_PICKUP, variant, Game():GetRoom():GetCenterPos(), Vector(0, 0), nil, subtype, Game():GetRoom():GetSpawnSeed())
+
+            Game():Spawn(EntityType.ENTITY_PICKUP, variant, spawnPosition, Vector(0, 0), nil, subtype, Game():GetRoom():GetSpawnSeed())
         end
     end
 

@@ -1,11 +1,10 @@
 local amuletCoin = Isaac.GetItemIdByName("Amulet Coin")
 
-function mod:PreSpawnCleanAward()
+function mod:PreSpawnCleanAward(rng, spawnPosition)
     local roomType = Game():GetRoom():GetType()
 
     local function f(player)
         if roomType == RoomType.ROOM_BOSS and player:HasCollectible(amuletCoin) then
-            local rng = player:GetCollectibleRNG(amuletCoin)
             local coinAmount = rng:RandomInt(5)
 
             Game():Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_COIN, Game():GetRoom():GetCenterPos(), RandomVector():Resized(math.random(8)), nil, CoinSubType.COIN_LUCKYPENNY, Game():GetRoom():GetSpawnSeed())

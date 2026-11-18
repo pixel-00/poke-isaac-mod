@@ -7,12 +7,12 @@ function mod:TearEffect(tear)
     if player and player:ToPlayer() and player:ToPlayer():HasCollectible(looseFeathers) then
         tear.TearFlags = tear.TearFlags | TearFlags.TEAR_PIERCING
         tear.Scale = tear.Scale * 1.25
-        tear:GetData().isWindTear = true
+        tear:GetData().LOOSE_FEATHERS_TEAR = true
     end
 end
 
 function mod:DragEnemy(tear, enemy, _)
-    if tear:GetData().isWindTear and enemy:IsEnemy() then
+    if tear:GetData().LOOSE_FEATHERS_TEAR and enemy:IsEnemy() then
         if enemy:IsBoss() then
             enemy:AddVelocity(tear.Velocity / 4, false)
         elseif enemy.Type == EntityType.ENTITY_FIREPLACE then

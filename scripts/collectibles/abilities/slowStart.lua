@@ -59,13 +59,16 @@ end
 
 function mod:SaveSlowStart(shouldSave)
     if shouldSave then
+        local saveData = mod:GetSaveData()
+
         local function f(player)
             local index = mod:GetPlayerIndex(player)
 
-            mod:SavePlayerData(player, "Slow Start", SLOW_START_ROOMS[index])
+            mod:AddPlayerData(player, "Slow Start", SLOW_START_ROOMS[index], saveData)
         end
 
         mod:DoForAllPlayers(f)
+        mod:EncodeAndSaveData(saveData)
     end
 end
 

@@ -1,8 +1,7 @@
 local leftovers = Isaac.GetItemIdByName("Leftovers")
 
-function mod:ApplyLeftovers()
+function mod:ApplyLeftovers(rng, spawnPosition)
     local function f(player)
-        local rng = player:GetCollectibleRNG(leftovers)
         local x = rng:RandomFloat()
         if player:HasCollectible(leftovers) then
             if x < 0.85 then
