@@ -3,7 +3,7 @@ local flySwatter = Isaac.GetItemIdByName("Fly Swatter")
 function mod:TearEffect(tear)
     local player = tear.SpawnerEntity
     if player and player:ToPlayer() and player:ToPlayer():HasCollectible(flySwatter) then
-        tear:GetData().flySwatter = true
+        tear:GetData().FLY_SWATTER_TEAR = true
     end
 end
 
@@ -82,7 +82,7 @@ local function IsSmallBug(enemy)
 end
 
 function mod:KillBugs(tear, enemy, _)
-    if tear:GetData().flySwatter and enemy:IsEnemy() then
+    if tear:GetData().FLY_SWATTER_TEAR and enemy:IsEnemy() then
         local damage = tear.BaseDamage
         if IsSmallBug(enemy) then
             enemy:Die()
@@ -93,7 +93,7 @@ function mod:KillBugs(tear, enemy, _)
 end
 
 function mod:KillFamiliars(tear)
-    if tear:GetData().flySwatter then
+    if tear:GetData().FLY_SWATTER_TEAR then
         local entities = Isaac.FindInRadius(tear.Position, tear.Size, EntityPartition.FAMILIAR)
         for _, e in pairs(entities) do
             if e.Type == EntityType.ENTITY_FAMILIAR and (e.Variant == FamiliarVariant.BLUE_FLY or e.Variant == FamiliarVariant.BLUE_SPIDER) then

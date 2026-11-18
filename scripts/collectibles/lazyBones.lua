@@ -36,6 +36,8 @@ function mod:GiveBoneHeart(player)
 
     if data.numLazyBones and data.numLazyBones < player:GetCollectibleNum(lazyBones) then
         player:AddBoneHearts(1)
+        player:AddCacheFlags(CacheFlag.CACHE_DAMAGE | CacheFlag.CACHE_SPEED)
+        player:EvaluateItems()
         data.numLazyBones = nil
     end
 end

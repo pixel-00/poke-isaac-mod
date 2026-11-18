@@ -34,17 +34,16 @@ function mod:GetPlayerIndex(player)
 end
 
 function mod:GetPlayerFromIndex(index)
-    local players = mod:GetAllPlayers()
-    local player
+    local numPlayers = Game():GetNumPlayers()
 
-    for i = 0, #players - 1 do
+    for i = 0, numPlayers - 1 do
         local currentPlayer = Isaac.GetPlayer(i)
         if mod:GetPlayerIndex(currentPlayer) == index then
-            player = currentPlayer
+            return currentPlayer
         end
     end
 
-    return player
+    return nil
 end
 
 function mod:DoForAllPlayers(f)
