@@ -12,10 +12,12 @@ end
 
 function mod:UseShaken(item, rng, player, useFlags, activeSlot, varData)
     local items = Isaac.FindByType(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_COLLECTIBLE, -1, false, false)
-    print(varData)
+    local itemDesc = player:GetActiveItemDesc(activeSlot)
+    local itemPool = itemDesc.VarData
+    print(itemPool)
 
     for _, v in pairs(items) do
-        local newItem = Game():GetItemPool():GetCollectible(varData, true, rng:Next(), CollectibleType.COLLECTIBLE_NULL, ItemPoolType.POOL_TREASURE)
+        local newItem = Game():GetItemPool():GetCollectible(itemPool, true, rng:Next(), CollectibleType.COLLECTIBLE_NULL, ItemPoolType.POOL_TREASURE)
         v:ToPickup():Morph(EntityType.ENTITY_PICKUP, v.Variant, newItem, true, false, false)
     end
 
