@@ -9,6 +9,8 @@ function mod:FocusSash(entity, amount, damageFlags, source, countdownFrames)
         if player:HasTrinket(focusSash) and health <= amount then
             local trinketMultiplier = player:GetTrinketMultiplier(focusSash)
 
+            SFXManager():Play(SoundEffect.SOUND_THUMBSUP)
+            player:AnimateTrinket(focusSash)
             player:TryRemoveTrinket(focusSash)
             player:GetEffects():AddCollectibleEffect(CollectibleType.COLLECTIBLE_BOOK_OF_SHADOWS, true, 1)
             player:GetEffects():AddCollectibleEffect(CollectibleType.COLLECTIBLE_CAMO_UNDIES, true, trinketMultiplier - 1)

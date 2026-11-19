@@ -15,6 +15,7 @@ function mod:PopAirBalloon(entity, amount, damageFlags, source, countdownFrames)
 
         if trinketMultiplier <= 1 then
             player:TryRemoveTrinket(airBalloon)
+            SFXManager():Play(SoundEffect.SOUND_RIB_DEFLECT)
             player:AddCacheFlags(CacheFlag.CACHE_FLYING)
             player:EvaluateItems()
         end

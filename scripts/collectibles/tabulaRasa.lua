@@ -5,6 +5,8 @@ local tabulaRasaItemPool = false
 function mod:UseItem(item, rng, player, useFlags, activeSlot, varData)
     local roomType = Game():GetLevel():GetCurrentRoom():GetType()
     tabulaRasaItemPool = Game():GetItemPool():GetPoolForRoom(roomType, Game():GetSeeds():GetStartSeed())
+    SFXManager():Play(SoundEffect.SOUND_SUPERHOLY)
+
     return {
         Remove = true,
         ShowAnim = true

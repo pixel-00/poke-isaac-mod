@@ -61,6 +61,7 @@ function mod:UseTechnicalRecord(item, rng, player, useFlags, activeSlot, varData
 
     player:AddCollectible(collectible, 0, true, 0, nil, ItemPoolType.POOL_NULL)
     hud:ShowItemText(player, Isaac.GetItemConfig():GetCollectible(collectible), true)
+    SFXManager():Play(SoundEffect.SOUND_POWERUP1)
 
     return {
         Remove = true,

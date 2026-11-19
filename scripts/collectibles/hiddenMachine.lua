@@ -10,6 +10,8 @@ end
 
 function mod:UseItem(item, rng, player, useFlags, activeSlot, varData)
     player:GetEffects():AddCollectibleEffect(CollectibleType.COLLECTIBLE_LEO, false, 1)
+    SFXManager():Play(SoundEffect.SOUND_POWERUP1)
+
     return {ShowAnim = true}
 end
 

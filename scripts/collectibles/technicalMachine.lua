@@ -57,6 +57,8 @@ function mod:UseTechnicalMachine(item, rng, player, useFlags, activeSlot, varDat
         hud:ShowItemText("Technical Machine", "Nothing left to learn")
     end
 
+    SFXManager():Play(SoundEffect.SOUND_POWERUP_SPEWER)
+
     return {ShowAnim = true}
 end
 

@@ -5,9 +5,6 @@ hiddenItemManager:Init(mod)
 
 include("scripts.utilities")
 
--- Notes
--- pair o dice needs a complete rework, use multiple items and switch between them to switch icon
-
 -- Collectibles
 include("scripts.collectibles.lifeOrb")
 include("scripts.collectibles.amuletCoin")
@@ -33,12 +30,6 @@ include("scripts.collectibles.technicalMachine")
 include("scripts.collectibles.technicalRecord")
 include("scripts.collectibles.abilityCapsule")
 include("scripts.collectibles.chestOfChests")
--- gummy bears: spawns minisaacs on picking up a new item. these minisaacs are textured like gummy bears, and each different colour has a unique ability:
--- red: fire tears
--- yellow: penny tears
--- green: poison tears
--- blue: ice tears
--- purple: homing tears
 
 -- Ability Capsule Passives
 include("scripts.collectibles.abilities.hugePower")
@@ -70,7 +61,7 @@ include("scripts.collectibles.abilities.megaLauncher")
 include("scripts.collectibles.abilities.stamina")
 
 -- Trinkets
-include("scripts.trinkets.focusSash") -- destroyed animation
+include("scripts.trinkets.focusSash")
 include("scripts.trinkets.keyCutter")
-include("scripts.trinkets.airBalloon") -- destroyed animation
+include("scripts.trinkets.airBalloon")
 include("scripts.trinkets.magnifyingGlass")
