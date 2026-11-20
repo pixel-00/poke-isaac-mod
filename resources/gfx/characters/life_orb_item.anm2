@@ -1,11 +1,11 @@
 <AnimatedActor>
-	<Info CreatedBy="" CreatedOn="7/30/2023 5:40:11 PM" Version="9" Fps="30"/>
+	<Info CreatedBy="" CreatedOn="11/19/2026 8:34:04 PM" Version="10" Fps="30"/>
 	<Content>
 		<Spritesheets>
-			<Spritesheet Path="full_body.png" Id="0"/>
+			<Spritesheet Path="costumes\life_orb_item.png" Id="0"/>
 		</Spritesheets>
 		<Layers>
-			<Layer Name="body0" Id="0" SpritesheetId="0"/>
+			<Layer Name="body" Id="0" SpritesheetId="0"/>
 		</Layers>
 		<Nulls/>
 		<Events>
