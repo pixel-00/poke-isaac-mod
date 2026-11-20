@@ -3,40 +3,74 @@
         <Item Name="Bubble Beam" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Traffic Cone" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Lucky Star" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Lazy Bones" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Temper Tantrum" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Early Onset" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Couch Cushion" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Loose Feathers" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Pair o' Dice" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Technical Machine" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
     </Pool>
     <Pool Name="shop">
         <Item Name="Amulet Coin" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Fool's Map" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Promo Offer" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Technical Record" Weight="0.5" DecreaseBy="0.5" RemoveOn="0.1"/>
+        <Item Name="Ability Capsule" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
     </Pool>
     <Pool Name="boss">
         <Item Name="Coconut Water" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Junk Food" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Fly Swatter" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+    </Pool>
+    <Pool Name="angel">
+        <Item Name="Tabula Rasa" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
     </Pool>
     <Pool Name="secret">
         <Item Name="Hidden Machine" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Leftovers" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Early Onset" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Chest of Chests" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
     </Pool>
     <Pool Name="goldenChest">
         <Item Name="Amulet Coin" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
-        <Item Name="Traffic Cone" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Traffic Cone" Weight="0.5" DecreaseBy="0.5" RemoveOn="0.1"/>
+        <Item Name="Couch Cushion" Weight="0.5" DecreaseBy="0.5" RemoveOn="0.1"/>
+        <Item Name="Fly Swatter" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+    </Pool>
+    <Pool Name="redChest">
+        <Item Name="Red Map" Weight="0.5" DecreaseBy="0.5" RemoveOn="0.1"/>
     </Pool>
     <Pool Name="beggar">
         <Item Name="Leftovers" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Red Map" Weight="0.5" DecreaseBy="0.5" RemoveOn="0.1"/>
         <Item Name="Fool's Map" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Junk Food" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
     </Pool>
     <Pool Name="demonBeggar">
         <Item Name="Life Orb" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Ability Capsule" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
     </Pool>
     <Pool Name="curse">
         <Item Name="Life Orb" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
     </Pool>
     <Pool Name="craneGame">
         <Item Name="Life Orb" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
-        <Item Name="Amulet Coin" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Traffic Cone" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Fly Swatter" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Pair o' Dice" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Technical Machine" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Technical Record" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
     </Pool>
     <Pool Name="ultraSecret">
         <Item Name="Leftovers" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Red Map" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Promo Offer" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Temper Tantrum" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Couch Cushion" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+    </Pool>
+    <Pool Name="woodenChest">
+        <Item Name="Tabula Rasa" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
     </Pool>
     <Pool Name="rottenBeggar">
         <Item Name="Leftovers" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>

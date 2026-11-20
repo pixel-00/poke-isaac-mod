@@ -35,7 +35,7 @@ function mod:bubbleTear(tear)
 			while tearAmount > 0 do
                 local newLength = tearVelocity:Length() * ((2 * math.random() + 9) / 10)
                 local newVelocity = tearVelocity:Resized(newLength)
-				player:FireTear(player.Position, newVelocity)
+				player:ToPlayer():FireTear(player.Position, newVelocity)
 				tearAmount = tearAmount - 1
 			end
 		end
