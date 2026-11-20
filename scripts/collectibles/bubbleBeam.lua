@@ -1,4 +1,5 @@
 local bubbleBeam = Isaac.GetItemIdByName("Bubble Beam")
+
 local bubbleBeamMultiplier = 0.5
 local bubbleBeamShotSpeed = 0.4
 local bubbleBeamTearRadius = 30
