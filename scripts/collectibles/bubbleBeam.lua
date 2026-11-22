@@ -30,14 +30,13 @@ function mod:BubbleTear(tear)
     if player and player:ToPlayer() and player:ToPlayer():HasCollectible(bubbleBeam) then
         local sprite = tear:GetSprite()
 
-        print(sprite:GetFilename())
-        if sprite:GetFilename() == "gfx/002.000_tear.anm2" then
+        if sprite:GetFilename() == "gfx/002.000_Tear.anm2" then
             sprite:ReplaceSpritesheet(0, "gfx/bubble_tears.png")
             sprite:LoadGraphics()
         end
 
         tear.Velocity = tear.Velocity:Rotated((math.random() - 0.5) * 2 * bubbleBeamTearRadius)
-		tear.Scale = tear.Scale * ((2 * math.random()) + 14) / 10
+		tear.Scale = tear.Scale * ((2 * math.random()) + 14) / 9
 
         if canFireExtra then
 			local tearAmount = math.random(0,4)
