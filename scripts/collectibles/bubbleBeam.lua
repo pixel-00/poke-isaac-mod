@@ -1,9 +1,10 @@
 local bubbleBeam = Isaac.GetItemIdByName("Bubble Beam")
 
-local bubbleBeamMultiplier = 0.5
+local bubbleBeamMultiplier = 0.35
 local bubbleBeamShotSpeed = 0.4
 local bubbleBeamTearRadius = 30
-local canSpawnExtraTears = true
+
+local BUBBLE_BEAM_EXTRAS = {}
 
 function mod:EvaluateCache(player, cacheFlags)
 	local itemCount = player:GetCollectibleNum(bubbleBeam)
@@ -22,29 +23,60 @@ function mod:EvaluateCache(player, cacheFlags)
 	end
 end
 
-function mod:bubbleTear(tear)
+function mod:BubbleTear(tear)
 	local player = tear.SpawnerEntity
 	local tearVelocity = tear.Velocity
 
     if player and player:ToPlayer() and player:ToPlayer():HasCollectible(bubbleBeam) then
         local sprite = tear:GetSprite()
-        sprite:ReplaceSpritesheet(0, "gfx/bubble_tears.png")
-        sprite:LoadGraphics()
-		tear.Velocity = tear.Velocity:Rotated(math.random(-bubbleBeamTearRadius, bubbleBeamTearRadius))
+
+        print(sprite:GetFilename())
+        if sprite:GetFilename() == "gfx/002.000_tear.anm2" then
+            sprite:ReplaceSpritesheet(0, "gfx/bubble_tears.png")
+            sprite:LoadGraphics()
+        end
+
+        tear.Velocity = tear.Velocity:Rotated(math.random(-bubbleBeamTearRadius, bubbleBeamTearRadius))
 		tear.Scale = tear.Scale * 1.5
-		if canSpawnExtraTears then
-            canSpawnExtraTears = false
-			local tearAmount = math.random(0,2)
-			while tearAmount > 0 do
-                local newLength = tearVelocity:Length() * ((2 * math.random() + 9) / 10)
+
+        if not BUBBLE_BEAM_EXTRAS[GetPtrHash(tear)] then
+			local tearAmount = math.random(0,4)
+
+            while tearAmount > 0 do
+                local newLength = tearVelocity:Length() * ((6 * math.random() + 17) / 20)
                 local newVelocity = tearVelocity:Resized(newLength)
-				player:ToPlayer():FireTear(player.Position, newVelocity)
-				tearAmount = tearAmount - 1
+                local subTear = player:ToPlayer():FireTear(player.Position, newVelocity)
+
+                BUBBLE_BEAM_EXTRAS[GetPtrHash(subTear)] = true
+                tearAmount = tearAmount - 1
 			end
 		end
-		canSpawnExtraTears = true
 	end
 end
 
+function mod:BubbleTearPop(tear)
+    if tear then
+        local effects = Isaac.FindInRadius(tear.Position, 0)
+        local n = #effects
+        while n > 0 do
+            local effect = effects[i]
+            local sprite = effect:GetSprite()
+
+            if effect.Type == EntityType.ENTITY_EFFECT then
+                print(effect:GetSprite():GetFilename())
+                if false and effect.Variant == EffectVariant.TEAR_POOF_A then
+                    sprite:ReplaceSpritesheet(0, "gfx/effects/bubble_tears.png")
+                    sprite:LoadGraphics()
+                elseif false and effect.Variant == EffectVariant.TEAR_POOF_B then
+                    sprite:ReplaceSpritesheet(0, "gfx/effects/bubble_tears.png")
+                    sprite:LoadGraphics()
+                end
+            end
+            n = n - 1
+        end
+    end
+end
+
 mod:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, mod.EvaluateCache)
-mod:AddCallback(ModCallbacks.MC_POST_FIRE_TEAR, mod.bubbleTear)
+mod:AddCallback(ModCallbacks.MC_POST_FIRE_TEAR, mod.BubbleTear)
+mod:AddCallback(ModCallbacks.MC_POST_ENTITY_KILL, mod.BubbleTearPop)
