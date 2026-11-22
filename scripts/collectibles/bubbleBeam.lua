@@ -27,6 +27,9 @@ function mod:bubbleTear(tear)
 	local tearVelocity = tear.Velocity
 
     if player and player:ToPlayer() and player:ToPlayer():HasCollectible(bubbleBeam) then
+        local sprite = tear:GetSprite()
+        sprite:ReplaceSpritesheet(0, "gfx/bubble_tears.png")
+        sprite:LoadGraphics()
 		tear.Velocity = tear.Velocity:Rotated(math.random(-bubbleBeamTearRadius, bubbleBeamTearRadius))
 		tear.Scale = tear.Scale * 1.5
 		if canSpawnExtraTears then
