@@ -36,7 +36,7 @@ function mod:BubbleTear(tear)
         end
 
         tear.Velocity = tear.Velocity:Rotated((math.random() - 0.5) * 2 * bubbleBeamTearRadius)
-		tear.Scale = tear.Scale * ((2 * math.random()) + 14) / 9
+		tear.Scale = tear.Scale * ((3 * math.random()^2) + 7) / 5
 
         if canFireExtra then
 			local tearAmount = math.random(0,4)
