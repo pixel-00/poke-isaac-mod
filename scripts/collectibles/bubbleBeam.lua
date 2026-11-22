@@ -4,6 +4,8 @@ local bubbleBeamMultiplier = 0.35
 local bubbleBeamShotSpeed = 0.4
 local bubbleBeamTearRadius = 30
 
+local canFireExtra = true
+
 function mod:EvaluateCache(player, cacheFlags)
 	local itemCount = player:GetCollectibleNum(bubbleBeam)
 	if (cacheFlags & CacheFlag.CACHE_FIREDELAY) == CacheFlag.CACHE_FIREDELAY then
@@ -34,21 +36,23 @@ function mod:BubbleTear(tear)
             sprite:LoadGraphics()
         end
 
-        tear.Velocity = tear.Velocity:Rotated(math.random(-bubbleBeamTearRadius, bubbleBeamTearRadius))
-		tear.Scale = tear.Scale * 1.5
+        tear.Velocity = tear.Velocity:Rotated((math.random() - 0.5) * 2 * bubbleBeamTearRadius)
+		tear.Scale = tear.Scale * ((2 * math.random()) + 14) / 10
 
-        if not tear:GetData().BUBBLE_BEAM_EXTRA_TEAR then
+        if canFireExtra then
 			local tearAmount = math.random(0,4)
 
             while tearAmount > 0 do
+                canFireExtra = false
                 local newLength = tearVelocity:Length() * ((6 * math.random() + 17) / 20)
                 local newVelocity = tearVelocity:Resized(newLength)
-                local subTear = player:ToPlayer():FireTear(player.Position, newVelocity)
 
-                subTear:GetData().BUBBLE_BEAM_EXTRA_TEAR = true
+                player:ToPlayer():FireTear(tear.Position, newVelocity)
                 tearAmount = tearAmount - 1
 			end
 		end
+
+        canFireExtra = true
 	end
 end
 
