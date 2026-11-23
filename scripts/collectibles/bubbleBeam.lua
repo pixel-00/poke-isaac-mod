@@ -76,9 +76,6 @@ function mod:BubbleLaser(laser)
     local player = laser.SpawnerEntity
 
     if player and player:ToPlayer() and player:ToPlayer():HasCollectible(bubbleBeam) then
-        laser.Angle = (math.random() - 0.5) * 2 * BB_TEAR_RADIUS
-        laser.Velocity = Vector.FromAngle(laser.Angle)
-
         if canFireExtra then
 			local extraAmount = math.random(0,3)
             local category = LaserCategory(laser)
@@ -86,21 +83,14 @@ function mod:BubbleLaser(laser)
             while extraAmount > 0 do
                 canFireExtra = false
                 local direction = player:ToPlayer():GetAimDirection():Rotated((math.random() - 0.5) * 2 * BB_TEAR_RADIUS)
-                local newLaser
 
-                if category == "Brimstone" then
-                    newLaser = player:ToPlayer():FireBrimstone(direction, player, 0.5)
-                    newLaser.Velocity = direction
-                    newLaser:SetSize(laser.Size, laser.SizeMulti, 0)
+                if category == "Brimstone" and lazer.Position == player.Position then
+                    player:ToPlayer():FireBrimstone(direction, player, 0.5)
                 elseif category == "Technology" then
-                    newLaser = player:ToPlayer():FireTechLaser(player.Position, LaserOffset.LASER_TECH1_OFFSET, direction, false, false, player, 0.5)
+                    player:ToPlayer():FireTechLaser(player.Position, LaserOffset.LASER_TECH1_OFFSET, direction, false, false, player, 0.5)
                 elseif category == "Tech X" then
                     local length = laser.Velocity:Length()
-                    newLaser = player:ToPlayer():FireTechXLaser(player.Position, direction:Resized(length), 20 * math.random() + 10, player, 0.5)
-                end
-
-                if newLaser then
-                    newLaser.Position = laser.Position
+                    player:ToPlayer():FireTechXLaser(player.Position, direction:Resized(length), 20 * math.random() + 10, player, 0.5)
                 end
 
                 extraAmount = extraAmount - 1
