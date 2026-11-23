@@ -84,7 +84,7 @@ function mod:BubbleLaser(laser)
 
             while extraAmount > 0 do
                 canFireExtra = false
-                local index = mod:GetPlayerIndex(player)
+                local index = mod:GetPlayerIndex(player:ToPlayer())
                 local lastDirection = LAST_FIRING_DIRECTION[index]
                 local direction
 
