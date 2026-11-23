@@ -77,7 +77,7 @@ function mod:BubbleLaser(laser)
 
     if player and player:ToPlayer() and player:ToPlayer():HasCollectible(bubbleBeam) then
         laser.Angle = (math.random() - 0.5) * 2 * BB_TEAR_RADIUS
-        laser.Velocity = Vector.FromAngle(angle)
+        laser.Velocity = Vector.FromAngle(laser.Angle)
 
         if canFireExtra then
 			local extraAmount = math.random(0,3)
