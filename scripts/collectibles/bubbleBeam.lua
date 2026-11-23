@@ -101,12 +101,10 @@ function mod:BubbleLaser(laser)
                 elseif category == "Technology" then
                     player:ToPlayer():FireTechLaser(player.Position, LaserOffset.LASER_TECH1_OFFSET, direction, false, false, player, 0.5)
                 elseif category == "Tech X" then
-                    local length = laser.Velocity:Length()
-                    if length < 6 then
-                        length = 6
-                    end
+                    local length = 10 * player.ShotSpeed
                     player:ToPlayer():FireTechXLaser(player.Position, direction:Resized(length), 20 * math.random() + 10, player, 0.5)
                 end
+                print("tech x " .. direction.X .. ", " .. direction.Y)
 
                 extraAmount = extraAmount - 1
 			end
