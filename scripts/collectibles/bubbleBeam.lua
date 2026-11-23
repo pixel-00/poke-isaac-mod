@@ -56,22 +56,17 @@ function mod:BubbleTear(tear)
 end
 
 local function LaserCategory(laser)
-    if laser.Variant == LaserVariant.THICK_RED
-    or laser.Variant == LaserVariant.THIN_RED
-    or laser.Variant == LaserVariant.SHOOP
+    if laser.SubType == LaserSubType.LASER_SUBTYPE_RING_PROJECTILE then
+        return "Tech X"
+    elseif laser.Variant == LaserVariant.THICK_RED
     or laser.Variant == LaserVariant.GIANT_RED
     or laser.Variant == LaserVariant.BRIM_TECH
     or laser.Variant == LaserVariant.THICKER_RED
-    or laser.Variant == LaserVariant.THICK_BROWN
     or laser.Variant == LaserVariant.THICKER_BRIM_TECH
     or laser.Variant == LaserVariant.GIANT_BRIM_TECH then
         return "Brimstone"
-    elseif laser.Variant == LaserVariant.ELECTRIC then
-        if laser.SubType == LaserSubType.LASER_SUBTYPE_LINEAR then
-            return "Technology"
-        elseif laser.SubType == LaserSubType.LASER_SUBTYPE_RING_PROJECTILE then
-            return "Tech X"
-        end
+    elseif laser.Variant == LaserVariant.THIN_RED then
+        return "Technology"
     end
 end
 
@@ -89,7 +84,7 @@ function mod:BubbleLaser(laser)
                 canFireExtra = false
                 local direction = player:ToPlayer():GetAimDirection():Rotated((math.random() - 0.5) * 2 * bubbleBeamTearRadius)
                 if category == "Brimstone" then
-                    player:ToPlayer():FireBrimstone(direction, player)
+                    player:ToPlayer():FireBrimstone(direction, player, 0.5)
                 elseif category == "Technology" then
                     player:ToPlayer():FireTechLaser(laser.Position, LaserOffset.LASER_TECH1_OFFSET, direction, false, false, player)
                 elseif category == "Tech X" then
