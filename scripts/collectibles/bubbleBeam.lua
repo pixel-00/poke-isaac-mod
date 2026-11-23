@@ -55,5 +55,55 @@ function mod:BubbleTear(tear)
 	end
 end
 
+local function LaserCategory(laser)
+    if laser.Variant == LaserVariant.THICK_RED
+    or laser.Variant == LaserVariant.THIN_RED
+    or laser.Variant == LaserVariant.SHOOP
+    or laser.Variant == LaserVariant.GIANT_RED
+    or laser.Variant == LaserVariant.BRIM_TECH
+    or laser.Variant == LaserVariant.THICKER_RED
+    or laser.Variant == LaserVariant.THICK_BROWN
+    or laser.Variant == LaserVariant.THICKER_BRIM_TECH
+    or laser.Variant == LaserVariant.GIANT_BRIM_TECH then
+        return "Brimstone"
+    elseif laser.Variant == LaserVariant.ELECTRIC then
+        if laser.SubType == LaserSubType.LASER_SUBTYPE_LINEAR then
+            return "Technology"
+        elseif laser.SubType == LaserSubType.LASER_SUBTYPE_RING_PROJECTILE then
+            return "Tech X"
+        end
+    end
+end
+
+function mod:BubbleLaser(laser)
+    local player = laser.SpawnerEntity
+
+    if player and player:ToPlayer() and player:ToPlayer():HasCollectible(bubbleBeam) then
+        laser.Angle = (math.random() - 0.5) * 2 * bubbleBeamTearRadius
+
+        if canFireExtra then
+			local extraAmount = math.random(0,4)
+            local category = LaserCategory(laser)
+
+            while extraAmount > 0 do
+                canFireExtra = false
+                local direction = player:GetAimDirection():Rotated((math.random() - 0.5) * 2 * bubbleBeamTearRadius)
+                if category == "Brimstone" then
+                    player:ToPlayer():FireBrimstone(direction, player)
+                elseif category == "Technology" then
+                    player:ToPlayer():FireTechLaser(laser.Position, LaserOffset.LASER_TECH1_OFFSET, direction, false, false, player)
+                elseif category == "Tech X" then
+                    player:ToPlayer():FireTechXLaser(laser.Position, direction, 30, player)
+                end
+                extraAmount = extraAmount - 1
+			end
+		end
+
+        canFireExtra = true
+
+    end
+end
+
 mod:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, mod.EvaluateCache)
 mod:AddCallback(ModCallbacks.MC_POST_FIRE_TEAR, mod.BubbleTear)
+mod:AddCallback(ModCallbacks.MC_POST_LASER_INIT, mod.BubbleLaser)
