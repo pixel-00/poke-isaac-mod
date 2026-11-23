@@ -87,7 +87,7 @@ function mod:BubbleLaser(laser)
 
             while extraAmount > 0 do
                 canFireExtra = false
-                local direction = player:GetAimDirection():Rotated((math.random() - 0.5) * 2 * bubbleBeamTearRadius)
+                local direction = player:ToPlayer():GetAimDirection():Rotated((math.random() - 0.5) * 2 * bubbleBeamTearRadius)
                 if category == "Brimstone" then
                     player:ToPlayer():FireBrimstone(direction, player)
                 elseif category == "Technology" then
