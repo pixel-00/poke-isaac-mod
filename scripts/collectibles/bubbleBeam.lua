@@ -84,7 +84,13 @@ function mod:BubbleLaser(laser)
                 canFireExtra = false
                 local direction = player:ToPlayer():GetAimDirection():Rotated((math.random() - 0.5) * 2 * BB_TEAR_RADIUS)
 
-                if category == "Brimstone" and laser.Position:Distance(player.Position) < 1 then
+                if direction:Length() == 0 then
+                    direction = Vector(0, 1):Rotated((math.random() - 0.5) * 2 * BB_TEAR_RADIUS)
+                end
+
+                if category == "Brimstone" and laser.Position:Distance(player.Position) < 0.1 then
+                    print("brim " .. laser.Position)
+                    print("player " .. player.Position)
                     player:ToPlayer():FireBrimstone(direction, player, 0.5)
                 elseif category == "Technology" then
                     player:ToPlayer():FireTechLaser(player.Position, LaserOffset.LASER_TECH1_OFFSET, direction, false, false, player, 0.5)
@@ -93,7 +99,7 @@ function mod:BubbleLaser(laser)
                     if length < 1 then
                         length = 10
                     end
-                    player:ToPlayer():FireTechXLaser(player.Position, 10, 20 * math.random() + 10, player, 0.5)
+                    player:ToPlayer():FireTechXLaser(player.Position, direction:Resized(10), 20 * math.random() + 10, player, 0.5)
                 end
 
                 extraAmount = extraAmount - 1
