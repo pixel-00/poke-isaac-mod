@@ -102,7 +102,8 @@ function mod:BubbleLaser(laser)
                     local length = 10 * player.ShotSpeed
                     player:ToPlayer():FireTechXLaser(player.Position, direction:Resized(length), 20 * math.random() + 10, player, 0.5)
                 end
-                print("tech x " .. direction.X .. ", " .. direction.Y)
+                print("last direction: " .. direction.X .. ", " .. direction.Y)
+                print("spawner type: " .. laser.SpawnerType)
 
                 extraAmount = extraAmount - 1
 			end
@@ -118,7 +119,7 @@ function mod:UpdateDirection(player)
         local index = mod:GetPlayerIndex(player)
         local direction = player:GetAimDirection()
 
-        if direction:Length() > 0 then
+        if not (direction.X == 0 and direction.Y == 0) then
             LAST_FIRING_DIRECTION[index] = direction
         end
     end
