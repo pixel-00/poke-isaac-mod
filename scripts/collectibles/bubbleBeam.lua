@@ -8,6 +8,8 @@ local BB_TEAR_RADIUS = 30
 
 local canFireExtra = true
 
+local LAST_FIRING_DIRECTION = {}
+
 function mod:EvaluateCache(player, cacheFlags)
 	local itemCount = player:GetCollectibleNum(bubbleBeam)
 	if (cacheFlags & CacheFlag.CACHE_FIREDELAY) == CacheFlag.CACHE_FIREDELAY then
@@ -82,24 +84,28 @@ function mod:BubbleLaser(laser)
 
             while extraAmount > 0 do
                 canFireExtra = false
-                local direction = player:ToPlayer():GetAimDirection():Rotated((math.random() - 0.5) * 2 * BB_TEAR_RADIUS)
+                local index = mod:GetPlayerIndex(player)
+                local lastDirection = LAST_FIRING_DIRECTION[index]
+                local direction
 
-                if direction:Length() == 0 then
+                if lastDirection then
+                    direction = lastDirection:Rotated((math.random() - 0.5) * 2 * BB_TEAR_RADIUS)
+                else
                     direction = Vector(0, 1):Rotated((math.random() - 0.5) * 2 * BB_TEAR_RADIUS)
                 end
 
                 if category == "Brimstone" and laser.Position:Distance(player.Position) < 0.1 then
-                    print("brim " .. laser.Position)
-                    print("player " .. player.Position)
+                    print("brim " .. laser.Position.X .. ", " .. laser.Position.Y)
+                    print("player " .. player.Position.X .. ", " .. player.Position.Y)
                     player:ToPlayer():FireBrimstone(direction, player, 0.5)
                 elseif category == "Technology" then
                     player:ToPlayer():FireTechLaser(player.Position, LaserOffset.LASER_TECH1_OFFSET, direction, false, false, player, 0.5)
                 elseif category == "Tech X" then
                     local length = laser.Velocity:Length()
-                    if length < 1 then
-                        length = 10
+                    if length < 6 then
+                        length = 6
                     end
-                    player:ToPlayer():FireTechXLaser(player.Position, direction:Resized(10), 20 * math.random() + 10, player, 0.5)
+                    player:ToPlayer():FireTechXLaser(player.Position, direction:Resized(length), 20 * math.random() + 10, player, 0.5)
                 end
 
                 extraAmount = extraAmount - 1
@@ -111,6 +117,18 @@ function mod:BubbleLaser(laser)
     end
 end
 
+function mod:UpdateDirection(player)
+    if player:HasCollectible(bubbleBeam) then
+        local index = mod:GetPlayerIndex(player)
+        local direction = player:GetAimDirection()
+
+        if direction:Length() > 0 then
+            LAST_FIRING_DIRECTION[index] = direction
+        end
+    end
+end
+
 mod:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, mod.EvaluateCache)
 mod:AddCallback(ModCallbacks.MC_POST_FIRE_TEAR, mod.BubbleTear)
 mod:AddCallback(ModCallbacks.MC_POST_LASER_INIT, mod.BubbleLaser)
+mod:AddCallback(ModCallbacks.MC_POST_PEFFECT_UPDATE, mod.UpdateDirection)
