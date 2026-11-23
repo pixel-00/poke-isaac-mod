@@ -94,13 +94,11 @@ function mod:BubbleLaser(laser)
                     direction = Vector(0, 1):Rotated((math.random() - 0.5) * 2 * BB_TEAR_RADIUS)
                 end
 
-                if category == "Brimstone" and laser.Position:Distance(player.Position) < 0.1 then
-                    print("brim " .. laser.Position.X .. ", " .. laser.Position.Y)
-                    print("player " .. player.Position.X .. ", " .. player.Position.Y)
+                if category == "Brimstone" and laser.Parent == player then
                     player:ToPlayer():FireBrimstone(direction, player, 0.5)
-                elseif category == "Technology" then
+                elseif category == "Technology" and laser.Parent == player then
                     player:ToPlayer():FireTechLaser(player.Position, LaserOffset.LASER_TECH1_OFFSET, direction, false, false, player, 0.5)
-                elseif category == "Tech X" then
+                elseif category == "Tech X" and laser.Parent == player then
                     local length = 10 * player.ShotSpeed
                     player:ToPlayer():FireTechXLaser(player.Position, direction:Resized(length), 20 * math.random() + 10, player, 0.5)
                 end
