@@ -10,6 +10,7 @@
         <Item Name="Loose Feathers" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Pair o' Dice" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Technical Machine" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Fly Swatter" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
     </Pool>
     <Pool Name="shop">
         <Item Name="Amulet Coin" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
@@ -21,7 +22,6 @@
     <Pool Name="boss">
         <Item Name="Coconut Water" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Junk Food" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
-        <Item Name="Fly Swatter" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
     </Pool>
     <Pool Name="angel">
         <Item Name="Tabula Rasa" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
@@ -49,7 +49,6 @@
     </Pool>
     <Pool Name="demonBeggar">
         <Item Name="Life Orb" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
-        <Item Name="Ability Capsule" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
     </Pool>
     <Pool Name="curse">
         <Item Name="Life Orb" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
@@ -57,7 +56,6 @@
     <Pool Name="craneGame">
         <Item Name="Life Orb" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Traffic Cone" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
-        <Item Name="Fly Swatter" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Pair o' Dice" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Technical Machine" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Technical Record" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
