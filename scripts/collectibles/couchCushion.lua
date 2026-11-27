@@ -90,7 +90,7 @@ function mod:SpawnCushionPickup()
         local x = rng:RandomFloat()
         local spawnChance = math.max(0, math.min(1, math.ceil(player.Luck + 4) / 10))
 
-        if room:IsFirstVisit() and player:HasCollectible(couchCushion) and x <= spawnChance and roomType ~= RoomType.ROOM_DEFAULT then
+        if room:IsFirstVisit() and player:HasCollectible(couchCushion) and x < spawnChance and roomType ~= RoomType.ROOM_DEFAULT then
             local pickupToSpawn = mod:GetCushionPickup(roomType, rng)
             local spawnPosition = room:FindFreePickupSpawnPosition(Isaac.GetRandomPosition())
 

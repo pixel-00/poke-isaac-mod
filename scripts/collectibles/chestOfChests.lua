@@ -52,7 +52,7 @@ function mod:UseItem(item, rng, player, useFlags, activeSlot, varData)
 
         local room = Game():GetLevel():GetCurrentRoom()
 
-        Game():Spawn(EntityType.ENTITY_PICKUP, variant, room:FindFreePickupSpawnPosition(player.Position + RandomVector()), Vector(0, 0), player, subType, rng:GetSeed())
+        Game():Spawn(EntityType.ENTITY_PICKUP, variant, room:FindFreePickupSpawnPosition(player.Position + 3 * RandomVector()), Vector(0, 0), player, subType, rng:GetSeed())
     end
 
     SFXManager():Play(SoundEffect.SOUND_UNLOCK00)

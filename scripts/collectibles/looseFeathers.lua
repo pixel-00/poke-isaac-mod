@@ -29,7 +29,7 @@ function mod:ApplyStats(player, cacheFlags)
     if (cacheFlags & CacheFlag.CACHE_FIREDELAY) == CacheFlag.CACHE_FIREDELAY and itemCount > 0 then
 	    local tearsPerSecond = mod:ToTearsPerSecond(player.MaxFireDelay)
 
-        tearsPerSecond = tearsPerSecond * TEARS_MULTIPLIER
+        tearsPerSecond = tearsPerSecond * TEARS_MULTIPLIER * math.min(itemCount, 1)
 	    player.MaxFireDelay = mod:ToMaxFireDelay(tearsPerSecond)
     end
 
