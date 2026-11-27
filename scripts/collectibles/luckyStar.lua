@@ -1,14 +1,14 @@
 local luckyStar = Isaac.GetItemIdByName("Lucky Star")
 
-function mod:LuckyUpgrade(type, variant, subtype, position, velocity, spawner, seed)
+function mod:LuckyUpgrade(pickup)
     local replace = false
     local spawnExtra = false
-    local isCoin = (variant == PickupVariant.PICKUP_COIN)
-    local isKey = (variant == PickupVariant.PICKUP_KEY)
-    local isBomb = (variant == PickupVariant.PICKUP_BOMB)
+    local isCoin = (pickup.Variant == PickupVariant.PICKUP_COIN)
+    local isKey = (pickup.Variant == PickupVariant.PICKUP_KEY)
+    local isBomb = (pickup.Variant == PickupVariant.PICKUP_BOMB)
 
     local function f(player)
-        if player:HasCollectible(luckyStar) and type == EntityType.ENTITY_PICKUP and (isCoin or isKey or isBomb) then
+        if player:HasCollectible(luckyStar) and (isCoin or isKey or isBomb) then
             local rng = player:GetCollectibleRNG(luckyStar)
             local x = rng:RandomFloat()
             local chance = math.min(player.Luck / 50, 1)
@@ -19,25 +19,25 @@ function mod:LuckyUpgrade(type, variant, subtype, position, velocity, spawner, s
 
             if x < chance then
                 if isCoin then
-                    if subtype == CoinSubType.COIN_PENNY then
+                    if pickup.SubType == CoinSubType.COIN_PENNY then
                         replace = true
-                    elseif subtype == CoinSubType.COIN_DOUBLEPACK then
+                    elseif pickup.SubType == CoinSubType.COIN_DOUBLEPACK then
                         spawnExtra = true
                         replace = true
-                    elseif subtype == CoinSubType.COIN_STICKYNICKEL and x < chance / 2 then
+                    elseif pickup.SubType == CoinSubType.COIN_STICKYNICKEL and x < chance / 2 then
                         replace = true
                     end
                 elseif isKey then
-                    if subtype == KeySubType.KEY_NORMAL then
+                    if pickup.SubType == KeySubType.KEY_NORMAL then
                         replace = true
-                    elseif subtype == KeySubType.KEY_DOUBLEPACK then
+                    elseif pickup.SubType == KeySubType.KEY_DOUBLEPACK then
                         replace = true
                         spawnExtra = true
                     end
                 elseif isBomb then
-                    if subtype == BombSubType.BOMB_NORMAL or subtype == BombSubType.BOMB_TROLL or subtype == BombSubType.BOMB_SUPERTROLL then
+                    if pickup.SubType == BombSubType.BOMB_NORMAL or pickup.SubType == BombSubType.BOMB_TROLL or pickup.SubType == BombSubType.BOMB_SUPERTROLL then
                         replace = true
-                    elseif subtype == BombSubType.BOMB_DOUBLEPACK then
+                    elseif pickup.SubType == BombSubType.BOMB_DOUBLEPACK then
                         replace = true
                         spawnExtra = true
                     end
@@ -49,23 +49,20 @@ function mod:LuckyUpgrade(type, variant, subtype, position, velocity, spawner, s
     mod:DoForAllPlayers(f)
 
     if replace then
-        local newSubType = subtype
-        local extraSubType = subtype
+        local extraSubType = pickup.SubType
 
         if isCoin then
-            newSubType = CoinSubType.COIN_LUCKYPENNY
+            pickup.SubType = CoinSubType.COIN_LUCKYPENNY
             extraSubType = CoinSubType.COIN_LUCKYPENNY
         elseif isKey then
-            newSubType = KeySubType.KEY_GOLDEN
+            pickup.SubType = KeySubType.KEY_GOLDEN
         elseif isBomb then
-            newSubType = BombSubType.BOMB_GOLDEN
+            pickup.SubType = BombSubType.BOMB_GOLDEN
         end
 
         if spawnExtra then
-            Game():Spawn(EntityType.ENTITY_PICKUP, variant, Game():GetRoom():FindFreePickupSpawnPosition(position), velocity:Rotated(360 * rng:RandomFloat()), nil, extraSubType, seed)
+            Game():Spawn(EntityType.ENTITY_PICKUP, pickup.Variant, Game():GetRoom():FindFreePickupSpawnPosition(pickup.Position), pickup.Velocity:Rotated(360 * rng:RandomFloat()), nil, extraSubType, Game():GetRoom():GetSpawnSeed())
         end
-
-        return {type, variant, newSubType, seed}
     end
 end
 
@@ -81,5 +78,5 @@ function mod:GiveInitialLuckyPenny(player)
     end
 end
 
-mod:AddCallback(ModCallbacks.MC_PRE_ENTITY_SPAWN, mod.LuckyUpgrade)
+mod:AddCallback(ModCallbacks.MC_POST_PICKUP_INIT, mod.LuckyUpgrade)
 mod:AddCallback(ModCallbacks.MC_POST_PEFFECT_UPDATE, mod.GiveInitialLuckyPenny)
