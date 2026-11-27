@@ -26,12 +26,12 @@ include("scripts.collectibles.earlyOnset")
 include("scripts.collectibles.couchCushion")
 include("scripts.collectibles.looseFeathers")
 include("scripts.collectibles.flySwatter")
-include("scripts.collectibles.technicalMachine")
+include("scripts.collectibles.technicalMachine") -- !!! needs to be nerfed to 12 room charge
 include("scripts.collectibles.technicalRecord")
-include("scripts.collectibles.abilityCapsule")
+include("scripts.collectibles.abilityCapsule") --!!! Make it a one floor charge, like eraser
 include("scripts.collectibles.chestOfChests")
 
--- Ability Capsule Passives
+-- Ability Capsule Passives !!! Make them quest items for T isaac
 include("scripts.collectibles.abilities.hugePower")
 include("scripts.collectibles.abilities.intimidate")
 include("scripts.collectibles.abilities.levitate")
@@ -56,7 +56,7 @@ include("scripts.collectibles.abilities.intrepidSword")
 include("scripts.collectibles.abilities.dauntlessShield")
 include("scripts.collectibles.abilities.beastBoost")
 include("scripts.collectibles.abilities.pickpocket")
-include("scripts.collectibles.abilities.plusMinus")
+include("scripts.collectibles.abilities.plusMinus") -- check interaction with special charge types
 include("scripts.collectibles.abilities.megaLauncher")
 include("scripts.collectibles.abilities.stamina")
 

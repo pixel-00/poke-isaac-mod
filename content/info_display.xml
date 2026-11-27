@@ -31,8 +31,9 @@
         <info text="Randomly reveals rooms on the map"/>
     </collectible>
     <collectible id="10">
-        <info text="Grants a luck based chance to replace pennies, double pennies, and sticky nickels with lucky pennies"/>
-        <info text="Spawns a lucky penny on pickup"/>
+        <info text="Chance to replace pennies with lucky pennies, and bombs and keys with their golden variants"/>
+        <info text="Chance increases with luck"/>
+        <info text="Drops a lucky penny on pickup"/>
     </collectible>
     <collectible id="11">
         <info text="Duplicates all purchases"/>
